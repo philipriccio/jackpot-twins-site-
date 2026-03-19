@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+:root {
+  --background: #090504;
+  --foreground: #f7f0dd;
+  --gold: #f1c76b;
+  --gold-soft: #caa24b;
+  --card: rgba(255, 248, 227, 0.05);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-card: var(--card);
+  --font-sans: var(--font-serif);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    radial-gradient(circle at top, rgba(241, 199, 107, 0.14), transparent 28%),
+    linear-gradient(180deg, #130a09 0%, #090504 35%, #050303 100%);
+  color: var(--foreground);
+  font-family: var(--font-serif), Georgia, serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(241, 199, 107, 0.3);
+  color: #fff7e7;
+}
