@@ -1,11 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --background: #090504;
-  --foreground: #f7f0dd;
-  --gold: #f1c76b;
-  --gold-soft: #caa24b;
-  --card: rgba(255, 248, 227, 0.05);
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+  --gold: #d4a017;
+  --gold-soft: #c9a84c;
+  --red: #e63329;
+  --card: rgba(255, 255, 255, 0.04);
 }
 
 @theme inline {
@@ -13,8 +14,9 @@
   --color-foreground: var(--foreground);
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
+  --color-red: var(--red);
   --color-card: var(--card);
-  --font-sans: var(--font-serif);
+  --font-sans: var(--font-sans);
 }
 
 * {
@@ -27,10 +29,11 @@ html {
 
 body {
   background:
-    radial-gradient(circle at top, rgba(241, 199, 107, 0.14), transparent 28%),
-    linear-gradient(180deg, #130a09 0%, #090504 35%, #050303 100%);
+    radial-gradient(circle at top, rgba(212, 160, 23, 0.12), transparent 28%),
+    radial-gradient(circle at 85% 18%, rgba(230, 51, 41, 0.08), transparent 18%),
+    linear-gradient(180deg, #0d0d0d 0%, #090909 36%, #050505 100%);
   color: var(--foreground);
-  font-family: var(--font-serif), Georgia, serif;
+  font-family: var(--font-sans), Arial, sans-serif;
 }
 
 a {
@@ -39,6 +42,30 @@ a {
 }
 
 ::selection {
-  background: rgba(241, 199, 107, 0.3);
-  color: #fff7e7;
+  background: rgba(212, 160, 23, 0.35);
+  color: #fff8e8;
+}
+
+.noise-mask {
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px),
+    radial-gradient(circle at 80% 30%, rgba(212, 160, 23, 0.08) 0 1px, transparent 1px),
+    radial-gradient(circle at 40% 75%, rgba(230, 51, 41, 0.08) 0 1px, transparent 1px),
+    radial-gradient(circle at 65% 65%, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px);
+  background-size: 140px 140px, 180px 180px, 220px 220px, 120px 120px;
+}
+
+.poster-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(212, 160, 23, 0.55), rgba(255, 255, 255, 0.08), rgba(230, 51, 41, 0.25));
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }

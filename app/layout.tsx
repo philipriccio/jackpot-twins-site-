@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, Playfair_Display } from "next/font/google";
+import { Bebas_Neue, Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
-const display = Bebas_Neue({
-  variable: "--font-display",
+const condensed = Bebas_Neue({
+  variable: "--font-condensed",
   subsets: ["latin"],
   weight: "400",
 });
@@ -12,6 +12,12 @@ const serif = Playfair_Display({
   variable: "--font-serif",
   subsets: ["latin"],
   weight: ["400", "600", "700", "800"],
+});
+
+const sans = Inter({
+  variable: "--font-sans",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -53,8 +59,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${display.variable} ${serif.variable} h-full antialiased`}>
-      <body className="min-h-full bg-[#090504] text-[#f7f0dd]">{children}</body>
+    <html lang="en" className={`${condensed.variable} ${serif.variable} ${sans.variable} h-full antialiased`}>
+      <body className="min-h-full bg-[#0a0a0a] font-[var(--font-sans)] text-white">{children}</body>
     </html>
   );
 }
