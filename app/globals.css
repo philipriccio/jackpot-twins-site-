@@ -1,21 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ffffff;
-  --gold: #d4a017;
-  --gold-soft: #c9a84c;
-  --red: #e63329;
-  --card: rgba(255, 255, 255, 0.04);
+  --black: #0a0a0a;
+  --cream: #f5edd8;
+  --pink: #e8308a;
+  --red: #e8272a;
+  --blue: #5bb8e8;
+  --yellow: #f5d020;
+  --orange: #f06b20;
+  --white: #ffffff;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-gold: var(--gold);
-  --color-gold-soft: var(--gold-soft);
-  --color-red: var(--red);
-  --color-card: var(--card);
+  --color-background: var(--cream);
+  --color-foreground: var(--black);
   --font-sans: var(--font-sans);
 }
 
@@ -28,12 +26,13 @@ html {
 }
 
 body {
-  background:
-    radial-gradient(circle at top, rgba(212, 160, 23, 0.12), transparent 28%),
-    radial-gradient(circle at 85% 18%, rgba(230, 51, 41, 0.08), transparent 18%),
-    linear-gradient(180deg, #0d0d0d 0%, #090909 36%, #050505 100%);
-  color: var(--foreground);
+  margin: 0;
+  background: var(--black);
+  color: var(--black);
   font-family: var(--font-sans), Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 a {
@@ -41,31 +40,71 @@ a {
   text-decoration: none;
 }
 
+button {
+  font: inherit;
+}
+
 ::selection {
-  background: rgba(212, 160, 23, 0.35);
-  color: #fff8e8;
+  background: color-mix(in srgb, var(--yellow) 70%, white 30%);
+  color: var(--black);
 }
 
-.noise-mask {
-  background-image:
-    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px),
-    radial-gradient(circle at 80% 30%, rgba(212, 160, 23, 0.08) 0 1px, transparent 1px),
-    radial-gradient(circle at 40% 75%, rgba(230, 51, 41, 0.08) 0 1px, transparent 1px),
-    radial-gradient(circle at 65% 65%, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px);
-  background-size: 140px 140px, 180px 180px, 220px 220px, 120px 120px;
+.jt-shell {
+  background: var(--black);
 }
 
-.poster-frame::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(212, 160, 23, 0.55), rgba(255, 255, 255, 0.08), rgba(230, 51, 41, 0.25));
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
+.jt-display {
+  font-family: var(--font-display), Impact, sans-serif;
+}
+
+.jt-subheading {
+  font-family: var(--font-subheading), Arial, sans-serif;
+}
+
+.jt-body {
+  font-family: var(--font-sans), Arial, sans-serif;
+}
+
+.jt-ticker-track {
+  width: max-content;
+  animation: jt-marquee 24s linear infinite;
+}
+
+.jt-quote-dots,
+.jt-ticket-dots {
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.12) 2px, transparent 2px);
+  background-size: 28px 28px;
+}
+
+.jt-ticket-dots {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 2px, transparent 2px);
+}
+
+.jt-shadow-button {
+  box-shadow: 4px 4px 0 var(--black);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.jt-shadow-button:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--black);
+}
+
+@keyframes jt-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes jt-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.15;
+  }
 }

@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, Inter, Playfair_Display } from "next/font/google";
+import { Bebas_Neue, Inter, Oswald } from "next/font/google";
 import "./globals.css";
 
-const condensed = Bebas_Neue({
-  variable: "--font-condensed",
+const display = Bebas_Neue({
+  variable: "--font-display",
   subsets: ["latin"],
   weight: "400",
 });
 
-const serif = Playfair_Display({
-  variable: "--font-serif",
+const subheading = Oswald({
+  variable: "--font-subheading",
   subsets: ["latin"],
-  weight: ["400", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 const sans = Inter({
@@ -59,8 +59,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${condensed.variable} ${serif.variable} ${sans.variable} h-full antialiased`}>
-      <body className="min-h-full bg-[#0a0a0a] font-[var(--font-sans)] text-white">{children}</body>
+    <html
+      lang="en"
+      className={`${display.variable} ${subheading.variable} ${sans.variable} h-full antialiased`}
+    >
+      <body className="min-h-full bg-[var(--black)] font-[var(--font-sans)] text-[var(--black)]">
+        {children}
+      </body>
     </html>
   );
 }
