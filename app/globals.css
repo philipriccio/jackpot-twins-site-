@@ -1,24 +1,19 @@
-@import "tailwindcss";
-
 :root {
   --black: #0a0a0a;
-  --cream: #f5edd8;
+  --off-white: #fff8f0;
   --pink: #e8308a;
   --red: #e8272a;
   --blue: #5bb8e8;
   --yellow: #f5d020;
   --orange: #f06b20;
+  --cream: #fff8f0;
   --white: #ffffff;
 }
 
-@theme inline {
-  --color-background: var(--cream);
-  --color-foreground: var(--black);
-  --font-sans: var(--font-sans);
-}
-
-* {
+*, *::before, *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
@@ -26,12 +21,11 @@ html {
 }
 
 body {
-  margin: 0;
   background: var(--black);
   color: var(--black);
-  font-family: var(--font-sans), Arial, sans-serif;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
@@ -40,71 +34,19 @@ a {
   text-decoration: none;
 }
 
-button {
+button,
+input,
+textarea,
+select {
   font: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 ::selection {
   background: color-mix(in srgb, var(--yellow) 70%, white 30%);
   color: var(--black);
-}
-
-.jt-shell {
-  background: var(--black);
-}
-
-.jt-display {
-  font-family: var(--font-display), Impact, sans-serif;
-}
-
-.jt-subheading {
-  font-family: var(--font-subheading), Arial, sans-serif;
-}
-
-.jt-body {
-  font-family: var(--font-sans), Arial, sans-serif;
-}
-
-.jt-ticker-track {
-  width: max-content;
-  animation: jt-marquee 24s linear infinite;
-}
-
-.jt-quote-dots,
-.jt-ticket-dots {
-  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.12) 2px, transparent 2px);
-  background-size: 28px 28px;
-}
-
-.jt-ticket-dots {
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 2px, transparent 2px);
-}
-
-.jt-shadow-button {
-  box-shadow: 4px 4px 0 var(--black);
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
-}
-
-.jt-shadow-button:hover {
-  transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0 var(--black);
-}
-
-@keyframes jt-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes jt-blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.15;
-  }
 }

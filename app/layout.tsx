@@ -1,55 +1,47 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, Inter, Oswald } from "next/font/google";
+import { Bebas_Neue, Inter, Luckiest_Guy, Nunito, Oswald } from "next/font/google";
 import "./globals.css";
 
-const display = Bebas_Neue({
-  variable: "--font-display",
+const bebasNeue = Bebas_Neue({
+  variable: "--font-bebas-neue",
   subsets: ["latin"],
   weight: "400",
 });
 
-const subheading = Oswald({
-  variable: "--font-subheading",
+const luckiestGuy = Luckiest_Guy({
+  variable: "--font-luckiest-guy",
+  subsets: ["latin"],
+  weight: "400",
+});
+
+const nunito = Nunito({
+  variable: "--font-nunito",
+  subsets: ["latin"],
+  weight: ["400", "600", "700", "800", "900"],
+});
+
+const oswald = Oswald({
+  variable: "--font-oswald",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
 });
 
-const sans = Inter({
-  variable: "--font-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600"],
 });
 
 export const metadata: Metadata = {
-  title: "Jackpot Twins",
+  title: "JACKPOT TWINS — jackpottwins.ca",
   description:
-    "Jackpot Twins is a world premiere comedy by Philip Riccio, produced by The Company Theatre in association with Mirvish Productions.",
-  robots: {
-    index: false,
-    follow: false,
-    googleBot: {
-      index: false,
-      follow: false,
-      noimageindex: true,
-    },
-  },
+    "Jackpot Twins — A New Comedy by Philip Riccio. World Premiere Spring 2027 at the CAA Theatre, Toronto. Starring Seana McKenna & Nora McLellan.",
   openGraph: {
-    title: "Jackpot Twins",
+    title: "Jackpot Twins — World Premiere",
     description:
-      "A world premiere comedy by Philip Riccio, produced by The Company Theatre in association with Mirvish Productions.",
-    type: "website",
+      "A sharp-witted, irreverent new comedy about the heavy price of getting everything you ever wanted.",
     url: "https://jackpottwins.ca",
-    images: [
-      {
-        url: "https://jackpottwins.ca/images/poster-web-1200x630.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Jackpot Twins poster",
-      },
-    ],
-  },
-  alternates: {
-    canonical: "https://jackpottwins.ca",
+    images: ["/images/poster-web-1200x630.jpg"],
   },
 };
 
@@ -61,11 +53,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${display.variable} ${subheading.variable} ${sans.variable} h-full antialiased`}
+      className={`${bebasNeue.variable} ${luckiestGuy.variable} ${nunito.variable} ${oswald.variable} ${inter.variable}`}
     >
-      <body className="min-h-full bg-[var(--black)] font-[var(--font-sans)] text-[var(--black)]">
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
