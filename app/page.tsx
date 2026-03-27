@@ -24,7 +24,7 @@ const castData: CastMember[] = [
     img: "/images/headshots/seana-mckenna.jpeg",
     imgStyle: "center 20%",
     cardIcon: "✝️",
-    bio: "Seana McKenna is a recipient of the Order of Canada — do we need to say more? No. But we will anyway. A National Theatre School graduate, she has spent four decades setting the standard at Stratford, Shaw, Canadian Stage, and stages across North America, playing everything from Juliet to Julius Caesar along the way. She made history as Stratford's first female Richard III. Three Dora Awards, a Genie, a Jessie, and an Honorary Doctorate later — if you saw her in Things I Know to Be True and needed a few days to recover, good news: this one's a comedy.",
+    bio: "Seana McKenna is a recipient of the Order of Canada — do we need to say more? No. But we will anyway. A National Theatre School graduate, she has spent four decades setting the standard at Stratford, Shaw, Canadian Stage, and stages across North America, playing everything from Juliet to Julius Caesar along the way. She made history as Stratford's first female Richard III. Three Dora Awards, a Genie, a Jessie, and Honorary Doctorates later — if you saw her in Things I Know to Be True and needed a few days to recover, good news: this one's a comedy.",
   },
   {
     name: "Nora McLellan",
@@ -42,12 +42,12 @@ const castData: CastMember[] = [
     bio: "Tony Nappo has appeared in roughly 70 films, hundreds of TV episodes, and more Toronto stages than most people have visited. Born in Scarborough, trained at the American Academy of Dramatic Arts in Manhattan, he's the kind of actor critics describe as ‘razor-sharp’ and ‘effortlessly magnetic.’ He's appeared alongside Al Pacino, played a recurring villain in Bad Blood, voiced a gangster in Fugget About It, and wrote the beloved column Nappoholics Anonymous for Intermission Magazine. If you've watched Canadian TV in the last twenty years, you've seen him.",
   },
   {
-    name: "Colin A. Doyle",
+    name: "Colin A Doyle",
     role: "Harold Bates",
     img: "/images/headshots/colin-doyle.jpg",
     imgStyle: "center 30%",
     cardIcon: "🔍",
-    bio: "Colin A. Doyle is a Toronto-based actor and theatre producer who has performed across Canada, the US, and Europe. A York University Acting Conservatory graduate, he has worked with some of the most inventive companies in the country — Outside the March, Factory Theatre, Theatre Passe Muraille, Why Not Theatre — and has played everything from Peter Pan to a post-apocalyptic Homer Simpson. The range is real.",
+    bio: "Colin A Doyle is a Dora Award\u2013winning, Toronto-based actor and theatre producer who has performed across Canada, the US, and Europe. A York University Acting Conservatory graduate, he has worked with some of the most inventive companies in the country \u2014 Outside the March, Canadian Stage, Obsidian Theatre, Crow\u2019s Theatre, Caravan, Coal Mine Theatre, and Mirvish \u2014 and has played everything from Peter Pan to a post-apocalyptic Homer Simpson. The range is real.",
   },
   {
     name: "Caroline Toal",
