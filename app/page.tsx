@@ -793,6 +793,43 @@ export default function Home() {
     return () => cleanups.forEach((cleanup) => cleanup());
   }, []);
 
+  // Native touch listeners with { passive: false } so preventDefault() works.
+  // React's onTouchMove is passive by default — preventDefault is silently ignored,
+  // causing the page to scroll while scratching. This matches the prototype approach.
+  useEffect(() => {
+    const cleanups: Array<() => void> = [];
+
+    scratchCanvases.current.forEach((canvas, index) => {
+      if (!canvas) return;
+
+      const onTouchStart = (e: TouchEvent) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        if (touch) scratchAt(index, touch.clientX, touch.clientY, false);
+      };
+      const onTouchMove = (e: TouchEvent) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        if (touch) scratchAt(index, touch.clientX, touch.clientY, false);
+      };
+      const onTouchEnd = () => {
+        checkReveal(index);
+      };
+
+      canvas.addEventListener("touchstart", onTouchStart, { passive: false });
+      canvas.addEventListener("touchmove", onTouchMove, { passive: false });
+      canvas.addEventListener("touchend", onTouchEnd);
+
+      cleanups.push(() => {
+        canvas.removeEventListener("touchstart", onTouchStart);
+        canvas.removeEventListener("touchmove", onTouchMove);
+        canvas.removeEventListener("touchend", onTouchEnd);
+      });
+    });
+
+    return () => cleanups.forEach((fn) => fn());
+  }, [scratchAt, checkReveal]);
+
   useEffect(() => {
     return () => {
       flipIntervals.current.forEach((interval) => {
@@ -1019,18 +1056,9 @@ export default function Home() {
                             }}
                             onMouseUp={() => checkReveal(index)}
                             onMouseLeave={() => checkReveal(index)}
-                            onTouchStart={(event) => {
-                              event.preventDefault();
-                              const touch = event.touches[0];
-                              if (touch) scratchAt(index, touch.clientX, touch.clientY, false);
-                            }}
-                            onTouchMove={(event) => {
-                              event.preventDefault();
-                              const touch = event.touches[0];
-                              if (touch) scratchAt(index, touch.clientX, touch.clientY, false);
-                            }}
-                            onTouchEnd={() => checkReveal(index)}
                           />
+                          {/* Touch handlers registered natively via useEffect with { passive: false }
+                              so preventDefault() actually blocks page scrolling during scratch */}
                         </div>
                       </div>
                       <div className="scratch-card-back">
