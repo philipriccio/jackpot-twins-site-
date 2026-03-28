@@ -313,7 +313,7 @@ export default function Home() {
     }
 
     ctx.save();
-    ctx.font = `bold ${Math.min(w / 5, 28)}px var(--font-bebas-neue), sans-serif`;
+    ctx.font = `bold ${Math.min(w / 5, 28)}px "Bebas Neue", sans-serif`;
     ctx.fillStyle = "#C0C0C0";
     ctx.shadowColor = "rgba(0,0,0,0.2)";
     ctx.shadowBlur = 3;
@@ -326,7 +326,7 @@ export default function Home() {
     ctx.fillText(icon, w / 2, h * 0.46);
     ctx.filter = "none";
 
-    ctx.font = `bold ${Math.min(w / 6, 20)}px var(--font-luckiest-guy), cursive`;
+    ctx.font = `bold ${Math.min(w / 6, 20)}px "Luckiest Guy", cursive`;
     ctx.fillStyle = "#C0C0C0";
     ctx.shadowColor = "rgba(0,0,0,0.2)";
     ctx.shadowBlur = 2;
@@ -359,12 +359,16 @@ export default function Home() {
       const ctx = canvas.getContext("2d");
       if (!ctx) return;
 
-      const x = clientX - rect.left;
-      const y = clientY - rect.top;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const x = (clientX - rect.left) * dpr;
+      const y = (clientY - rect.top) * dpr;
+      ctx.save();
       ctx.globalCompositeOperation = "destination-out";
+      ctx.fillStyle = "rgba(0,0,0,1)";
       ctx.beginPath();
-      ctx.arc(x, y, 22, 0, Math.PI * 2);
+      ctx.arc(x, y, 22 * dpr, 0, Math.PI * 2);
       ctx.fill();
+      ctx.restore();
       scratchProgress.current[index] += 1;
 
       if (createFlecks) {
@@ -920,10 +924,10 @@ export default function Home() {
                             }}
                             className="scratch-canvas"
                             onMouseDown={(event) => {
-                              if (!isDesktop) scratchAt(index, event.clientX, event.clientY, false);
+                              scratchAt(index, event.clientX, event.clientY, isDesktop);
                             }}
                             onMouseMove={(event) => {
-                              if (!isDesktop && event.buttons) scratchAt(index, event.clientX, event.clientY, false);
+                              if (event.buttons) scratchAt(index, event.clientX, event.clientY, isDesktop);
                             }}
                             onTouchStart={(event) => {
                               const touch = event.touches[0];
@@ -932,6 +936,13 @@ export default function Home() {
                             onTouchMove={(event) => {
                               const touch = event.touches[0];
                               if (touch) scratchAt(index, touch.clientX, touch.clientY, false);
+                            }}
+                            onMouseUp={() => {
+                              const canvas = scratchCanvases.current[index];
+                              if (canvas && !revealedCards[index]) {
+                                const pct = computeRevealPct(canvas);
+                                if (pct > 0.35) updateRevealState(index, true);
+                              }
                             }}
                           />
                         </div>
