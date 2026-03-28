@@ -145,7 +145,7 @@ function SignupModal({
         <button type="button" className="signup-modal-close" onClick={onClose} aria-label="Close signup form">
           &times;
         </button>
-        <p className="signup-modal-title">Be the first to know when tickets go on sale</p>
+        <p className="signup-modal-title">Be the first to know when single tickets go on sale</p>
         {status === "success" ? (
           <p className="signup-modal-success">You&apos;re in! 🎰 We&apos;ll be in touch.</p>
         ) : (
@@ -903,12 +903,23 @@ export default function Home() {
               </div>
             </div>
 
-            <p className="hero-signup-teaser">Be the first to know when tickets go on sale</p>
+            <p className="hero-signup-teaser">Tickets available within an Off&nbsp;Mirvish Season Subscription</p>
+            <div className="cta-row">
+              <a
+                href="https://mirvish.com/subscriptions"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-main"
+                style={{ background: "var(--black)" }}
+              >
+                Subscribe at Mirvish.com
+              </a>
+            </div>
+            <p className="hero-single-tickets">Single tickets available at a later date. Be the first to know when.</p>
             <div className="cta-row">
               <button
                 type="button"
-                className="btn-main"
-                style={{ background: "var(--black)" }}
+                className="btn-main btn-secondary"
                 onClick={() => {
                   setSignupStatus("idle");
                   setModalOpen(true);
@@ -1049,19 +1060,29 @@ export default function Home() {
         </section>
 
         <section className="signup" id="signup">
-          <p className="signup-label">Stay in the Loop</p>
-          <h2 className="signup-heading">Be First to Know</h2>
-          <p className="signup-sub">Get ticket announcements and behind-the-scenes updates.</p>
+          <p className="signup-label">Subscriptions Available Now</p>
+          <h2 className="signup-heading">Get Your Tickets</h2>
+          <p className="signup-sub">Tickets available within an Off&nbsp;Mirvish Season Subscription.</p>
+          <a
+            href="https://mirvish.com/subscriptions"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-main"
+            style={{ fontSize: 18, padding: "16px 44px", margin: "0 auto", background: "var(--black)", textDecoration: "none" }}
+          >
+            Subscribe at Mirvish.com
+          </a>
+          <p className="signup-single-tickets">Single tickets available at a later date.</p>
           <button
             type="button"
-            className="btn-main"
-            style={{ fontSize: 18, padding: "16px 44px", margin: "0 auto", background: "var(--black)" }}
+            className="btn-main btn-secondary"
+            style={{ fontSize: 16, padding: "14px 36px", margin: "0 auto" }}
             onClick={() => {
               setSignupStatus("idle");
               setModalOpen(true);
             }}
           >
-            Sign Me Up
+            Sign Up for Single Ticket Alerts
           </button>
         </section>
 
