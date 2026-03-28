@@ -376,12 +376,14 @@ body{
   display:inline-flex;
   align-items:center;
   gap:10px;
+  text-decoration:none;
   background:var(--red);
   color:var(--white);
-  font-family:'Nunito',sans-serif;
-  font-size:16px;
-  font-weight:800;
-  letter-spacing:0.04em;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:20px;
+  font-weight:400;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
   padding:14px 36px;
   text-decoration:none;
   border:none;
@@ -980,8 +982,8 @@ footer{
 .btn-secondary{
   background:transparent !important;
   border:2px solid rgba(255,255,255,0.4) !important;
-  font-size:14px !important;
-  padding:10px 28px !important;
+  font-size:18px !important;
+  padding:12px 28px !important;
 }
 .btn-secondary:hover{
   background:rgba(255,255,255,0.15) !important;

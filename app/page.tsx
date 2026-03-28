@@ -915,7 +915,7 @@ export default function Home() {
                 Subscribe at Mirvish.com
               </a>
             </div>
-            <p className="hero-single-tickets">Single tickets available at a later date. Be the first to know when.</p>
+            <p className="hero-signup-teaser">Single tickets available at a later date. Be the first to know.</p>
             <div className="cta-row">
               <button
                 type="button"
