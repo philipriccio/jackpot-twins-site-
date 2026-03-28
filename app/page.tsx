@@ -904,7 +904,7 @@ export default function Home() {
             </div>
 
             <p className="hero-signup-teaser">Tickets available within an Off&nbsp;Mirvish Season Subscription</p>
-            <div className="cta-row">
+            <div className="cta-row" style={{ marginTop: 8, marginBottom: 28 }}>
               <a
                 href="https://mirvish.com/subscriptions"
                 target="_blank"
@@ -916,10 +916,11 @@ export default function Home() {
               </a>
             </div>
             <p className="hero-signup-teaser">Single tickets available at a later date. Be the first to know.</p>
-            <div className="cta-row">
+            <div className="cta-row" style={{ marginTop: 8 }}>
               <button
                 type="button"
-                className="btn-main btn-secondary"
+                className="btn-main"
+                style={{ background: "var(--red)" }}
                 onClick={() => {
                   setSignupStatus("idle");
                   setModalOpen(true);
