@@ -15,7 +15,7 @@ type CastMember = {
 };
 
 type SignupState = "idle" | "submitting" | "success" | "error";
-type SoundType = "reveal" | "flip" | "toggle" | "signup";
+
 
 type CountdownState = {
   days: string;
@@ -177,7 +177,6 @@ export default function Home() {
   const [countdown, setCountdown] = useState<CountdownState>(getCountdown);
   const [modalOpen, setModalOpen] = useState(false);
   const [signupStatus, setSignupStatus] = useState<SignupState>("idle");
-  const [soundEnabled, setSoundEnabled] = useState(false);
   const [activatedCards, setActivatedCards] = useState<boolean[]>(() => castData.map(() => false));
   const [revealedCards, setRevealedCards] = useState<boolean[]>(() => castData.map(() => false));
   const [flippedCards, setFlippedCards] = useState<boolean[]>(() => castData.map(() => false));
@@ -187,7 +186,6 @@ export default function Home() {
   const [pennyHidden, setPennyHidden] = useState(false);
   const [pennyPosition, setPennyPosition] = useState({ x: 0, y: 0, rotation: -15 });
 
-  const audioContextRef = useRef<AudioContext | null>(null);
   const scratchCanvases = useRef<(HTMLCanvasElement | null)[]>([]);
   const flipIntervals = useRef<(number | null)[]>(castData.map(() => null));
   const scratchCounts = useRef<number[]>(castData.map(() => 0));
@@ -199,54 +197,8 @@ export default function Home() {
 
   const allTickerItems = useMemo(() => [...tickerItems, ...tickerItems], []);
 
-  const playSound = useCallback((type: SoundType) => {
-    if (!soundEnabled || typeof window === "undefined") return;
-
-    const AudioCtor = window.AudioContext ?? (window as Window & typeof globalThis & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
-    if (!AudioCtor) return;
-
-    if (!audioContextRef.current) {
-      audioContextRef.current = new AudioCtor();
-    }
-
-    const audioCtx = audioContextRef.current;
-    if (audioCtx.state === "suspended") {
-      void audioCtx.resume();
-    }
-
-    const makeVoice = (freq: number, start: number, stop: number, gainValue: number) => {
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = "sine";
-      osc.frequency.setValueAtTime(freq, start);
-      gain.gain.setValueAtTime(gainValue, start);
-      gain.gain.exponentialRampToValueAtTime(0.001, stop);
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start(start);
-      osc.stop(stop);
-    };
-
-    const now = audioCtx.currentTime;
-
-    if (type === "reveal") {
-      [523, 659, 784, 1047].forEach((freq, index) => makeVoice(freq, now + index * 0.08, now + index * 0.08 + 0.18, 0.08));
-      return;
-    }
-
-    if (type === "flip") {
-      makeVoice(880, now, now + 0.14, 0.05);
-      makeVoice(660, now + 0.03, now + 0.16, 0.035);
-      return;
-    }
-
-    if (type === "toggle") {
-      makeVoice(440, now, now + 0.16, 0.04);
-      return;
-    }
-
-    [523, 659, 784, 1047, 784, 1047].forEach((freq, index) => makeVoice(freq, now + index * 0.1, now + index * 0.1 + 0.12, 0.06));
-  }, [soundEnabled]);
+  // Sound removed — site is silent by design
+  const playSound = useCallback((_type: string) => {}, []);
 
   const startFlipRotation = useCallback((index: number) => {
     if (flipIntervals.current[index]) window.clearInterval(flipIntervals.current[index]!);
@@ -842,23 +794,6 @@ export default function Home() {
   return (
     <>
       <main>
-        <button
-          className="sound-toggle"
-          id="soundToggle"
-          onClick={() => {
-            setSoundEnabled((current) => {
-              const next = !current;
-              if (next) {
-                window.setTimeout(() => playSound("toggle"), 0);
-              }
-              return next;
-            });
-          }}
-        >
-          <span className="icon" id="soundIcon">{soundEnabled ? "🔊" : "🔇"}</span>
-          <span id="soundLabel">{soundEnabled ? "SOUND ON" : "SOUND OFF"}</span>
-        </button>
-
         {isDesktop ? (
           <div
             className={`penny-cursor ${pennyVisible && !pennyHidden ? "visible" : ""}`}
@@ -890,7 +825,7 @@ export default function Home() {
           <div className="hero-right">
             <p className="hero-eyebrow">
               <span className="blink" />
-              World Premiere &nbsp;·&nbsp; Toronto &nbsp;·&nbsp; Spring 2027
+              World Premiere&nbsp;·&nbsp;Toronto&nbsp;·&nbsp;Spring&nbsp;2027
             </p>
 
             <div className="hero-title" aria-label="Jackpot Twins">
