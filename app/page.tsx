@@ -176,6 +176,7 @@ export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
   const [signupStatus, setSignupStatus] = useState<SignupState>("idle");
   const [soundEnabled, setSoundEnabled] = useState(false);
+  const [activatedCards, setActivatedCards] = useState<boolean[]>(() => castData.map(() => false));
   const [revealedCards, setRevealedCards] = useState<boolean[]>(() => castData.map(() => false));
   const [flippedCards, setFlippedCards] = useState<boolean[]>(() => castData.map(() => false));
   const [flipLabels, setFlipLabels] = useState<string[]>(() => castData.map(() => "PLAY"));
@@ -369,8 +370,8 @@ export default function Home() {
     return transparent / (imageData.data.length / 16);
   }, []);
 
-  const revealCard = useCallback((index: number, shouldPlaySound: boolean) => {
-    setRevealedCards((current) => {
+  const activateCard = useCallback((index: number, shouldPlaySound: boolean) => {
+    setActivatedCards((current) => {
       if (current[index]) return current;
       const next = [...current];
       next[index] = true;
@@ -379,6 +380,23 @@ export default function Home() {
     startFlipRotation(index);
     if (shouldPlaySound) playSound("reveal");
   }, [playSound, startFlipRotation]);
+
+  const revealCard = useCallback((index: number) => {
+    setRevealedCards((current) => {
+      if (current[index]) return current;
+      const next = [...current];
+      next[index] = true;
+      return next;
+    });
+    // Also activate if not already
+    setActivatedCards((current) => {
+      if (current[index]) return current;
+      const next = [...current];
+      next[index] = true;
+      return next;
+    });
+    startFlipRotation(index);
+  }, [startFlipRotation]);
 
   const spawnFlecks = useCallback((clientX: number, clientY: number) => {
     for (let i = 0; i < 2; i += 1) {
@@ -424,19 +442,20 @@ export default function Home() {
 
     if (scratchCounts.current[index] > 20 && scratchCounts.current[index] % 5 === 0) {
       const pct = computeRevealPct(canvas);
-      if (pct > 0.35) revealCard(index, true);
+      if (pct > 0.35) activateCard(index, true);
     }
-  }, [computeRevealPct, flippedCards, revealCard, revealedCards, spawnFlecks]);
+  }, [activateCard, computeRevealPct, flippedCards, revealedCards, spawnFlecks]);
 
   const checkReveal = useCallback((index: number) => {
     const canvas = scratchCanvases.current[index];
-    if (!canvas || revealedCards[index]) return;
+    if (!canvas || activatedCards[index]) return;
     const pct = computeRevealPct(canvas);
-    if (pct > 0.35) revealCard(index, true);
-  }, [computeRevealPct, revealCard, revealedCards]);
+    if (pct > 0.35) activateCard(index, true);
+  }, [activateCard, activatedCards, computeRevealPct]);
 
   const revealAll = useCallback(() => {
     setFlippedCards(castData.map(() => false));
+    setActivatedCards(castData.map(() => true));
     setRevealedCards(castData.map(() => true));
     castData.forEach((_, index) => startFlipRotation(index));
     playSound("reveal");
@@ -448,6 +467,7 @@ export default function Home() {
     });
     flipIntervals.current = castData.map(() => null);
     scratchCounts.current = castData.map(() => 0);
+    setActivatedCards(castData.map(() => false));
     setRevealedCards(castData.map(() => false));
     setFlippedCards(castData.map(() => false));
     setFlipLabels(castData.map(() => "PLAY"));
@@ -458,7 +478,12 @@ export default function Home() {
   }, [drawScratchCard, playSound]);
 
   const toggleFlip = useCallback((index: number) => {
-    if (!revealedCards[index]) return;
+    if (!activatedCards[index]) return;
+
+    // When flipping to bio, also reveal (hide remaining gold overlay)
+    if (!revealedCards[index]) {
+      setRevealedCards((current) => current.map((value, i) => (i === index ? true : value)));
+    }
 
     const nextFlipped = !flippedCards[index];
     setFlippedCards((current) => current.map((value, i) => (i === index ? nextFlipped : value)));
@@ -470,7 +495,7 @@ export default function Home() {
     }
 
     playSound("flip");
-  }, [flippedCards, playSound, revealedCards, startFlipRotation, stopFlipRotation]);
+  }, [activatedCards, flippedCards, playSound, revealedCards, startFlipRotation, stopFlipRotation]);
 
   const handleSignup = useCallback(async (formData: FormData) => {
     setSignupStatus("submitting");
@@ -944,6 +969,7 @@ export default function Home() {
 
           <div className="scratch-grid" id="scratchGrid" ref={scratchGridRef}>
             {castData.map((actor, index) => {
+              const activated = activatedCards[index];
               const revealed = revealedCards[index];
               const flipped = flippedCards[index];
 
@@ -1000,7 +1026,7 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-                  <button type="button" className={`flip-slot-btn ${revealed ? "lit" : ""} ${flipped ? "flipped" : ""}`} onClick={() => toggleFlip(index)}>
+                  <button type="button" className={`flip-slot-btn ${activated ? "lit" : ""} ${flipped ? "flipped" : ""}`} onClick={() => toggleFlip(index)}>
                     {flipLabels[index]}
                   </button>
                 </div>

@@ -171,3 +171,26 @@ Caroline Toal is a two-time Dora Award winner, a Stratford Festival Mary Savidge
 ---
 
 *The prototype HTML file is the single source of truth for design direction until Philip approves changes.*
+
+---
+
+## ⚠️ HARD-WON TECHNICAL RULES (March 27, 2026 Incident)
+
+**Read INCIDENT-REPORT-2026-03-27.md and SITE-SPECIFICATION.md for full details.**
+
+### Before touching ANY code on this project:
+1. **Compare against the prototype** (`/workspace/jt-prototype/index.html`) before AND after
+2. **Test the FULL page** — every section, scroll top to bottom
+3. **Test at DPR=1 AND DPR=2** if touching canvas code
+4. **Do NOT push until Philip has verified locally**
+
+### Technical rules:
+- **NO styled-jsx** — Use regular `.css` file imports only
+- **Canvas pixel mask images** must be native `<img>` with `crossOrigin="anonymous"`
+- **Canvas `ctx.font`** must use actual font names, not CSS variables
+- **Canvas draw operations** must `save()`/`restore()` context state
+- **All canvas coordinates** must account for `devicePixelRatio`
+- **Scratch handlers** must be on the canvas element directly
+- **Never `npm install`/`npm uninstall`** packages without version research
+
+### Coolify UUID: `sws4sc0c08okwwccw8k0kccc`
