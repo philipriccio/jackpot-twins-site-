@@ -839,8 +839,8 @@ export default function Home() {
             </p>
 
             <p className="hero-billing">
-              David and Hannah Mirvish and The Company Theatre
-              <span className="billing-present">Present</span>
+              <span className="billing-names">David&nbsp;and&nbsp;Hannah&nbsp;Mirvish&nbsp;and&nbsp;The&nbsp;Company&nbsp;Theatre</span>
+              <span className="billing-present">present</span>
             </p>
 
             <div className="hero-title" aria-label="Jackpot Twins">
