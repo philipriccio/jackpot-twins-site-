@@ -3,6 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+
+// Google Analytics event helper
+function gaEvent(action: string, params?: Record<string, string | number>) {
+  if (typeof window !== "undefined" && (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag) {
+    (window as unknown as { gtag: (...args: unknown[]) => void }).gtag("event", action, params);
+  }
+}
 import "./page.css";
 
 type CastMember = {
@@ -333,6 +340,7 @@ export default function Home() {
     });
     startFlipRotation(index);
     if (shouldPlaySound) playSound("reveal");
+    gaEvent("card_scratched", { cast_member: castData[index].name, card_index: index });
   }, [playSound, startFlipRotation]);
 
   const revealCard = useCallback((index: number) => {
@@ -444,6 +452,7 @@ export default function Home() {
 
     if (nextFlipped) {
       stopFlipRotation(index, "BACK");
+      gaEvent("card_flipped_to_bio", { cast_member: castData[index].name, card_index: index });
     } else {
       startFlipRotation(index);
     }
@@ -472,6 +481,7 @@ export default function Home() {
 
       setSignupStatus("success");
       playSound("signup");
+      gaEvent("email_signup", { method: "jackpottwins_modal" });
     } catch {
       setSignupStatus("error");
     }
