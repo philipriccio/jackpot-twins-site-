@@ -1,21 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#1a1a2e"/>
-  <!-- Bulb glow -->
-  <circle cx="16" cy="13" r="10" fill="#FFD700" opacity="0.25"/>
-  <circle cx="16" cy="13" r="7" fill="#FFD700" opacity="0.4"/>
-  <!-- Bulb glass -->
-  <ellipse cx="16" cy="12" rx="5.5" ry="6.5" fill="#FFE44D"/>
-  <ellipse cx="16" cy="12" rx="5.5" ry="6.5" fill="url(#bulbGrad)"/>
-  <!-- Bulb highlight -->
-  <ellipse cx="14" cy="10" rx="2" ry="3" fill="#FFFDE0" opacity="0.6"/>
-  <!-- Bulb base/screw -->
-  <rect x="13" y="18" width="6" height="2" rx="0.5" fill="#C0C0C0"/>
-  <rect x="13.5" y="20" width="5" height="1.5" rx="0.5" fill="#A0A0A0"/>
-  <rect x="14" y="21.5" width="4" height="1.5" rx="0.75" fill="#808080"/>
-  <!-- Contact point -->
-  <circle cx="16" cy="24" r="1" fill="#606060"/>
+  <rect width="32" height="32" rx="6" fill="#E8272A"/>
+  <!-- Glow -->
+  <circle cx="16" cy="16" r="11" fill="#FFD700" opacity="0.2"/>
+  <circle cx="16" cy="16" r="8" fill="#FFD700" opacity="0.3"/>
+  <!-- Marquee bulb ball -->
+  <circle cx="16" cy="16" r="6" fill="#FFE44D"/>
+  <circle cx="16" cy="16" r="6" fill="url(#bulbGlow)"/>
+  <!-- Highlight -->
+  <circle cx="14" cy="14" r="2.5" fill="#FFFDE0" opacity="0.5"/>
   <defs>
-    <radialGradient id="bulbGrad" cx="0.4" cy="0.35" r="0.6">
+    <radialGradient id="bulbGlow" cx="0.4" cy="0.35" r="0.6">
       <stop offset="0%" stop-color="#FFFDE0"/>
       <stop offset="100%" stop-color="#FFD700"/>
     </radialGradient>
