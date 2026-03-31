@@ -1,3 +1,4 @@
+import Script from "next/script";
 import type { Metadata } from "next";
 import { Bebas_Neue, Inter, Luckiest_Guy, Nunito, Oswald } from "next/font/google";
 import "./globals.css";
@@ -55,6 +56,20 @@ export default function RootLayout({
       lang="en"
       className={`${bebasNeue.variable} ${luckiestGuy.variable} ${nunito.variable} ${oswald.variable} ${inter.variable}`}
     >
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-KCPDK21Y7G"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-KCPDK21Y7G');
+          `}
+        </Script>
+      </head>
       <body>{children}</body>
     </html>
   );
