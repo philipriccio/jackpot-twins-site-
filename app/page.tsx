@@ -44,7 +44,7 @@ const castData: CastMember[] = [
     name: "Nora McLellan",
     role: "Bernadette Fitzgerald",
     img: "/images/headshots/nora-mclellan.jpeg",
-    imgStyle: "center 0%",
+    imgStyle: "center -10%",
     cardIcon: "💺",
     bio: "Nora McLellan has been one of Canadian theatre's great pleasures for over fifty years, and she shows absolutely no signs of stopping. She spent 22 seasons at the Shaw Festival and four at Stratford, trained with the legendary Uta Hagen in New York, and has four Jessie Awards and two Doras to her name. Toronto audiences know her from John at The Company Theatre — for which she won the Dora for Outstanding Performance — and as Sister Rose in CBC's Son of a Critch, a role written especially for her. She is, in every sense, a force of nature.",
   },
