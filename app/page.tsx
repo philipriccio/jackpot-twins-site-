@@ -889,7 +889,7 @@ export default function Home() {
             <p className="hero-signup-teaser">Tickets available within an Off&nbsp;Mirvish Season Subscription</p>
             <div className="cta-row" style={{ marginTop: 8, marginBottom: 28 }}>
               <a
-                href="https://mirvish.com/subscriptions"
+                href="https://www.mirvish.com/whats-on/subscriptions/off-mirvish-2026-27"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-main"
@@ -922,7 +922,7 @@ export default function Home() {
               <Image src="/logos/ct-logo-white.svg" alt="The Company Theatre" width={210} height={56} />
             </Link>
             <div className="copro-pipe" />
-            <Link className="copro-mirvish" href="https://mirvish.com" target="_blank">
+            <Link className="copro-mirvish" href="https://www.mirvish.com" target="_blank">
               <Image src="/logos/mirvish-logo-white.svg" alt="Mirvish Productions" width={205} height={28} />
             </Link>
           </div>
@@ -1039,7 +1039,7 @@ export default function Home() {
           <h2 className="signup-heading">Get Your Tickets</h2>
           <p className="signup-sub">Tickets available within an Off&nbsp;Mirvish Season Subscription.</p>
           <a
-            href="https://mirvish.com/subscriptions"
+            href="https://www.mirvish.com/whats-on/subscriptions/off-mirvish-2026-27"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-main"
@@ -1067,7 +1067,7 @@ export default function Home() {
               <Image src="/logos/ct-logo-white.svg" alt="The Company Theatre" width={120} height={32} />
             </Link>
             <span className="footer-pipe" />
-            <Link href="https://mirvish.com" target="_blank">
+            <Link href="https://www.mirvish.com" target="_blank">
               <Image src="/logos/mirvish-logo-white.svg" alt="Mirvish Productions" width={146} height={20} />
             </Link>
           </div>
