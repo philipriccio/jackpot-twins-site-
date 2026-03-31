@@ -835,6 +835,7 @@ export default function Home() {
             <p className="hero-eyebrow">
               <span className="blink" />
               World Premiere&nbsp;·&nbsp;Toronto&nbsp;·&nbsp;Spring&nbsp;2027
+              <span className="blink" />
             </p>
 
             <div className="hero-title" aria-label="Jackpot Twins">
