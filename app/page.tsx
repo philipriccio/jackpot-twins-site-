@@ -838,6 +838,11 @@ export default function Home() {
               <span className="blink" />
             </p>
 
+            <p className="hero-billing">
+              David and Hannah Mirvish and The Company Theatre
+              <span className="billing-present">Present</span>
+            </p>
+
             <div className="hero-title" aria-label="Jackpot Twins">
               {titleWords.map((word, index) => (
                 <div key={word.alt} className={`title-word-wrap ${word.className}`}>
