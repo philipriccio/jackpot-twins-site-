@@ -38,7 +38,7 @@ const castData: CastMember[] = [
     img: "/images/headshots/seana-mckenna.jpeg",
     imgStyle: "center 20%",
     cardIcon: "✝️",
-    bio: "Seana McKenna is a recipient of the Order of Canada — do we need to say more? No. But we will anyway. A National Theatre School graduate, she has spent four decades setting the standard at Stratford, Shaw, Canadian Stage, and stages across North America, playing everything from Juliet to Julius Caesar along the way. She made history as Stratford's first female Richard III. Three Dora Awards, a Genie, a Jessie, and an Honorary Doctorate later — if you saw her in Things I Know to Be True and needed a few days to recover, good news: this one's a comedy.",
+    bio: "Seana McKenna is a recipient of the Order of Canada — do we need to say more? No. But we will anyway. A National Theatre School graduate, she has spent four decades setting the standard at Stratford, Shaw, Canadian Stage, and stages across North America, playing everything from Juliet to Julius Caesar along the way. She made history as Stratford's first female Richard III. Three Dora Awards, a Genie, a Jessie, and multiple Honorary Doctorates later — if you saw her in Things I Know to Be True and needed a few days to recover, good news: this one's a comedy.",
   },
   {
     name: "Nora McLellan",
