@@ -827,10 +827,6 @@ export default function Home() {
         </div>
 
         <section className="hero">
-          <div className="hero-poster">
-            <Image src="/images/hero-landscape.jpg" alt="Jackpot Twins - A New Comedy by Philip Riccio" width={1800} height={750} priority />
-          </div>
-
           <div className="hero-right">
             <p className="hero-eyebrow">
               <span className="blink" />

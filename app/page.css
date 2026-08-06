@@ -78,22 +78,9 @@ body{
 }
 
 .hero{
-  background:#2a3a1e;
+  background:var(--black);
   position:relative;
   border-bottom:4px solid var(--black);
-}
-.hero-poster{
-  width:100%;
-  display:block;
-  line-height:0;
-  overflow:hidden;
-}
-.hero-poster img{
-  width:100%;
-  height:auto;
-  display:block;
-  object-fit:contain;
-  object-position:top center;
 }
 .hero-right{
   background:linear-gradient(135deg, var(--hot-pink) 0%, var(--deep-orange) 100%);
@@ -102,7 +89,6 @@ body{
   align-items:center;
   text-align:center;
   padding:64px 40px 56px;
-  border-top:4px solid var(--black);
   position:relative;
   overflow:hidden;
 }
