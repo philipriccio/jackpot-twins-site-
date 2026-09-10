@@ -196,8 +196,7 @@ body{
   0%,100%{opacity:0.15;transform:scale(0.6);}
   50%{opacity:1;transform:scale(1.3);}
 }
-.title-word-wrap.jackpot img{max-width:520px;width:100%;}
-.title-word-wrap.twins img{max-width:380px;width:100%;margin-top:-8px;}
+.title-word-wrap.lockup img{max-width:640px;width:100%;}
 .hero-byline{
   font-family:'Bebas Neue',sans-serif;
   font-size:clamp(24px,3.5vw,36px);

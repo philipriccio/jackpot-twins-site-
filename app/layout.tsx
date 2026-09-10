@@ -73,9 +73,9 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/jackpot-twins-title.jpg",
-        width: 3794,
-        height: 2324,
+        url: "/images/jt-2026-logo-new.png",
+        width: 2405,
+        height: 1518,
         alt: "Jackpot Twins — A New Comedy by Philip Riccio",
       },
     ],
@@ -85,7 +85,7 @@ export const metadata: Metadata = {
     title: "Jackpot Twins — World Premiere Spring 2027",
     description:
       "A sharp-witted, irreverent new comedy about the heavy price of getting everything you ever wanted.",
-    images: ["/images/jackpot-twins-title.jpg"],
+    images: ["/images/jt-2026-logo-new.png"],
   },
 };
 

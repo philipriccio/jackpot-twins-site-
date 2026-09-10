@@ -91,8 +91,7 @@ const tickerItems = [
 
 const countdownTarget = new Date("2027-03-09T19:30:00-05:00");
 const titleWords = [
-  { src: "/images/title-jackpot.png", alt: "JACKPOT", className: "jackpot" },
-  { src: "/images/title-twins.png", alt: "TWINS", className: "twins" },
+  { src: "/images/jt-2026-logo-new.webp", alt: "Jackpot Twins", className: "lockup" },
 ] as const;
 
 function parseObjectPosition(position?: string) {

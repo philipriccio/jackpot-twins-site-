@@ -126,3 +126,10 @@ All images compressed — 35-90% reductions. PNGs still large (title-jackpot.png
 ---
 
 *Prototype source of truth: `/workspace/jt-prototype/index.html`*
+
+## Sep 10, 2026 — New Mirvish Title Lockup Release
+- Retrieved Otto Pierre's approved transparent title lockup and preserved the original 2405×1518 RGBA PNG in the production asset folder.
+- Replaced the split `title-jackpot.png` / `title-twins.png` hero with the combined lockup. The hero uses an optimized 926 KB WebP; Open Graph and Twitter metadata use the original PNG.
+- Preserved the existing canvas sparkle treatment over the new title artwork.
+- Production build and full-page desktop/mobile visual proof passed with no horizontal overflow.
+- Philip approved the verified local release candidate for production deployment on Sep. 10.
