@@ -133,3 +133,5 @@ All images compressed — 35-90% reductions. PNGs still large (title-jackpot.png
 - Preserved the existing canvas sparkle treatment over the new title artwork.
 - Production build and full-page desktop/mobile visual proof passed with no horizontal overflow.
 - Philip approved the verified local release candidate for production deployment on Sep. 10.
+- Released as commit `4157030d7db1723027147203963924821b86e071` from `stable-deploy` through Coolify deployment `esguguycf8kwmzvprac8pwng`; the rolling update finished successfully.
+- Live proof passed on `https://jackpottwins.ca`: both the PNG social asset and WebP hero are byte-for-byte identical to the release files, metadata references the new PNG, desktop/mobile layouts show the combined lockup uncropped, and both viewports have zero horizontal overflow.
