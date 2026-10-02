@@ -838,32 +838,54 @@ export default function Home() {
               <span className="billing-present">present</span>
             </p>
 
-            <div className="hero-title" aria-label="Jackpot Twins">
-              {titleWords.map((word, index) => (
-                <div key={word.alt} className={`title-word-wrap ${word.className}`}>
-                  <img
-                    ref={(node) => {
-                      titleImageRefs.current[index] = node;
-                    }}
-                    src={word.src}
-                    alt={word.alt}
-                    crossOrigin="anonymous"
-                  />
-                  <canvas
-                    ref={(node) => {
-                      bulbCanvasRefs.current[index] = node;
-                    }}
-                    className="bulb-overlay"
-                    id={index === 0 ? "bulbJackpot" : "bulbTwins"}
-                  />
-                  <div
-                    ref={(node) => {
-                      dotContainerRefs.current[index] = node;
-                    }}
-                    className="title-dots"
-                  />
-                </div>
-              ))}
+            <div className="hero-title-composite">
+              <div className="hero-figure hero-figure-nora" aria-hidden="true">
+                <Image
+                  src="/images/nora-jackpot-twins-cutout.webp"
+                  alt=""
+                  width={1051}
+                  height={1367}
+                  priority
+                />
+              </div>
+
+              <div className="hero-title" aria-label="Jackpot Twins">
+                {titleWords.map((word, index) => (
+                  <div key={word.alt} className={`title-word-wrap ${word.className}`}>
+                    <img
+                      ref={(node) => {
+                        titleImageRefs.current[index] = node;
+                      }}
+                      src={word.src}
+                      alt={word.alt}
+                      crossOrigin="anonymous"
+                    />
+                    <canvas
+                      ref={(node) => {
+                        bulbCanvasRefs.current[index] = node;
+                      }}
+                      className="bulb-overlay"
+                      id={index === 0 ? "bulbJackpot" : "bulbTwins"}
+                    />
+                    <div
+                      ref={(node) => {
+                        dotContainerRefs.current[index] = node;
+                      }}
+                      className="title-dots"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              <div className="hero-figure hero-figure-seana" aria-hidden="true">
+                <Image
+                  src="/images/seana-jackpot-twins-cutout.webp"
+                  alt=""
+                  width={910}
+                  height={1480}
+                  priority
+                />
+              </div>
             </div>
 
             <p className="hero-byline">A New Comedy by Philip Riccio</p>

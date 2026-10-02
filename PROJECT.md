@@ -135,3 +135,10 @@ All images compressed — 35-90% reductions. PNGs still large (title-jackpot.png
 - Philip approved the verified local release candidate for production deployment on Sep. 10.
 - Released as commit `4157030d7db1723027147203963924821b86e071` from `stable-deploy` through Coolify deployment `esguguycf8kwmzvprac8pwng`; the rolling update finished successfully.
 - Live proof passed on `https://jackpottwins.ca`: both the PNG social asset and WebP hero are byte-for-byte identical to the release files, metadata references the new PNG, desktop/mobile layouts show the combined lockup uncropped, and both viewports have zero horizontal overflow.
+
+## Oct 2, 2026 — Sisters + Title Hero Composition
+- Enhanced approved photo selects 7 and 38; changed Seana McKenna's cream outfit to Jackpot Twins pink while preserving identity, pose, glasses, hair, and studio lighting.
+- Created transparent, optimized WebP cutouts and placed Nora McLellan left / existing title lockup centre / Seana McKenna right in the main hero. Their feet share the title lockup's bottom baseline and all three elements scale responsively.
+- The initial cast-card placement was rejected by Philip and fully reverted; original cast headshots remain unchanged.
+- Production build passed. Browser proof at 1440px, 768px, and 390px showed the intended composition and no horizontal overflow.
+- Philip approved the live release after confirming that only the transparent women—not their studio backgrounds—should appear beside the title.
