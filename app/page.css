@@ -158,30 +158,31 @@ body{
 }
 
 .hero-title-composite{
-  width:min(1280px,100%);
-  display:grid;
-  grid-template-columns:minmax(160px,0.72fr) minmax(420px,1.6fr) minmax(160px,0.72fr);
+  width:100%;
+  display:flex;
+  justify-content:center;
   align-items:end;
-  gap:10px;
+  gap:2px;
   margin-bottom:16px;
   padding:0 8px;
   position:relative;
   z-index:1;
 }
-.hero-title{display:flex;flex-direction:column;align-items:center;position:relative;z-index:2;gap:0;min-width:0;}
+.hero-title{width:min(640px,44.5vw);flex:0 1 640px;display:flex;flex-direction:column;align-items:center;position:relative;z-index:2;gap:0;min-width:0;}
 .hero-figure{
-  height:clamp(300px,31vw,440px);
+  height:min(240px,16.7vw);
+  flex:0 0 auto;
   display:flex;
   align-items:flex-end;
   position:relative;
   z-index:1;
-  min-width:0;
 }
 .hero-figure-nora{justify-content:flex-end;}
 .hero-figure-seana{justify-content:flex-start;}
 .hero-figure img{
   width:auto;
   height:100%;
+  max-width:none;
   object-fit:contain;
   object-position:center bottom;
   filter:drop-shadow(0 12px 14px rgba(0,0,0,0.22));
@@ -227,22 +228,21 @@ body{
 .title-word-wrap.lockup img{max-width:640px;width:100%;}
 @media(max-width:900px){
   .hero-title-composite{
-    grid-template-columns:minmax(100px,0.62fr) minmax(330px,1.55fr) minmax(100px,0.62fr);
-    gap:4px;
+    gap:2px;
   }
-  .hero-figure{height:clamp(230px,37vw,340px);}
+  .hero-title{width:56vw;flex-basis:56vw;}
+  .hero-figure{height:20.8vw;}
 }
 @media(max-width:600px){
   .hero-title-composite{
-    width:calc(100% + 28px);
-    grid-template-columns:minmax(70px,1fr) minmax(210px,58vw) minmax(70px,1fr);
-    gap:0;
-    margin-left:-14px;
+    width:100%;
+    gap:2px;
     padding:0;
   }
-  .hero-figure{height:clamp(118px,36vw,148px);}
-  .hero-figure-nora{justify-content:flex-end;margin-right:-8px;}
-  .hero-figure-seana{justify-content:flex-start;margin-left:-4px;}
+  .hero-title{width:58vw;flex-basis:58vw;}
+  .hero-figure{height:21.5vw;}
+  .hero-figure-nora{justify-content:flex-end;margin-right:0;}
+  .hero-figure-seana{justify-content:flex-start;margin-left:0;}
   .hero-title{z-index:2;}
 }
 .hero-byline{

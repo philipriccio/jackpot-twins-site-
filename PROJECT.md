@@ -142,3 +142,6 @@ All images compressed — 35-90% reductions. PNGs still large (title-jackpot.png
 - The initial cast-card placement was rejected by Philip and fully reverted; original cast headshots remain unchanged.
 - Production build passed. Browser proof at 1440px, 768px, and 390px showed the intended composition and no horizontal overflow.
 - Philip approved the live release after confirming that only the transparent women—not their studio backgrounds—should appear beside the title.
+- Released as commit `ca7adc11f62e0a9000c6e7a00b726f1caaa4309a` from `stable-deploy` through Coolify deployment `go0443iv954vu7bvljnek2d8`; the rolling update finished successfully.
+- Live proof passed on `https://jackpottwins.ca`: both transparent WebP assets match the release files byte-for-byte, the homepage references both figures, and desktop/mobile visual checks show Nora left, Seana right, the shared title baseline, and zero horizontal overflow.
+- Philip requested a tighter second pass: both figures were reduced to the visual height of the `TWINS` word, normalized to identical rendered heights, tightly cropped to remove hidden transparent side padding, and placed 2px off the title on desktop and mobile without overlap.

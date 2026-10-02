@@ -841,10 +841,10 @@ export default function Home() {
             <div className="hero-title-composite">
               <div className="hero-figure hero-figure-nora" aria-hidden="true">
                 <Image
-                  src="/images/nora-jackpot-twins-cutout.webp"
+                  src="/images/nora-jackpot-twins-cutout-tight.webp"
                   alt=""
-                  width={1051}
-                  height={1367}
+                  width={630}
+                  height={1337}
                   priority
                 />
               </div>
@@ -879,10 +879,10 @@ export default function Home() {
 
               <div className="hero-figure hero-figure-seana" aria-hidden="true">
                 <Image
-                  src="/images/seana-jackpot-twins-cutout.webp"
+                  src="/images/seana-jackpot-twins-cutout-tight.webp"
                   alt=""
-                  width={910}
-                  height={1480}
+                  width={415}
+                  height={1473}
                   priority
                 />
               </div>
