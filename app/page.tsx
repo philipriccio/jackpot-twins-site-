@@ -879,10 +879,10 @@ export default function Home() {
 
               <div className="hero-figure hero-figure-seana" aria-hidden="true">
                 <Image
-                  src="/images/seana-jackpot-twins-cutout-tight.webp"
+                  src="/images/seana-jackpot-twins-photo-33-cutout.webp"
                   alt=""
-                  width={415}
-                  height={1473}
+                  width={400}
+                  height={1395}
                   priority
                 />
               </div>
