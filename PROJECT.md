@@ -150,3 +150,8 @@ All images compressed — 35-90% reductions. PNGs still large (title-jackpot.png
 - Philip requested that Seana's hero figure be replaced with approved marketing photo 33. The Drive source was checksum-verified, the cream suit was recoloured to the established campaign pink, and a new transparent cache-busted cutout replaced photo 38 without changing the hero sizing or placement rules.
 - Release commit `76374cf29a9988078cf4d639dc12b43d6e6c98ac` was deployed successfully through Coolify deployment `vg13g7f2jozberadahozzn8l`. The first deployment attempt `rat3wzms398ezyfljruqc56r` failed safely during Nixpacks environment setup before app compilation; host disk, memory, swap, and OOM checks were healthy, and one clean retry succeeded.
 - Live proof passed: the public photo 33 asset matches the release file byte-for-byte; Nora and Seana remain identical heights (240px desktop, 83.84px mobile), share the title baseline, remain 2px from the title, and produce no horizontal overflow.
+
+## Oct 5, 2026 — Single-Ticket On-Sale Date
+- Replaced the vague “available at a later date” copy in the hero and ticket section with: “Single tickets go on sale October 9.”
+- Updated the signup modal to offer an October 9 on-sale reminder while preserving the existing subscription and alert flows.
+- Production build and desktop/mobile visual checks passed with no horizontal overflow.

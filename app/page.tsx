@@ -152,7 +152,7 @@ function SignupModal({
         <button type="button" className="signup-modal-close" onClick={onClose} aria-label="Close signup form">
           &times;
         </button>
-        <p className="signup-modal-title">Be the first to know when single tickets go on sale</p>
+        <p className="signup-modal-title">Get a reminder when single tickets go on sale October 9</p>
         {status === "success" ? (
           <p className="signup-modal-success">You&apos;re in! 🎰 We&apos;ll be in touch.</p>
         ) : (
@@ -920,7 +920,7 @@ export default function Home() {
                 Subscribe at Mirvish.com
               </a>
             </div>
-            <p className="hero-signup-teaser">Single tickets available at a later date. Be the first to know.</p>
+            <p className="hero-signup-teaser">Single tickets go on sale October 9.</p>
             <div className="cta-row" style={{ marginTop: 8 }}>
               <button
                 type="button"
@@ -1069,7 +1069,7 @@ export default function Home() {
           >
             Subscribe at Mirvish.com
           </a>
-          <p className="signup-single-tickets">Single tickets available at a later date.</p>
+          <p className="signup-single-tickets">Single tickets go on sale October 9.</p>
           <button
             type="button"
             className="btn-main btn-secondary"
