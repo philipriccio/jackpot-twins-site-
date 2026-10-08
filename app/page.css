@@ -1077,3 +1077,17 @@ footer{
   margin-bottom:12px;
   position:relative;
 }
+
+/* Photo 288 campaign artwork: live movie-poster billing, above producer credits. */
+.campaign-portrait{background:var(--white);border-top:4px solid var(--black);}
+.campaign-portrait-frame{position:relative;max-width:1280px;margin:0 auto;padding-top:96px;}
+.campaign-portrait-image{display:block;width:100%;height:auto;}
+.campaign-name{position:absolute;top:26px;transform:translateX(-50%);width:36%;text-align:center;font-family:var(--font-bebas-neue),'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(32px,5.3vw,68px);line-height:.94;letter-spacing:.035em;text-transform:uppercase;color:var(--pink);}
+.campaign-name span{display:block;}
+.campaign-name .campaign-name-first{font-size:.58em;line-height:1.15;letter-spacing:.14em;color:var(--black);}
+.campaign-name-nora{left:32%;}
+.campaign-name-seana{left:70%;}
+@media(max-width:600px){
+  .campaign-portrait-frame{padding-top:54px;}
+  .campaign-name{top:15px;font-size:clamp(24px,7.2vw,40px);letter-spacing:.015em;width:42%;}
+}

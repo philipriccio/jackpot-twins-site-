@@ -937,6 +937,27 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="campaign-portrait" aria-label="Nora McLellan and Seana McKenna in Jackpot Twins">
+          <div className="campaign-portrait-frame">
+            <div className="campaign-name campaign-name-nora">
+              <span className="campaign-name-first">Nora</span>
+              <span>McLellan</span>
+            </div>
+            <div className="campaign-name campaign-name-seana">
+              <span className="campaign-name-first">Seana</span>
+              <span>McKenna</span>
+            </div>
+            <Image
+              className="campaign-portrait-image"
+              src="/images/jackpot-twins-photo288-equal-chairs.webp"
+              alt="Nora McLellan in red and Seana McKenna in pink, seated in matching blue recliners."
+              width={1536}
+              height={864}
+              sizes="(max-width: 1280px) 100vw, 1280px"
+            />
+          </div>
+        </section>
+
         <div className="copro">
           <span className="copro-label">A Production By</span>
           <div className="copro-logos">
