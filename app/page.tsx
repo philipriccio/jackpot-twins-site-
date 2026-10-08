@@ -80,6 +80,13 @@ const creativeTeam = [
   { role: "Lighting Design", person: "Kevin Lamotte" },
 ] as const;
 
+const additionalCreativeTeam = [
+  { role: "Costume Design", person: "Niloufar Ziaee" },
+  { role: "Sound Design", person: "Thomas Ryder Payne" },
+  { role: "Stage Manager", person: "Alysse Szatkowski" },
+  { role: "Assistant Stage Manager", person: "Meghan Speakman" },
+] as const;
+
 const tickerItems = [
   "JACKPOT TWINS",
   "WRITTEN AND DIRECTED BY PHILIP RICCIO",
@@ -1069,6 +1076,14 @@ export default function Home() {
           <h2 className="creative-heading">Creative Team</h2>
           <ul className="creative-list">
             {creativeTeam.map((item) => (
+              <li key={item.role} className="creative-item">
+                <span className="creative-role">{item.role}</span>
+                <span className="creative-person">{item.person}</span>
+              </li>
+            ))}
+          </ul>
+          <ul className="creative-list creative-list-additional">
+            {additionalCreativeTeam.map((item) => (
               <li key={item.role} className="creative-item">
                 <span className="creative-role">{item.role}</span>
                 <span className="creative-person">{item.person}</span>
