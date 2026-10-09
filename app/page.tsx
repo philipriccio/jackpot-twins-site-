@@ -832,9 +832,9 @@ export default function Home() {
           <div className="hero-right">
             <div className="cta-row hero-top-ticket">
               <a href={ticketUrl("above_title")} target="_blank" rel="noopener noreferrer"
-                className="btn-main" data-ticket-placement="above_title"
+                className="btn-main ticket-slot" data-ticket-placement="above_title"
                 onClick={() => gaEvent("ticket_click", { placement: "above_title", link_url: ticketUrl("above_title"), transport_type: "beacon" })}>
-                Buy Tickets
+                <span className="ticket-slot-face"><span aria-hidden="true" className="ticket-slot-star">★</span><span>Buy Tickets</span><span aria-hidden="true" className="ticket-slot-star">★</span></span>
               </a>
             </div>
 
@@ -927,10 +927,9 @@ export default function Home() {
                 onClick={() => gaEvent("ticket_click", { placement: "hero", link_url: ticketUrl("hero"), transport_type: "beacon" })}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-main"
-                style={{ background: "var(--black)" }}
+                className="btn-main ticket-slot"
               >
-                Buy Tickets
+                <span className="ticket-slot-face"><span aria-hidden="true" className="ticket-slot-star">★</span><span>Buy Tickets</span><span aria-hidden="true" className="ticket-slot-star">★</span></span>
               </a>
             </div>
             <p className="hero-signup-teaser">Get the latest Jackpot Twins news and updates.</p>
@@ -1108,10 +1107,9 @@ export default function Home() {
             onClick={() => gaEvent("ticket_click", { placement: "ticket_section", link_url: ticketUrl("ticket_section"), transport_type: "beacon" })}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-main"
-            style={{ fontSize: 18, padding: "16px 44px", margin: "0 auto", background: "var(--black)", textDecoration: "none" }}
+            className="btn-main ticket-slot"
           >
-            Buy Tickets
+            <span className="ticket-slot-face"><span aria-hidden="true" className="ticket-slot-star">★</span><span>Buy Tickets</span><span aria-hidden="true" className="ticket-slot-star">★</span></span>
           </a>
           <p className="signup-single-tickets">Get the latest Jackpot Twins news and updates.</p>
           <button
