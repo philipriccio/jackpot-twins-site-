@@ -830,6 +830,14 @@ export default function Home() {
 
         <section className="hero">
           <div className="hero-right">
+            <div className="cta-row hero-top-ticket">
+              <a href={ticketUrl("above_title")} target="_blank" rel="noopener noreferrer"
+                className="btn-main" data-ticket-placement="above_title"
+                onClick={() => gaEvent("ticket_click", { placement: "above_title", link_url: ticketUrl("above_title"), transport_type: "beacon" })}>
+                Buy Tickets
+              </a>
+            </div>
+
             <p className="hero-eyebrow">
               <span className="blink" />
               World Premiere&nbsp;·&nbsp;Toronto&nbsp;·&nbsp;Spring&nbsp;2027
@@ -840,14 +848,6 @@ export default function Home() {
               <span className="billing-names">David&nbsp;and&nbsp;Hannah&nbsp;Mirvish&nbsp;and&nbsp;The&nbsp;Company&nbsp;Theatre</span>
               <span className="billing-present">present</span>
             </p>
-
-            <div className="cta-row hero-top-ticket">
-              <a href={ticketUrl("above_title")} target="_blank" rel="noopener noreferrer"
-                className="btn-main" data-ticket-placement="above_title"
-                onClick={() => gaEvent("ticket_click", { placement: "above_title", link_url: ticketUrl("above_title"), transport_type: "beacon" })}>
-                Buy Tickets
-              </a>
-            </div>
 
             <div className="hero-title-composite">
               <div className="hero-figure hero-figure-nora" aria-hidden="true">
