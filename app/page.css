@@ -1092,3 +1092,9 @@ footer{
   .campaign-portrait-frame{padding-top:54px;}
   .campaign-name{top:15px;font-size:clamp(24px,7.2vw,40px);letter-spacing:.015em;width:42%;}
 }
+
+/* Primary ticket action sits above the title, clear of the artwork. */
+.hero-top-ticket{margin:18px 0 26px;position:relative;z-index:3}
+.hero-top-ticket .btn-main{background:var(--black);min-height:48px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+a[data-ticket-placement]:focus-visible{outline:3px solid var(--red);outline-offset:5px}
+@media(max-width:600px){.hero-top-ticket{margin:14px 0 20px}.hero-top-ticket .btn-main{padding:14px 32px}}

@@ -4,12 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-// Google Analytics event helper
-function gaEvent(action: string, params?: Record<string, string | number>) {
-  if (typeof window !== "undefined" && (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag) {
-    (window as unknown as { gtag: (...args: unknown[]) => void }).gtag("event", action, params);
-  }
-}
+import { gaEvent, ticketUrl } from "./ticket-analytics";
+
 import "./page.css";
 
 type CastMember = {
@@ -159,7 +155,7 @@ function SignupModal({
         <button type="button" className="signup-modal-close" onClick={onClose} aria-label="Close signup form">
           &times;
         </button>
-        <p className="signup-modal-title">Get a reminder when single tickets go on sale October 9</p>
+        <p className="signup-modal-title">Get news and updates from Jackpot Twins</p>
         {status === "success" ? (
           <p className="signup-modal-success">You&apos;re in! 🎰 We&apos;ll be in touch.</p>
         ) : (
@@ -187,7 +183,7 @@ function SignupModal({
 }
 
 export default function Home() {
-  const [countdown, setCountdown] = useState<CountdownState>(getCountdown);
+  const [countdown, setCountdown] = useState<CountdownState>({ days: "—", hours: "—", mins: "—", secs: "—" });
   const [modalOpen, setModalOpen] = useState(false);
   const [signupStatus, setSignupStatus] = useState<SignupState>("idle");
   const [activatedCards, setActivatedCards] = useState<boolean[]>(() => castData.map(() => false));
@@ -845,6 +841,14 @@ export default function Home() {
               <span className="billing-present">present</span>
             </p>
 
+            <div className="cta-row hero-top-ticket">
+              <a href={ticketUrl("above_title")} target="_blank" rel="noopener noreferrer"
+                className="btn-main" data-ticket-placement="above_title"
+                onClick={() => gaEvent("ticket_click", { placement: "above_title", link_url: ticketUrl("above_title"), transport_type: "beacon" })}>
+                Buy Tickets
+              </a>
+            </div>
+
             <div className="hero-title-composite">
               <div className="hero-figure hero-figure-nora" aria-hidden="true">
                 <Image
@@ -915,19 +919,21 @@ export default function Home() {
               </div>
             </div>
 
-            <p className="hero-signup-teaser">Tickets available within an Off&nbsp;Mirvish Season Subscription</p>
+            <p className="hero-signup-teaser">March 9–28, 2027 · CAA Theatre, Toronto</p>
             <div className="cta-row" style={{ marginTop: 8, marginBottom: 28 }}>
               <a
-                href="https://www.mirvish.com/whats-on/subscriptions/off-mirvish-2026-27"
+                href={ticketUrl("hero")}
+                data-ticket-placement="hero"
+                onClick={() => gaEvent("ticket_click", { placement: "hero", link_url: ticketUrl("hero"), transport_type: "beacon" })}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-main"
                 style={{ background: "var(--black)" }}
               >
-                Subscribe at Mirvish.com
+                Buy Tickets
               </a>
             </div>
-            <p className="hero-signup-teaser">Single tickets go on sale October 9.</p>
+            <p className="hero-signup-teaser">Get the latest Jackpot Twins news and updates.</p>
             <div className="cta-row" style={{ marginTop: 8 }}>
               <button
                 type="button"
@@ -1093,19 +1099,21 @@ export default function Home() {
         </section>
 
         <section className="signup" id="signup">
-          <p className="signup-label">Subscriptions Available Now</p>
+          <p className="signup-label">Jackpot Twins at the CAA Theatre</p>
           <h2 className="signup-heading">Get Your Tickets</h2>
-          <p className="signup-sub">Tickets available within an Off&nbsp;Mirvish Season Subscription.</p>
+          <p className="signup-sub">March 9–28, 2027 · Three weeks only.</p>
           <a
-            href="https://www.mirvish.com/whats-on/subscriptions/off-mirvish-2026-27"
+            href={ticketUrl("ticket_section")}
+            data-ticket-placement="ticket_section"
+            onClick={() => gaEvent("ticket_click", { placement: "ticket_section", link_url: ticketUrl("ticket_section"), transport_type: "beacon" })}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-main"
             style={{ fontSize: 18, padding: "16px 44px", margin: "0 auto", background: "var(--black)", textDecoration: "none" }}
           >
-            Subscribe at Mirvish.com
+            Buy Tickets
           </a>
-          <p className="signup-single-tickets">Single tickets go on sale October 9.</p>
+          <p className="signup-single-tickets">Get the latest Jackpot Twins news and updates.</p>
           <button
             type="button"
             className="btn-main btn-secondary"
@@ -1115,7 +1123,7 @@ export default function Home() {
               setModalOpen(true);
             }}
           >
-            Sign Up for Single Ticket Alerts
+            Sign Up for Updates
           </button>
         </section>
 
