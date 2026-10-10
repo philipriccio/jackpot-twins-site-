@@ -1,5 +1,7 @@
 "use client";
 
+import { CONSENT_TEXT, CONSENT_VERSION } from "@/lib/signup-contract";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -17,7 +19,7 @@ type CastMember = {
   bio: string;
 };
 
-type SignupState = "idle" | "submitting" | "success" | "error";
+type SignupState = "idle" | "submitting" | "success" | "review" | "error";
 
 
 type CountdownState = {
@@ -149,15 +151,15 @@ function SignupModal({
   if (!open) return null;
 
   return (
-    <div className={`signup-modal ${open ? "show" : ""}`} id="signupModal">
+    <div className={`signup-modal ${open ? "show" : ""}`} id="signupModal" role="dialog" aria-modal="true" aria-labelledby="signup-title">
       <div className="signup-modal-backdrop" onClick={onClose} />
       <div className="signup-modal-card">
         <button type="button" className="signup-modal-close" onClick={onClose} aria-label="Close signup form">
           &times;
         </button>
-        <p className="signup-modal-title">Get news and updates from Jackpot Twins</p>
+        <p id="signup-title" className="signup-modal-title">Get news and updates from Jackpot Twins</p>
         {status === "success" ? (
-          <p className="signup-modal-success">You&apos;re in! 🎰 We&apos;ll be in touch.</p>
+          <p role="status" className="signup-modal-success">You&apos;re in! 🎰 We&apos;ll be in touch.</p>
         ) : (
           <form
             className="signup-modal-form"
@@ -166,14 +168,16 @@ function SignupModal({
               await onSubmit(new FormData(event.currentTarget));
             }}
           >
-            <input name="firstName" type="text" className="signup-modal-input" placeholder="First name" required />
-            <input name="lastName" type="text" className="signup-modal-input" placeholder="Last name" required />
-            <input name="email" type="email" className="signup-modal-input" placeholder="Email address" required />
+            <input name="firstName" type="text" className="signup-modal-input" aria-label="First name" maxLength={100} placeholder="First name" required />
+            <input name="lastName" type="text" className="signup-modal-input" aria-label="Last name" maxLength={100} placeholder="Last name" required />
+            <input name="email" type="email" className="signup-modal-input" aria-label="Email address" maxLength={254} placeholder="Email address" required />
+            <label className="signup-consent"><input type="checkbox" name="consent" required /><span>{CONSENT_TEXT}</span></label>
             <button type="submit" className="signup-modal-btn" disabled={status === "submitting"}>
               {status === "submitting" ? "Sending..." : "Notify Me"}
             </button>
+            {status === "review" ? <p role="status" className="signup-error">Your request was recorded, but this address needs a subscription review. It has not been added to the mailing list.</p> : null}
             {status === "error" ? (
-              <p className="signup-error">We couldn&apos;t submit right now. Please try again.</p>
+              <p role="alert" className="signup-error">We couldn&apos;t submit right now. Please try again.</p>
             ) : null}
           </form>
         )}
@@ -469,7 +473,8 @@ export default function Home() {
       firstName: String(formData.get("firstName") ?? ""),
       lastName: String(formData.get("lastName") ?? ""),
       email: String(formData.get("email") ?? ""),
-      source: "jackpottwins.ca interest form",
+      consent: formData.get("consent") === "on",
+      consentVersion: CONSENT_VERSION,
     };
 
     try {
@@ -481,6 +486,9 @@ export default function Home() {
 
       if (!response.ok) throw new Error(`Signup failed: ${response.status}`);
 
+      const confirmation = await response.json();
+      if (confirmation.recorded !== true || typeof confirmation.subscribed !== "boolean") throw new Error("Invalid signup response");
+      if (!confirmation.subscribed) { setSignupStatus("review"); return; }
       setSignupStatus("success");
       playSound("signup");
       gaEvent("email_signup", { method: "jackpottwins_modal" });

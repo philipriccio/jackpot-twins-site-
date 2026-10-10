@@ -1144,3 +1144,8 @@ a.ticket-slot:focus-visible{outline:3px solid #17131d;outline-offset:5px}
   .ticket-slot-face::after{display:none}
   a.btn-main.ticket-slot{transition:none}
 }
+
+/* Consent remains legible and reachable on short mobile viewports. */
+.signup-modal-card { max-height: 90dvh; overflow-y: auto; }
+.signup-consent { display: flex; align-items: flex-start; gap: 10px; text-align: left; font-family: var(--font-inter), sans-serif; font-size: 13px; line-height: 1.5; }
+.signup-consent input { flex: 0 0 auto; margin-top: 4px; width: 18px; height: 18px; }
