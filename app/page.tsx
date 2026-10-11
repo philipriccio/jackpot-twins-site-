@@ -307,10 +307,33 @@ export default function Home() {
     ctx.fillText("JACKPOT TWINS", w / 2, h * 0.16);
     ctx.shadowBlur = 0;
 
-    ctx.font = `${Math.min(w / 3, 56)}px sans-serif`;
-    ctx.filter = "grayscale(100%) brightness(1.5)";
-    ctx.fillText(icon, w / 2, h * 0.46);
-    ctx.filter = "none";
+    const iconSize = Math.min(w / 3, 56);
+    if (icon === "✝️") {
+      // Draw Seana's tile geometrically: iOS emoji ink can be offset from
+      // the font's centred advance box. Keep it on the scratchable canvas.
+      ctx.save();
+      ctx.translate(w / 2, h * 0.46);
+      ctx.shadowOffsetY = 0;
+      const purple = ctx.createLinearGradient(0, -iconSize / 2, 0, iconSize / 2);
+      purple.addColorStop(0, "#bd59e1");
+      purple.addColorStop(1, "#821caf");
+      ctx.fillStyle = purple;
+      ctx.beginPath();
+      ctx.roundRect(-iconSize / 2, -iconSize / 2, iconSize, iconSize, iconSize * 0.2);
+      ctx.fill();
+      ctx.strokeStyle = "#9033b5";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(-iconSize * 0.045, -iconSize * 0.34, iconSize * 0.09, iconSize * 0.68);
+      ctx.fillRect(-iconSize * 0.22, -iconSize * 0.15, iconSize * 0.44, iconSize * 0.09);
+      ctx.restore();
+    } else {
+      ctx.font = `${iconSize}px sans-serif`;
+      ctx.filter = "grayscale(100%) brightness(1.5)";
+      ctx.fillText(icon, w / 2, h * 0.46);
+      ctx.filter = "none";
+    }
 
     ctx.font = `bold ${Math.min(w / 8, 18)}px "Luckiest Guy", cursive`;
     ctx.fillStyle = "#C0C0C0";

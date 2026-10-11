@@ -1,0 +1,42 @@
+[
+  {
+    "width": 320,
+    "canvasWidth": 500,
+    "purpleMin": 192,
+    "purpleMax": 307,
+    "centreError": 0,
+    "overflow": false,
+    "scratchRevealReplay": "pass",
+    "pageErrors": []
+  },
+  {
+    "width": 390,
+    "canvasWidth": 628,
+    "purpleMin": 256,
+    "purpleMax": 371,
+    "centreError": 0,
+    "overflow": false,
+    "scratchRevealReplay": "pass",
+    "pageErrors": []
+  },
+  {
+    "width": 430,
+    "canvasWidth": 628,
+    "purpleMin": 256,
+    "purpleMax": 371,
+    "centreError": 0,
+    "overflow": false,
+    "scratchRevealReplay": "pass",
+    "pageErrors": []
+  },
+  {
+    "width": 1440,
+    "canvasWidth": 436,
+    "purpleMin": 160,
+    "purpleMax": 275,
+    "centreError": 0,
+    "overflow": false,
+    "scratchRevealReplay": "pass",
+    "pageErrors": []
+  }
+]

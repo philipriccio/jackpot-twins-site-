@@ -166,3 +166,6 @@ All images compressed — 35-90% reductions. PNGs still large (title-jackpot.png
 
 ## October 10 — audience signup repair (local only)
 Consent checkbox/version, fail-closed protected CRM proxy and truthful subscribed/review/error states implemented in isolated worktree. New unsuppressed signups enter CRM with durable consent/source evidence; old no-solicitation remains review-required. Requires CRM intake deployment first plus protected CRM_URL, CRM_AUTH and CRM_WEBSITE_SIGNUP_TOKEN, then edge abuse limits. No fallback credentials. Local production builds/typechecks and real 1440/390/320 browser→HTTP→isolated DB proofs passed. Not deployed. Full cross-repo review: ../crm-signup-release/reports/signup-2026-10-10/REVIEW.md.
+
+## October 10 — Seana cross centring (local only)
+Geometric purple cross tile replaces platform emoji on first cast scratch canvas. Build/typecheck and browser centring/scratch/reveal/replay at320/390/430/1440 passed. No deployment; iPhone Instagram final proof pending. See reports/cross-centering-2026-10-10/REVIEW.md.
