@@ -8,7 +8,9 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { gaEvent, ticketUrl } from "./ticket-analytics";
 
+import ApprovedHero from "./approved-hero";
 import "./page.css";
+import "./approved-hero.css";
 
 type CastMember = {
   name: string;
@@ -21,13 +23,6 @@ type CastMember = {
 
 type SignupState = "idle" | "submitting" | "success" | "review" | "error";
 
-
-type CountdownState = {
-  days: string;
-  hours: string;
-  mins: string;
-  secs: string;
-};
 
 const castData: CastMember[] = [
   {
@@ -94,31 +89,9 @@ const tickerItems = [
   "THE COMPANY THEATRE + MIRVISH PRODUCTIONS",
 ] as const;
 
-const countdownTarget = new Date("2027-03-09T19:30:00-05:00");
-const titleWords = [
-  { src: "/images/jt-2026-logo-new.webp", alt: "Jackpot Twins", className: "lockup" },
-] as const;
-
 function parseObjectPosition(position?: string) {
   const [x = "center", y = "center"] = (position ?? "center center").split(" ");
   return `${x} ${y}`;
-}
-
-function getCountdown(): CountdownState {
-  const diff = countdownTarget.getTime() - Date.now();
-  if (diff <= 0) return { days: "0", hours: "0", mins: "0", secs: "0" };
-
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
-  return {
-    days: String(days),
-    hours: String(hours).padStart(2, "0"),
-    mins: String(mins).padStart(2, "0"),
-    secs: String(secs).padStart(2, "0"),
-  };
 }
 
 function SignupModal({
@@ -187,7 +160,6 @@ function SignupModal({
 }
 
 export default function Home() {
-  const [countdown, setCountdown] = useState<CountdownState>({ days: "—", hours: "—", mins: "—", secs: "—" });
   const [modalOpen, setModalOpen] = useState(false);
   const [signupStatus, setSignupStatus] = useState<SignupState>("idle");
   const [activatedCards, setActivatedCards] = useState<boolean[]>(() => castData.map(() => false));
@@ -203,9 +175,6 @@ export default function Home() {
   const flipIntervals = useRef<(number | null)[]>(castData.map(() => null));
   const scratchCounts = useRef<number[]>(castData.map(() => 0));
   const fleckTimeouts = useRef<number[]>([]);
-  const titleImageRefs = useRef<(HTMLImageElement | null)[]>([]);
-  const bulbCanvasRefs = useRef<(HTMLCanvasElement | null)[]>([]);
-  const dotContainerRefs = useRef<(HTMLDivElement | null)[]>([]);
   const scratchGridRef = useRef<HTMLDivElement | null>(null);
 
   const allTickerItems = useMemo(() => [...tickerItems, ...tickerItems], []);
@@ -521,12 +490,6 @@ export default function Home() {
   }, [playSound]);
 
   useEffect(() => {
-    const interval = window.setInterval(() => setCountdown(getCountdown()), 1000);
-    setCountdown(getCountdown());
-    return () => window.clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
     const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
     const updateDesktop = () => setIsDesktop(mediaQuery.matches);
     updateDesktop();
@@ -568,224 +531,6 @@ export default function Home() {
     document.addEventListener("mousemove", handleMouseMove);
     return () => document.removeEventListener("mousemove", handleMouseMove);
   }, [isDesktop, revealedCards]);
-
-  useEffect(() => {
-    const cleanups: Array<() => void> = [];
-
-    titleWords.forEach((_, index) => {
-      const wrap = dotContainerRefs.current[index]?.parentElement;
-      const dotsContainer = dotContainerRefs.current[index];
-      const img = titleImageRefs.current[index];
-      const canvas = bulbCanvasRefs.current[index];
-      if (!wrap || !dotsContainer || !img || !canvas) return;
-
-      const spawnDots = () => {
-        dotsContainer.innerHTML = "";
-        const rect = img.getBoundingClientRect();
-        const wrapRect = wrap.getBoundingClientRect();
-        const w = rect.width;
-        const h = rect.height;
-        const offsetX = rect.left - wrapRect.left;
-        const offsetY = rect.top - wrapRect.top;
-        if (w < 10) return;
-
-        const count = Math.floor(w / 5);
-        const colors = ["#F5D020", "#FFEB3B", "#FFD700", "#FFF8DC", "#FFFFFF", "#FFE066"];
-
-        for (let i = 0; i < count; i += 1) {
-          const dot = document.createElement("div");
-          dot.className = "title-dot";
-          const size = Math.random() * 4 + 2;
-          const x = offsetX + Math.random() * w;
-          const y = offsetY + Math.random() * h;
-          const color = colors[Math.floor(Math.random() * colors.length)];
-          const dur = (Math.random() * 2 + 1.5).toFixed(2);
-          const delay = (Math.random() * 3).toFixed(2);
-          dot.style.left = `${x}px`;
-          dot.style.top = `${y}px`;
-          dot.style.width = `${size}px`;
-          dot.style.height = `${size}px`;
-          dot.style.background = color;
-          dot.style.boxShadow = `0 0 ${size * 2}px ${color}, 0 0 ${size * 4}px ${color}`;
-          dot.style.animationDuration = `${dur}s`;
-          dot.style.animationDelay = `${delay}s`;
-          dotsContainer.appendChild(dot);
-        }
-      };
-
-      let frame = 0;
-      let objectUrl: string | null = null;
-
-      const startBulbs = (maskImage: HTMLImageElement) => {
-        const rect = img.getBoundingClientRect();
-        const w = rect.width;
-        const h = rect.height;
-        if (w < 10 || h < 10) return;
-
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        canvas.width = Math.round(w * dpr);
-        canvas.height = Math.round(h * dpr);
-        canvas.style.width = `${w}px`;
-        canvas.style.height = `${h}px`;
-
-        const ctx = canvas.getContext("2d");
-        if (!ctx) return;
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-        const maskCanvas = document.createElement("canvas");
-        maskCanvas.width = Math.max(1, Math.round(w));
-        maskCanvas.height = Math.max(1, Math.round(h));
-        const maskCtx = maskCanvas.getContext("2d");
-        if (!maskCtx) return;
-        maskCtx.drawImage(maskImage, 0, 0, maskCanvas.width, maskCanvas.height);
-        const maskData = maskCtx.getImageData(0, 0, maskCanvas.width, maskCanvas.height).data;
-
-        const isInLetter = (x: number, y: number) => {
-          const px = Math.floor(x);
-          const py = Math.floor(y);
-          if (px < 0 || px >= maskCanvas.width || py < 0 || py >= maskCanvas.height) return false;
-          return maskData[(py * maskCanvas.width + px) * 4 + 3] > 100;
-        };
-
-        const colors = ["#F5D020", "#FFEB3B", "#FFD700", "#FFF8DC", "#FFFFFF", "#F5D020", "#FFD700"];
-        const bulbs = Array.from({ length: Math.floor(w / 4) }).flatMap(() => {
-          let attempts = 0;
-          let x = 0;
-          let y = 0;
-          do {
-            x = Math.random() * w;
-            y = Math.random() * h;
-            attempts += 1;
-          } while (!isInLetter(x, y) && attempts < 200);
-          if (attempts >= 200) return [];
-          return [{
-            x,
-            y,
-            vx: (Math.random() - 0.5) * 0.8,
-            vy: (Math.random() - 0.5) * 0.8,
-            r: Math.random() * 2 + 1.2,
-            color: colors[Math.floor(Math.random() * colors.length)],
-            glow: Math.random() * 0.5 + 0.3,
-            phase: Math.random() * Math.PI * 2,
-            speed: Math.random() * 0.04 + 0.02,
-          }];
-        });
-
-        const animate = () => {
-          ctx.clearRect(0, 0, w, h);
-          bulbs.forEach((bulb) => {
-            bulb.vy += 0.015;
-            let nx = bulb.x + bulb.vx;
-            let ny = bulb.y + bulb.vy;
-
-            if (!isInLetter(nx, ny)) {
-              if (isInLetter(nx, bulb.y)) {
-                bulb.vy *= -0.7;
-                ny = bulb.y + bulb.vy;
-              } else if (isInLetter(bulb.x, ny)) {
-                bulb.vx *= -0.7;
-                nx = bulb.x + bulb.vx;
-              } else {
-                bulb.vx *= -0.6;
-                bulb.vy *= -0.6;
-                nx = bulb.x + bulb.vx;
-                ny = bulb.y + bulb.vy;
-              }
-              bulb.vx += (Math.random() - 0.5) * 0.4;
-            }
-
-            if (!isInLetter(nx, ny)) {
-              nx = bulb.x;
-              ny = bulb.y;
-              bulb.vx = (Math.random() - 0.5) * 0.6;
-              bulb.vy = -Math.random() * 1.5;
-            }
-
-            bulb.x = nx;
-            bulb.y = ny;
-            bulb.vx *= 0.998;
-
-            if (Math.random() < 0.008) {
-              bulb.vy -= Math.random() * 1.5 + 0.5;
-              bulb.vx += (Math.random() - 0.5) * 1;
-            }
-
-            bulb.phase += bulb.speed;
-            const twinkle = 0.5 + 0.5 * Math.sin(bulb.phase);
-            const alpha = bulb.glow * (0.3 + 0.7 * twinkle);
-
-            ctx.save();
-            ctx.globalAlpha = alpha;
-            ctx.beginPath();
-            ctx.arc(bulb.x, bulb.y, bulb.r, 0, Math.PI * 2);
-            ctx.fillStyle = bulb.color;
-            ctx.shadowColor = bulb.color;
-            ctx.shadowBlur = bulb.r * 4;
-            ctx.fill();
-            ctx.restore();
-
-            ctx.save();
-            ctx.globalAlpha = alpha * 0.7;
-            ctx.beginPath();
-            ctx.arc(bulb.x, bulb.y, bulb.r * 0.35, 0, Math.PI * 2);
-            ctx.fillStyle = "#FFFFFF";
-            ctx.fill();
-            ctx.restore();
-          });
-
-          frame = window.requestAnimationFrame(animate);
-        };
-
-        animate();
-      };
-
-      const setupWord = () => {
-        spawnDots();
-
-        fetch(img.currentSrc || img.src)
-          .then((response) => response.blob())
-          .then((blob) => {
-            objectUrl = URL.createObjectURL(blob);
-            const maskImage = new window.Image();
-            maskImage.crossOrigin = "anonymous";
-            maskImage.onload = () => startBulbs(maskImage);
-            maskImage.src = objectUrl!;
-          })
-          .catch(() => {
-            const fallbackImage = new window.Image();
-            fallbackImage.crossOrigin = "anonymous";
-            fallbackImage.onload = () => startBulbs(fallbackImage);
-            fallbackImage.src = img.currentSrc || img.src;
-          });
-      };
-
-      if (img.complete && img.naturalWidth > 0) {
-        window.setTimeout(setupWord, 100);
-      } else {
-        const onLoad = () => window.setTimeout(setupWord, 100);
-        img.addEventListener("load", onLoad, { once: true });
-        cleanups.push(() => img.removeEventListener("load", onLoad));
-      }
-
-      cleanups.push(() => {
-        if (frame) window.cancelAnimationFrame(frame);
-        if (objectUrl) URL.revokeObjectURL(objectUrl);
-        dotsContainer.innerHTML = "";
-      });
-    });
-
-    const handleResize = () => {
-      titleImageRefs.current.forEach((img, index) => {
-        if (!img || !img.complete) return;
-        dotContainerRefs.current[index]!.innerHTML = "";
-      });
-    };
-
-    window.addEventListener("resize", handleResize);
-    cleanups.push(() => window.removeEventListener("resize", handleResize));
-
-    return () => cleanups.forEach((cleanup) => cleanup());
-  }, []);
 
   // Native touch listeners with { passive: false } so preventDefault() works.
   // React's onTouchMove is passive by default — preventDefault is silently ignored,
@@ -859,147 +604,7 @@ export default function Home() {
           </div>
         </div>
 
-        <section className="hero">
-          <div className="hero-right">
-            <div className="cta-row hero-top-ticket">
-              <a href={ticketUrl("above_title")} target="_blank" rel="noopener noreferrer"
-                className="btn-main ticket-slot" data-ticket-placement="above_title"
-                onClick={() => gaEvent("ticket_click", { placement: "above_title", link_url: ticketUrl("above_title"), transport_type: "beacon" })}>
-                <span className="ticket-slot-face"><span aria-hidden="true" className="ticket-slot-star">★</span><span>Buy Tickets</span><span aria-hidden="true" className="ticket-slot-star">★</span></span>
-              </a>
-            </div>
-
-            <p className="hero-eyebrow">
-              <span className="blink" />
-              World Premiere&nbsp;·&nbsp;Toronto&nbsp;·&nbsp;Spring&nbsp;2027
-              <span className="blink" />
-            </p>
-
-            <p className="hero-billing">
-              <span className="billing-names">David&nbsp;and&nbsp;Hannah&nbsp;Mirvish&nbsp;and&nbsp;The&nbsp;Company&nbsp;Theatre</span>
-              <span className="billing-present">present</span>
-            </p>
-
-            <div className="hero-title-composite">
-              <div className="hero-figure hero-figure-nora" aria-hidden="true">
-                <Image
-                  src="/images/nora-jackpot-twins-cutout-tight.webp"
-                  alt=""
-                  width={630}
-                  height={1337}
-                  priority
-                />
-              </div>
-
-              <div className="hero-title" aria-label="Jackpot Twins">
-                {titleWords.map((word, index) => (
-                  <div key={word.alt} className={`title-word-wrap ${word.className}`}>
-                    <img
-                      ref={(node) => {
-                        titleImageRefs.current[index] = node;
-                      }}
-                      src={word.src}
-                      alt={word.alt}
-                      crossOrigin="anonymous"
-                    />
-                    <canvas
-                      ref={(node) => {
-                        bulbCanvasRefs.current[index] = node;
-                      }}
-                      className="bulb-overlay"
-                      id={index === 0 ? "bulbJackpot" : "bulbTwins"}
-                    />
-                    <div
-                      ref={(node) => {
-                        dotContainerRefs.current[index] = node;
-                      }}
-                      className="title-dots"
-                    />
-                  </div>
-                ))}
-              </div>
-
-              <div className="hero-figure hero-figure-seana" aria-hidden="true">
-                <Image
-                  src="/images/seana-jackpot-twins-photo-33-cutout.webp"
-                  alt=""
-                  width={400}
-                  height={1395}
-                  priority
-                />
-              </div>
-            </div>
-
-            <p className="hero-byline">A New Comedy by Philip Riccio</p>
-            <p className="hero-dates-inline">March 9th – March 28th, 2027</p>
-
-            <div className="countdown-wrap">
-              <p className="countdown-label">COUNTDOWN TO FIRST PERFORMANCE</p>
-              <div className="countdown" id="countdown">
-                {[
-                  [countdown.days, "Days"],
-                  [countdown.hours, "Hours"],
-                  [countdown.mins, "Mins"],
-                  [countdown.secs, "Secs"],
-                ].map(([value, label]) => (
-                  <div key={label} className="countdown-unit">
-                    <span className="countdown-num">{value}</span>
-                    <span className="countdown-txt">{label}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <p className="hero-signup-teaser">March 9–28, 2027 · CAA Theatre, Toronto</p>
-            <div className="cta-row" style={{ marginTop: 8, marginBottom: 28 }}>
-              <a
-                href={ticketUrl("hero")}
-                data-ticket-placement="hero"
-                onClick={() => gaEvent("ticket_click", { placement: "hero", link_url: ticketUrl("hero"), transport_type: "beacon" })}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-main ticket-slot"
-              >
-                <span className="ticket-slot-face"><span aria-hidden="true" className="ticket-slot-star">★</span><span>Buy Tickets</span><span aria-hidden="true" className="ticket-slot-star">★</span></span>
-              </a>
-            </div>
-            <p className="hero-signup-teaser">Get the latest Jackpot Twins news and updates.</p>
-            <div className="cta-row" style={{ marginTop: 8 }}>
-              <button
-                type="button"
-                className="btn-main"
-                style={{ background: "var(--red)" }}
-                onClick={() => {
-                  setSignupStatus("idle");
-                  setModalOpen(true);
-                }}
-              >
-                Sign Me Up
-              </button>
-            </div>
-          </div>
-        </section>
-
-        <section className="campaign-portrait" aria-label="Nora McLellan and Seana McKenna in Jackpot Twins">
-          <div className="campaign-portrait-frame">
-            <div className="campaign-name campaign-name-nora">
-              <span className="campaign-name-first">Nora</span>
-              <span>McLellan</span>
-            </div>
-            <div className="campaign-name campaign-name-seana">
-              <span className="campaign-name-first">Seana</span>
-              <span>McKenna</span>
-            </div>
-            <Image
-              className="campaign-portrait-image"
-              src="/images/jackpot-twins-photo288-equal-chairs.webp"
-              alt="Nora McLellan in red and Seana McKenna in pink, seated in matching blue recliners."
-              width={1536}
-              height={864}
-              sizes="(max-width: 1280px) 100vw, 1280px"
-            />
-          </div>
-        </section>
+        <ApprovedHero />
 
         <div className="copro">
           <span className="copro-label">A Production By</span>
