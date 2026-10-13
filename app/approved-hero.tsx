@@ -84,12 +84,12 @@ export default function ApprovedHero() {
               fetchPriority="high" loading="eager" alt="Nora McLellan and Seana McKenna holding the Jackpot Twins lottery cheque" />
           </div>
           <div className="insta-hero-copy">
-            <p className="hero-billing">{/* eslint-disable-next-line @next/next/no-img-element */}
-              <img className="desktop-lettering" src="/images/jt-glitter-presenters-small-and.png" width={2171} height={724} alt="" aria-hidden="true" /><span className="billing-names"><span className="billing-party">David and Hannah Mirvish</span>{" "}<span className="billing-and">and</span>{" "}<span className="billing-party">The Company Theatre</span></span><span className="billing-present">present</span></p>
+            <p className="hero-billing"><span className="billing-names"><span className="billing-party">David and Hannah Mirvish</span>{" "}<span className="billing-and">and</span>{" "}<span className="billing-party">The Company Theatre</span></span><span className="billing-present">present</span></p>
             <p className="hero-byline"><span className="byline-copy">A New Comedy by Philip Riccio</span>{/* eslint-disable-next-line @next/next/no-img-element */}
               <img className="desktop-lettering" src="/images/jt-diamond-byline.webp" width={1410} height={352} alt="" aria-hidden="true" /></p>
             <div className="conversion-pitch"><h2>Winning the Lottery is easy.<br /><span>Surviving it is the hard part.</span></h2><p>A sharp-witted new comedy about the price of getting<br className="desktop-break" /> everything you ever wanted.</p></div>
-            <p className="hero-signup-teaser visit-details">March 9–28, 2027 · CAA Theatre, Toronto</p>
+            <p className="hero-signup-teaser visit-details"><span className="visit-details-copy">March 9–28, 2027 · CAA Theatre, Toronto</span>{/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="desktop-lettering" src="/images/jt-gold-dates-theatre.png" width={2173} height={724} alt="" aria-hidden="true" /></p>
             <div className="cta-row">
               <a className="btn-main ticket-slot" href={ticketUrl("hero")} data-ticket-placement="hero" target="_blank" rel="noopener noreferrer"
                 onClick={() => gaEvent("ticket_click", { placement: "hero", link_url: ticketUrl("hero"), transport_type: "beacon" })}>
