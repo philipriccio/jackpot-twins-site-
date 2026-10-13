@@ -867,6 +867,9 @@ body{
   cursor:pointer;
 }
 
+.chairs-photo{margin:0;background:#fff;}
+.chairs-photo img{display:block;width:100%;max-width:1536px;height:auto;margin-inline:auto;}
+
 .creative{
   background:var(--blue);
   padding:72px 80px;

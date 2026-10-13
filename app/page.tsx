@@ -713,6 +713,16 @@ export default function Home() {
           </div>
         </section>
 
+        <figure className="chairs-photo">
+          <Image
+            src="/images/jackpot-twins-photo288-equal-chairs.webp"
+            alt="Nora McLellan and Seana McKenna seated in matching blue chairs in Jackpot Twins"
+            width={1536}
+            height={864}
+            sizes="(max-width: 1536px) 100vw, 1536px"
+          />
+        </figure>
+
         <section className="creative">
           <h2 className="creative-heading">Creative Team</h2>
           <ul className="creative-list">
