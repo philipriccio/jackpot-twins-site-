@@ -1,0 +1,27 @@
+[
+  {
+    "site": "JT",
+    "width": 1440,
+    "checks": "pageview, campaign handoff, distinct placements, click, scratch dedup, reveal-all, replay, subscribed/review, privacy, overflow",
+    "errors": []
+  },
+  {
+    "site": "CT",
+    "width": 1440,
+    "checks": "pageview, cross-site attribution, owned-site click, modal success/review/failure, internal route pageview, privacy, overflow"
+  },
+  {
+    "site": "JT",
+    "width": 390,
+    "checks": "pageview, campaign handoff, distinct placements, click, scratch dedup, reveal-all, replay, subscribed/review, privacy, overflow",
+    "errors": []
+  },
+  {
+    "site": "CT",
+    "width": 390,
+    "checks": "pageview, cross-site attribution, owned-site click, modal success/review/failure, internal route pageview, privacy, overflow"
+  },
+  {
+    "blockedStorageAndAnalytics": "navigation preserved"
+  }
+]

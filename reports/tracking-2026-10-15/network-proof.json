@@ -1,0 +1,12 @@
+[
+  {
+    "port": 3201,
+    "interceptedRequests": 1,
+    "pageViewRequests": 1
+  },
+  {
+    "port": 3202,
+    "interceptedRequests": 1,
+    "pageViewRequests": 1
+  }
+]

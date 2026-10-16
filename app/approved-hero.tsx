@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gaEvent, ticketUrl } from "./ticket-analytics";
+import { ticketUrl } from "./ticket-analytics";
 
 /** The photograph stays untouched; only its edge colours fill the surrounding hero. */
 export default function ApprovedHero() {
@@ -91,8 +91,7 @@ export default function ApprovedHero() {
             <p className="hero-signup-teaser visit-details"><span className="visit-details-copy">March 9–28, 2027 · CAA Theatre, Toronto</span>{/* eslint-disable-next-line @next/next/no-img-element */}
               <img className="desktop-lettering" src="/images/jt-gold-dates-theatre.png" width={2173} height={724} alt="" aria-hidden="true" /></p>
             <div className="cta-row">
-              <a className="btn-main ticket-slot" href={ticketUrl("hero")} data-ticket-placement="hero" target="_blank" rel="noopener noreferrer"
-                onClick={() => gaEvent("ticket_click", { placement: "hero", link_url: ticketUrl("hero"), transport_type: "beacon" })}>
+              <a className="btn-main ticket-slot" href={ticketUrl("hero")} data-ticket-placement="hero" target="_blank" rel="noopener noreferrer">
                 <span className="ticket-slot-face"><span aria-hidden="true" className="ticket-slot-star">★</span><span>Buy Tickets</span><span aria-hidden="true" className="ticket-slot-star">★</span></span>
               </a>
             </div>

@@ -329,7 +329,10 @@ export default function Home() {
     return transparent / (imageData.data.length / 16);
   }, []);
 
+  const activatedOnce = useRef(new Set<number>());
   const activateCard = useCallback((index: number, shouldPlaySound: boolean) => {
+    if (activatedOnce.current.has(index)) return;
+    activatedOnce.current.add(index);
     setActivatedCards((current) => {
       if (current[index]) return current;
       const next = [...current];
@@ -414,6 +417,9 @@ export default function Home() {
   }, [activateCard, activatedCards, computeRevealPct]);
 
   const revealAll = useCallback(() => {
+    const newlyRevealed = castData.length - activatedOnce.current.size;
+    if (newlyRevealed > 0) gaEvent("cast_reveal_all", { newly_revealed: newlyRevealed });
+    castData.forEach((_, index) => activatedOnce.current.add(index));
     setFlippedCards(castData.map(() => false));
     setActivatedCards(castData.map(() => true));
     setRevealedCards(castData.map(() => true));
@@ -422,6 +428,8 @@ export default function Home() {
   }, [playSound, startFlipRotation]);
 
   const resetAll = useCallback(() => {
+    activatedOnce.current.clear();
+    gaEvent("cast_replay");
     flipIntervals.current.forEach((interval) => {
       if (interval) window.clearInterval(interval);
     });
@@ -609,7 +617,7 @@ export default function Home() {
         <div className="copro">
           <span className="copro-label">A Production By</span>
           <div className="copro-logos">
-            <Link className="copro-ct" href="https://companytheatre.ca" target="_blank">
+            <Link className="copro-ct" href="https://companytheatre.ca" data-analytics-placement="company_credit" target="_blank">
               <Image src="/logos/ct-logo-white.svg" alt="The Company Theatre" width={210} height={56} />
             </Link>
             <div className="copro-pipe" />
@@ -750,7 +758,6 @@ export default function Home() {
           <a
             href={ticketUrl("ticket_section")}
             data-ticket-placement="ticket_section"
-            onClick={() => gaEvent("ticket_click", { placement: "ticket_section", link_url: ticketUrl("ticket_section"), transport_type: "beacon" })}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-main ticket-slot"
@@ -773,7 +780,7 @@ export default function Home() {
 
         <footer>
           <div className="footer-logos">
-            <Link href="https://companytheatre.ca" target="_blank">
+            <Link href="https://companytheatre.ca" data-analytics-placement="company_footer" target="_blank">
               <Image src="/logos/ct-logo-white.svg" alt="The Company Theatre" width={120} height={32} />
             </Link>
             <span className="footer-pipe" />

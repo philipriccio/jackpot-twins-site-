@@ -1,0 +1,30 @@
+# Website attribution release — local only, 2026-10-15
+
+## Scope
+JT worktree `projects/jt-cross-fix` (production base ba6cfaa); CT worktree `projects/ct-signup-release` (deployed signup base 124bcaf). Initially inspected stale `company-theatre-website`; all own changes there were restored, no existing edits overwritten. No email content/controller, production settings, sends, push or deployment touched.
+
+## Implemented
+- Shared equivalent small campaign helpers in each repo. Carry only source/medium/campaign/content/id UTMs matching bounded slug syntax, never arbitrary query keys/hash, forms, CRM redirect tokens or recipient IDs. Inbound complete campaign overrides prior context; optional sessionStorage survives internal navigation/reload with a 30-minute stored-record freshness limit; in-memory fallback handles denied storage. Incoming campaign is available even if GA is blocked.
+- HTTP anchors to the other owned site or the ticket show page preserve email/ad UTMs, including CRM `creative-<hash>-placement-N` and `batch-<hash>`. `site_placement` identifies the website outbound location without destroying original creative attribution. Direct visitors use website/referral/jackpot_twins_tickets fallback. Same-origin/internal links never get campaign tags. Query targets/navigation are preserved; no preventDefault, waits or callbacks gate navigation. Capture-phase normal/keyboard/middle clicks; initial decoration supports copy/open-new-tab.
+- GA queue configured before first event. Manual page_view once per pathname visit; safe page location keeps only bounded UTMs, no arbitrary query/hash. Custom events include sanitized acquisition_source/medium/campaign/content/id. Site-to-site tagging is attribution handoff across two existing GA properties, NOT unified identity/cross-domain user stitching.
+- ticket_click canonical only once per click (removed competing per-anchor handlers); owned_site_click and donation_link_click. Donation iframe completion is NOT claimed/measured as purchase.
+- JT card_scratched fires once per card per play round after actual scratch threshold. Reveal All emits a single cast_reveal_all with newly_revealed count, never fabricated scratch events; repeated Reveal All after completion does not recount; cast_replay intentionally begins another round. Existing bio-flip event preserved.
+- CT email_signup only after HTTP success AND recorded=true/subscribed=true, method company_theatre_modal or company_theatre_inline. Existing review/error behavior unchanged. JT existing confirmed-success-only signup now gets acquisition context.
+
+## Verified
+- Both production builds and independent TypeScript passed. Scoped ESLint passed: JT three pre-existing warnings; CT uses valid JT ESLint configuration because CT's existing config is malformed. Diff checks pass.
+- `node reports/tracking-2026-10-15/attribution-proof.cjs` (run from JT root): both helper implementations pass campaign carry-through, privacy stripping, js/config/event command ordering, internal continuity, new-campaign replacement, rejection of email-shaped campaign source, and throwing analytics.
+- `browser-proof.cjs`: Chromium with external requests blocked, real local production apps on 3201/3202. 1440/390 layouts/screenshots inspected; zero JT page errors/overflow; CT no overflow. Actual pointer/canvas repeated scratching, repeated Reveal All and replay; distinct ticket/cross-site attribution and event count; real CT Next navigation emits another pageview without tagging internal anchors; mocked HTTP signup review/success (JT) and failure/review/success (CT mounted modal), no PII in dataLayer; donation click emits no purchase; denied storage + throwing gtag still opens destination. No production signup request.
+- `network-proof.cjs`: loaded real Google tag and intercepted/aborted all collection egress. Both sites produced exactly one page_view request; synthetic email/token query absent. No QA events delivered. This verifies outgoing transport construction, not GA dashboard ingestion.
+- agent-browser named-session snapshot used with Google collection blocked; installed Chrome used (no install). Separate graph files rebuilt, existing graphs untouched.
+
+## Rollout / rollback
+Local commits only. Coordinate deployment with parent after current send completes; no requirement to stop batch. Deploy each site's scoped commit through its established production branch/app; configure GA settings below; verify public asset version and one intentionally labelled/test-filtered browser round. Roll back site release to previous image/commit if regression; no schema/data rollback.
+
+## GA settings / remaining limits
+- Disable enhanced history pageviews (manual Next route pageviews now authoritative) and automatic form interactions; use ticket_click rather than enhanced click totals. Parent owns admin verification.
+- Register event-scoped dimensions placement, destination_host, destination_path, method and acquisition_source/medium/campaign/content/id as needed. Treat ticket_click as intent, email_signup as confirmed subscription, never purchases. Batch IDs are aggregate hashes, not person IDs.
+- Google native campaign reporting uses cleaned landing UTMs; acquisition_* supplements context after navigation. Ad blockers/privacy controls can prevent measurement. Two properties do not provide deduplicated cross-site users. No Mirvish sales/revenue, no CanadaHelps donation completion or historical backfill.
+- CT's existing production page still promotes subscriptions/October9 notice; destination deliberately unchanged. Explicit production_tickets click measurement now covers that existing CTA; content/CTA modernization is separate from this analytics patch.
+- Unused CT NewsletterSignup component receives same success-only event but is not mounted anywhere in current routes; source/typecheck proof only for that variant. External CT cast images were blocked in QA; placeholders are not evidence of a new image regression.
+- Existing JT scratch data before this release remains inflated; mark release date when comparing.
