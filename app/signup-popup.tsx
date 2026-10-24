@@ -89,6 +89,11 @@ export default function SignupPopup({ open, onClose, onSubmit, status }: {
   const dialog = useRef<HTMLDialogElement>(null);
   const title = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
+    if (!open || status !== "success") return;
+    const timer = window.setTimeout(() => onClose("success"), 2000);
+    return () => window.clearTimeout(timer);
+  }, [open, status, onClose]);
+  useEffect(() => {
     if (!open || !dialog.current) return;
     const node = dialog.current;
     const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
@@ -121,8 +126,8 @@ export default function SignupPopup({ open, onClose, onSubmit, status }: {
       <button type="button" className="casino-close" onClick={() => onClose("close_button")} aria-label="Close signup form">×</button>
       <div className="casino-signup-inner">
         <h2 id="casino-signup-title" className="casino-title" ref={title} tabIndex={-1}>Jackpot Twins email signup</h2>
-        <p id="casino-signup-description" className="casino-description">{status === "success" ? "You’re on the list for Jackpot Twins and The Company Theatre news. See you in your inbox!" : "Get Jackpot Twins news, behind-the-scenes extras and special offers."}</p>
-        {status === "success" ? <div role="status" className="casino-success"><span aria-hidden="true">★</span><p>You’re signed up!</p><button type="button" className="casino-submit" onClick={() => onClose("success")}>BACK TO THE SHOW <span aria-hidden="true">→</span></button></div> : <form className="casino-form" onSubmit={async event => { event.preventDefault(); await onSubmit(new FormData(event.currentTarget)); }}>
+        <p id="casino-signup-description" className={status === "success" ? "casino-title" : "casino-description"}>{status === "success" ? "Signup complete" : "Get Jackpot Twins news, behind-the-scenes extras and special offers."}</p>
+        {status === "success" ? <div role="status" className="casino-success"><p>You’re signed up!</p></div> : <form className="casino-form" onSubmit={async event => { event.preventDefault(); await onSubmit(new FormData(event.currentTarget)); }}>
           <div className="casino-names"><label>First name<input name="firstName" autoComplete="given-name" maxLength={100} placeholder="First name" required /></label><label>Last name<input name="lastName" autoComplete="family-name" maxLength={100} placeholder="Last name" required /></label></div>
           <label>Email address<input name="email" type="email" autoComplete="email" maxLength={254} placeholder="you@example.com" required /></label>
           <label className="casino-consent"><input type="checkbox" name="consent" required /><span>{CONSENT_TEXT}</span></label>
