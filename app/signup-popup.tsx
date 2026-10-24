@@ -31,6 +31,11 @@ export function useSignupPopup() {
     gaEvent("signup_popup_dismiss", { trigger: trigger.current, reason });
   }, []);
   useEffect(() => {
+    // A shareable review link bypasses visitor rules without changing preferences.
+    if (new URLSearchParams(window.location.search).get("preview_signup") === "1") {
+      const previewTimer = window.setTimeout(() => openSignup("manual"), 0);
+      return () => window.clearTimeout(previewTimer);
+    }
     // An email arrival is likely already a subscriber. The manual form stays available.
     if (new URLSearchParams(window.location.search).get("utm_medium")?.toLowerCase() === "email" || campaignContext().utm_medium?.toLowerCase() === "email") return;
     try {
