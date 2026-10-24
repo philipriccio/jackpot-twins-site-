@@ -169,3 +169,6 @@ Consent checkbox/version, fail-closed protected CRM proxy and truthful subscribe
 
 ## October 10 — Seana cross centring (local only)
 Geometric purple cross tile replaces platform emoji on first cast scratch canvas. Build/typecheck and browser centring/scratch/reveal/replay at320/390/430/1440 passed. No deployment; iPhone Instagram final proof pending. See reports/cross-centering-2026-10-10/REVIEW.md.
+
+## October 24 — approved casino signup popup release
+Philip approved deployment in Telegram36095. Pearl-white form, gold/silver chasing marquee, chrome Sign up label, concise approved copy. Automatic opening requires20seconds elapsed, hero entirely above viewport,2.5seconds idle; suppress during interaction, hidden page, competing dialogs,7day dismissal, known local subscriber, or email arrival. Manual signup stays available. Existing consent/proxy/attribution preserved. Browser timing and behavior evidence: workspace audits/jt-signup-popup-2026-10-24/. Subscriber recognition is browser-local, not cross-device identity detection.

@@ -1,0 +1,31 @@
+/* Chrome and glitter-gold cabinet, with a calm, legible form at its centre. */
+.casino-signup{position:fixed;inset:0;margin:auto;width:min(510px,calc(100% - 32px));max-width:none;max-height:calc(100dvh - 32px);padding:0;border:2px solid #fff9e6;border-radius:24px;background:#d5a64a;color:#251122;overflow:auto;overscroll-behavior:contain;box-shadow:0 0 0 3px #787780,0 0 0 5px #f7f4ed,0 0 0 8px #85462e,0 24px 90px #0009,0 0 48px #ffc34750;font-family:Arial,sans-serif}
+.casino-signup::backdrop{background:#210d20c9;backdrop-filter:blur(6px)}
+.casino-signup-shell{position:relative;isolation:isolate;padding:32px;background:radial-gradient(circle,#fffbdcdd 0 .7px,transparent 1px) 0 0/5px 7px,radial-gradient(circle,#78501999 0 .7px,transparent 1px) 2px 4px/7px 9px,linear-gradient(125deg,#86602c 0%,#f4d16c 12%,#fff3ba 24%,#b98a37 33%,#edc45d 45%,#fff9df 51%,#b07b29 65%,#f9da80 82%,#9a6227 100%)}
+.casino-signup-inner{position:relative;background:linear-gradient(145deg,#ffffff 0%,#f4f5fa 55%,#e8ecf3 100%);border:3px solid #f8faff;border-radius:12px;padding:37px 25px 22px;box-shadow:0 0 0 2px #77737b,0 0 0 5px #e1e2e8,inset 0 0 0 1px #c4cad7,0 6px 15px #45241466;text-align:center}
+.casino-close{position:absolute;z-index:3;top:37px;right:37px;display:grid;place-items:center;width:32px;height:32px;border:1px solid #bcb7b3;border-radius:50%;background:linear-gradient(#fff,#e4e8f0);color:#6a2948;font:26px/1 Arial;cursor:pointer;box-shadow:0 1px 2px #64473230}
+.casino-title{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.casino-description{font-size:20px;line-height:1.4;font-weight:700;max-width:340px;margin:0 auto 24px;color:#652440;text-wrap:pretty}
+.casino-form{display:grid;gap:14px;text-align:left}
+.casino-form label{display:grid;gap:6px;font-size:12px;font-weight:700;color:#5d3044}
+.casino-names{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.casino-form input:not([type=checkbox]){width:100%;min-width:0;border:1px solid #a4aaba;border-radius:7px;padding:12px 10px;background:#fff;color:#251122;font:16px/1.2 Arial,sans-serif;box-shadow:inset 0 2px 3px #5734240b}
+.casino-form input::placeholder{color:#806b70;font-size:14px}
+.casino-form .casino-consent{display:flex;align-items:flex-start;gap:9px;font-size:11px;line-height:1.5;font-weight:400;margin:2px 0}
+.casino-consent input{flex:none;width:18px;height:18px;margin:0;accent-color:#b4205b}
+.casino-submit{position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:18px;width:100%;min-height:51px;padding:12px 15px;border:2px solid #fffae5;border-radius:9px;background:radial-gradient(circle,#ffffff80 0 .6px,transparent .9px) 0 0/4px 5px,linear-gradient(170deg,#fff6bf 0%,#edc35e 36%,#c99431 49%,#f8d675 56%,#ffefad 100%);box-shadow:0 3px 0 #a87832,0 0 0 1px #b88938,inset 0 1px #fff;color:#472333;font:800 19px/1.2 Arial,sans-serif;letter-spacing:.3px;cursor:pointer;text-shadow:0 1px #fff3c5}
+.casino-submit::before{content:"";position:absolute;z-index:-1;inset:-50% auto -50% -70%;width:40%;background:linear-gradient(90deg,transparent,#ffffff90,transparent);transform:skewX(-22deg);animation:casino-shine 5s ease-in-out infinite;pointer-events:none}
+.casino-submit:hover{filter:brightness(1.07)}.casino-submit:disabled{opacity:.65;cursor:wait}.casino-submit .casino-submit-label{font-family:var(--font-luckiest-guy),Impact,sans-serif;font-size:32px;font-weight:400;line-height:1.15;letter-spacing:1px;text-transform:uppercase;background:radial-gradient(circle,#fff 0 .65px,transparent 1px) 0 0/4px 5px,linear-gradient(#fff 0%,#dce3ef 30%,#fff 43%,#7c8597 49%,#dce3ef 60%,#fff 78%,#a3aaba 100%);background-clip:text;-webkit-background-clip:text;color:transparent;-webkit-text-stroke:1px #65536c;paint-order:stroke fill;text-shadow:none;filter:drop-shadow(0 2px 0 #493248) drop-shadow(0 0 1px #fff)}
+.casino-feedback{font-size:12px;line-height:1.5;margin:3px 0;padding:10px;background:#fce5e9;border-radius:6px;color:#8c1745}
+.casino-success>span{font-size:36px;color:#b4205b}.casino-success>p{font-size:17px;font-weight:700;margin:0 0 25px}
+/* Order follows the perimeter clockwise. One smooth travelling pulse per 4s. */
+.casino-bulbs{position:absolute;z-index:2;display:flex;justify-content:space-between;align-items:center;pointer-events:none}
+.casino-bulbs-top,.casino-bulbs-bottom{left:18px;right:18px;height:12px}.casino-bulbs-top{top:9px}.casino-bulbs-bottom{bottom:9px;flex-direction:row-reverse}
+.casino-bulbs-left,.casino-bulbs-right{top:37px;bottom:37px;width:12px;flex-direction:column}.casino-bulbs-right{right:9px}.casino-bulbs-left{left:9px;flex-direction:column-reverse}
+.casino-bulbs i{display:block;flex:none;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#fff3c6 35%,#e7ae48 75%);border:1px solid #a77d36;box-shadow:0 1px 2px #67471d,inset 0 0 2px #fff;animation:casino-chase 4s ease-in-out infinite}
+.casino-bulbs i:nth-child(even){background:radial-gradient(circle at 35% 30%,#fff,#e8edfa 40%,#a9aeba 80%);border-color:#88878d}
+.casino-signup :focus-visible{outline:3px solid #1764a3;outline-offset:3px}.casino-title:focus-visible{outline:none}
+@keyframes casino-chase{0%,24%,100%{filter:brightness(.85);box-shadow:0 1px 2px #67471d,inset 0 0 2px #fff}8%,14%{filter:brightness(1.55);box-shadow:0 0 4px 2px #fff9e6,0 0 12px 4px #ffe397}}
+@keyframes casino-shine{0%,30%{left:-70%}65%,100%{left:145%}}
+@media(max-width:400px){.casino-signup{width:calc(100% - 30px)}.casino-signup-shell{padding:27px}.casino-signup-inner{padding:36px 15px 20px}.casino-description{font-size:17px;margin-bottom:20px}.casino-names{gap:8px}.casino-form input:not([type=checkbox]){padding:11px 8px}.casino-close{top:30px;right:30px}.casino-bulbs i{width:8px;height:8px}.casino-bulbs-top{top:7px}.casino-bulbs-bottom{bottom:7px}.casino-bulbs-right{right:6px}.casino-bulbs-left{left:6px}}
+@media(prefers-reduced-motion:reduce){.casino-signup *,.casino-signup *::before,.casino-signup *::after{animation:none!important;transition:none!important}.casino-submit::before{display:none}}

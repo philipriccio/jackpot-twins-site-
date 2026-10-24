@@ -1,6 +1,6 @@
 "use client";
 
-import { CONSENT_TEXT, CONSENT_VERSION } from "@/lib/signup-contract";
+import { CONSENT_VERSION } from "@/lib/signup-contract";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -9,6 +9,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { gaEvent, ticketUrl } from "./ticket-analytics";
 
 import ApprovedHero from "./approved-hero";
+import SignupPopup, { useSignupPopup, rememberSignupSuccess, type SignupState } from "./signup-popup";
 import "./page.css";
 import "./approved-hero.css";
 
@@ -21,7 +22,6 @@ type CastMember = {
   bio: string;
 };
 
-type SignupState = "idle" | "submitting" | "success" | "review" | "error";
 
 
 const castData: CastMember[] = [
@@ -94,73 +94,9 @@ function parseObjectPosition(position?: string) {
   return `${x} ${y}`;
 }
 
-function SignupModal({
-  open,
-  onClose,
-  onSubmit,
-  status,
-}: {
-  open: boolean;
-  onClose: () => void;
-  onSubmit: (formData: FormData) => Promise<void>;
-  status: SignupState;
-}) {
-  useEffect(() => {
-    if (!open) return;
-
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
-    };
-
-    window.addEventListener("keydown", onKeyDown);
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      window.removeEventListener("keydown", onKeyDown);
-      document.body.style.overflow = "";
-    };
-  }, [open, onClose]);
-
-  if (!open) return null;
-
-  return (
-    <div className={`signup-modal ${open ? "show" : ""}`} id="signupModal" role="dialog" aria-modal="true" aria-labelledby="signup-title">
-      <div className="signup-modal-backdrop" onClick={onClose} />
-      <div className="signup-modal-card">
-        <button type="button" className="signup-modal-close" onClick={onClose} aria-label="Close signup form">
-          &times;
-        </button>
-        <p id="signup-title" className="signup-modal-title">Get news and updates from Jackpot Twins</p>
-        {status === "success" ? (
-          <p role="status" className="signup-modal-success">You&apos;re in! 🎰 We&apos;ll be in touch.</p>
-        ) : (
-          <form
-            className="signup-modal-form"
-            onSubmit={async (event) => {
-              event.preventDefault();
-              await onSubmit(new FormData(event.currentTarget));
-            }}
-          >
-            <input name="firstName" type="text" className="signup-modal-input" aria-label="First name" maxLength={100} placeholder="First name" required />
-            <input name="lastName" type="text" className="signup-modal-input" aria-label="Last name" maxLength={100} placeholder="Last name" required />
-            <input name="email" type="email" className="signup-modal-input" aria-label="Email address" maxLength={254} placeholder="Email address" required />
-            <label className="signup-consent"><input type="checkbox" name="consent" required /><span>{CONSENT_TEXT}</span></label>
-            <button type="submit" className="signup-modal-btn" disabled={status === "submitting"}>
-              {status === "submitting" ? "Sending..." : "Notify Me"}
-            </button>
-            {status === "review" ? <p role="status" className="signup-error">Your request was recorded, but this address needs a subscription review. It has not been added to the mailing list.</p> : null}
-            {status === "error" ? (
-              <p role="alert" className="signup-error">We couldn&apos;t submit right now. Please try again.</p>
-            ) : null}
-          </form>
-        )}
-      </div>
-    </div>
-  );
-}
-
 export default function Home() {
-  const [modalOpen, setModalOpen] = useState(false);
+  const { open: modalOpen, openSignup, closeSignup } = useSignupPopup();
+  const signupPending = useRef(false);
   const [signupStatus, setSignupStatus] = useState<SignupState>("idle");
   const [activatedCards, setActivatedCards] = useState<boolean[]>(() => castData.map(() => false));
   const [revealedCards, setRevealedCards] = useState<boolean[]>(() => castData.map(() => false));
@@ -467,7 +403,10 @@ export default function Home() {
   }, [activatedCards, flippedCards, playSound, revealedCards, startFlipRotation, stopFlipRotation]);
 
   const handleSignup = useCallback(async (formData: FormData) => {
+    if (signupPending.current) return;
+    signupPending.current = true;
     setSignupStatus("submitting");
+    gaEvent("signup_popup_submit");
 
     const payload = {
       firstName: String(formData.get("firstName") ?? ""),
@@ -482,19 +421,22 @@ export default function Home() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
+        signal: AbortSignal.timeout(15000),
       });
 
       if (!response.ok) throw new Error(`Signup failed: ${response.status}`);
 
       const confirmation = await response.json();
       if (confirmation.recorded !== true || typeof confirmation.subscribed !== "boolean") throw new Error("Invalid signup response");
-      if (!confirmation.subscribed) { setSignupStatus("review"); return; }
+      if (!confirmation.subscribed) { setSignupStatus("review"); gaEvent("signup_popup_review"); return; }
       setSignupStatus("success");
+      rememberSignupSuccess();
       playSound("signup");
       gaEvent("email_signup", { method: "jackpottwins_modal" });
     } catch {
       setSignupStatus("error");
-    }
+      gaEvent("signup_popup_error");
+    } finally { signupPending.current = false; }
   }, [playSound]);
 
   useEffect(() => {
@@ -770,8 +712,7 @@ export default function Home() {
             className="btn-main btn-secondary"
             style={{ fontSize: 16, padding: "14px 36px", margin: "0 auto" }}
             onClick={() => {
-              setSignupStatus("idle");
-              setModalOpen(true);
+              openSignup("manual");
             }}
           >
             Sign Up for Updates
@@ -792,7 +733,7 @@ export default function Home() {
         </footer>
       </main>
 
-      <SignupModal open={modalOpen} onClose={() => setModalOpen(false)} onSubmit={handleSignup} status={signupStatus} />
+      <SignupPopup open={modalOpen} onClose={closeSignup} onSubmit={handleSignup} status={signupStatus} />
     </>
   );
 }
