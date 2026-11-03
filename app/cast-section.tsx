@@ -65,7 +65,7 @@ export default function CastSection() {
         <div className="cast-leads">
           {castData.slice(0, 2).map((actor, index) => <Portrait key={actor.name} actor={actor} index={index} />)}
         </div>
-        <div className="cast-divider">With</div>
+        <div className="cast-divider" aria-hidden="true" />
         <div className="cast-ensemble">
           {castData.slice(2).map((actor, index) => <Portrait key={actor.name} actor={actor} index={index + 2} />)}
         </div>
