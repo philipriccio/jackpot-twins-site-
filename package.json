@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "scratch:report": "node scratch-runtime/operator.cjs report",
-    "scratch:worker": "node scratch-runtime/operator.cjs work"
+    "scratch:worker": "node scratch-runtime/operator.cjs serve"
   },
   "dependencies": {
     "@aws-sdk/client-sesv2": "3.1163.0",

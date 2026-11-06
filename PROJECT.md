@@ -175,3 +175,9 @@ Philip approved deployment in Telegram36095. Pearl-white form, gold/silver chasi
 
 ## November 5 — scratch launch candidate (local, disabled by default)
 Isolated patched-release implementation adds PostgreSQL-authoritative verified-email gameplay, finite configurable rewards, exact Mirvish links, CRM/mail outbox, concrete SES transport with uncertainty handling, signed provider delivery events, private interaction analytics and gated homepage integration. No live prize policy/configuration, sends, push or deployment. Evidence: ../../audits/jt-scratch-launch-20261105/IMPLEMENTATION.md; operational gates/rollback: SCRATCH-OPERATIONS.md. Original prototype unchanged. Synthetic production-build preview localhost:3295/scratch.
+
+## November 5 — free-prize frequency approved (Telegram37178)
+Philip approved 1% of winning cards for free-ticket pairs, initially capped at six pairs; reassess using participation/award analytics if no one wins. Local scratch-campaign-policy.json now records 1, retaining 70/20/10 conditional discounts and staff email booking follow-up. This supersedes earlier frequency-unset blockers. Campaign remains disabled; production setup/acceptance and deployment remain outstanding. No production changes or sends.
+
+## November 6 — today's launch preparation (local)
+Philip requests launch today and will decide the campaign end afterward; nullable end-date support and private validated operator update implemented without changing Mirvish offer dates. Production worker packaging/continuous lifecycle and conservative transient-secret maintenance added. Local tests and acceptance are in ../../audits/jt-scratch-launch-20261105/FINAL-ACCEPTANCE-20261106.md. Parent owns production acceptance/deployment; local work is not a claim of live launch.

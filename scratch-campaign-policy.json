@@ -2,8 +2,13 @@
   "enabled": false,
   "synthetic": false,
   "initialFreePairs": 6,
-  "discountConditionalWeights": {"25": 70, "40": 20, "50": 10},
-  "freeWinningPercentage": null,
+  "discountConditionalWeights": {
+    "25": 70,
+    "40": 20,
+    "50": 10
+  },
+  "freeWinningPercentage": 1,
   "freeInstructions": "Our team will follow up by email to arrange your pair of tickets. Tickets are booked manually by our team.",
-  "launchGate": "Free-ticket frequency must be approved and configured before activation. Campaign dates and final rules must also be configured."
+  "launchGate": "Prize frequency approved November 5, 2026: 1% of winning cards, capped at six pairs. November 6: launch requested today; campaign end will be decided after launch (NULL intentionally). Final rules and production acceptance remain required before activation.",
+  "endsAt": null
 }

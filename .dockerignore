@@ -5,3 +5,7 @@ node_modules
 .env*
 *.log
 knowledge-graph.json
+
+reports
+audits
+scratch-runtime

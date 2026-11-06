@@ -1,0 +1,47 @@
+require('../scripts/scratch-register.cjs');
+const {test,after}=require('node:test'),assert=require('node:assert/strict'),{randomUUID}=require('node:crypto');
+process.env.SCRATCH_DATABASE_URL='postgresql://jt_scratch_operator_fixture@localhost/jt_scratch_synthetic_20261105';
+const campaign='operations-'+randomUUID();process.env.SCRATCH_CAMPAIGN_ID=campaign;
+const {Pool}=require('pg'),db=new Pool({connectionString:'postgresql://localhost/jt_scratch_synthetic_20261105'});
+const api=require('../lib/scratch-server.ts'),ops=require('../lib/scratch-operations.ts');
+after(async()=>{await db.end();await api.pool().end();});
+test('end-date syntax rejects rollover, timezone ambiguity, missing and malformed values',()=>{
+ for(const value of [undefined,'','2026-02-30T00:00:00Z','2026-11-06','2026-11-06T08:00:00-05:00','forever'])assert.throws(()=>ops.parseEndDate(value));
+ assert.equal(ops.parseEndDate('none'),null);assert.equal(ops.parseEndDate('2027-01-01T00:00:00Z').toISOString(),'2027-01-01T00:00:00.000Z');
+});
+test('nullable campaign, restricted operator expiry changes, and maintenance preserve durable records',async()=>{
+ await db.query(`DO $$ BEGIN IF NOT EXISTS(SELECT 1 FROM pg_roles WHERE rolname='jt_scratch_operator_fixture') THEN CREATE ROLE jt_scratch_operator_fixture LOGIN; END IF; END $$`);
+ await db.query('GRANT USAGE ON SCHEMA public TO jt_scratch_operator_fixture');
+ await db.query('GRANT SELECT ON ALL TABLES IN SCHEMA public TO jt_scratch_operator_fixture');
+ await db.query('GRANT UPDATE(ends_at) ON scratch_campaign TO jt_scratch_operator_fixture');
+ await db.query('GRANT DELETE ON scratch_session,scratch_rate TO jt_scratch_operator_fixture');
+ await db.query('GRANT UPDATE(profile) ON scratch_verification TO jt_scratch_operator_fixture');
+ await db.query('GRANT UPDATE(payload,status,error_code) ON scratch_outbox TO jt_scratch_operator_fixture');
+ await db.query("INSERT INTO scratch_campaign VALUES($1,true,true,now()-interval '1 day',NULL,$2,6,'Synthetic only','Synthetic rules')",[campaign,{25:6930,40:1980,50:990,free:100}]);
+ assert.equal((await api.transaction(d=>api.campaign(d))).ends_at,null);
+ const future=new Date(Date.now()+86400000).toISOString();assert.equal((await ops.setCampaignEnd(future)).endsAt,future);
+ await assert.rejects(ops.setCampaignEnd('2020-01-01T00:00:00Z'),/future/);
+ await db.query("UPDATE scratch_campaign SET ends_at=now()-interval '1 minute' WHERE id=$1",[campaign]);
+ await assert.rejects(api.transaction(d=>api.campaign(d)),/not open/);
+ assert.equal((await api.transaction(d=>api.campaign(d,false))).id,campaign);
+ assert.equal((await ops.setCampaignEnd('none')).endsAt,null);await api.transaction(d=>api.campaign(d));
+ const runtime=new Pool({connectionString:'postgresql://jt_scratch_fixture@localhost/jt_scratch_synthetic_20261105'});
+ try{await assert.rejects(runtime.query('UPDATE scratch_campaign SET ends_at=NULL WHERE id=$1',[campaign]),/permission denied/);}finally{await runtime.end();}
+ const p=randomUUID(),v=randomUUID(),card=randomUUID(),outbox=randomUUID();
+ await db.query("DELETE FROM scratch_session WHERE hash IN ('expired-operations','current-operations')");
+ await db.query("INSERT INTO scratch_player(id,campaign,email,name,consent,consent_at) VALUES($1,$2,'synthetic@example.invalid','Fixture',false,now())",[p,campaign]);
+ await db.query("INSERT INTO scratch_session VALUES('expired-operations',$1,now()-interval '8 days'),('current-operations',$1,now()+interval '1 day')",[p]);
+ await db.query("INSERT INTO scratch_verification(id,player,hash,profile,request_hash,expires_at,attempts,used) VALUES($1,$2,'hash',$3,'request-hash',now()-interval '1 day',0,false)",[v,p,{name:'Fixture'}]);
+ await db.query("INSERT INTO scratch_card(id,player,day,round,prize) VALUES($1,$2,current_date,'{}','free')",[card,p]);
+ await db.query('INSERT INTO scratch_fulfillment(card) VALUES($1)',[card]);
+ await db.query("INSERT INTO scratch_outbox(id,dedupe,player,kind,payload,status) VALUES($1,$2,$3,'verification',$4,'unknown')",[outbox,'ops:'+v,p,{verificationId:v,code:'synthetic-code'}]);
+ await db.query("INSERT INTO scratch_rate VALUES('operations-expired',1,now()-interval '8 days'),('operations-current',1,now()+interval '1 day') ON CONFLICT DO NOTHING");
+ const cleaned=await ops.maintain();assert.equal(cleaned.sessions,1);assert.equal(cleaned.challenges,1);assert.equal(cleaned.payloads,1);
+ assert.equal((await db.query('SELECT status FROM scratch_outbox WHERE id=$1',[outbox])).rows[0].status,'unknown');
+ assert.equal((await db.query('SELECT 1 FROM scratch_fulfillment WHERE card=$1',[card])).rowCount,1);
+ assert.equal((await db.query("SELECT 1 FROM scratch_session WHERE hash='current-operations'")).rowCount,1);
+ assert.equal((await db.query('SELECT 1 FROM scratch_player WHERE id=$1',[p])).rowCount,1);
+ assert.equal((await db.query('SELECT request_hash FROM scratch_verification WHERE id=$1',[v])).rows[0].request_hash,'request-hash');
+ assert.deepEqual(await ops.maintain(),{sessions:0,rates:0,challenges:0,payloads:0});
+ await assert.rejects(api.pool().query('DELETE FROM scratch_card'),/permission denied/);
+});
