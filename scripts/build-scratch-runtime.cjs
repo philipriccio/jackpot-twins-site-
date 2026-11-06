@@ -1,0 +1,5 @@
+const fs=require('node:fs'),path=require('node:path'),ts=require('typescript');
+const root=path.join(__dirname,'..'),out=path.join(root,'scratch-runtime');fs.mkdirSync(path.join(out,'lib'),{recursive:true});
+for(const name of ['double-trouble.ts','scratch-server.ts','scratch-fulfillment.ts','scratch-offers.ts','scratch-analytics.ts','scratch-outbox.ts','scratch-mail.ts','scratch-delivery.ts','prize-email.ts']){const js=ts.transpileModule(fs.readFileSync(path.join(root,'lib',name),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,esModuleInterop:true}}).outputText;fs.writeFileSync(path.join(out,'lib',name.replace('.ts','.js')),js);}
+const cli=fs.readFileSync(path.join(__dirname,'scratch-operator.cjs'),'utf8').replace("require('./scratch-register.cjs');",'').replaceAll('../lib/','./lib/').replaceAll('.ts\'','.js\'');fs.writeFileSync(path.join(out,'operator.cjs'),cli);
+console.log('Compiled scratch worker/operator; runtime requires only production dependencies.');

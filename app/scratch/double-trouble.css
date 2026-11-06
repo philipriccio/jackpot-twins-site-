@@ -1,0 +1,182 @@
+.dt-page{min-height:100vh;background:#ec2589;color:#fff;font-family:var(--font-inter),Arial,sans-serif}.dt-page *{box-sizing:border-box}.dt-backdrop{text-align:center;padding:100px 20px}.dt-backdrop h1{font-size:70px;line-height:1}.dt-page button,.dt-page select{font:inherit;min-height:44px;cursor:pointer}.dt-page button{background:#f8e456;color:#19142d;border:2px solid #19142d;border-radius:8px;padding:10px 16px;font-weight:800}.dt-page :focus-visible{outline:3px solid #ffdd36;outline-offset:3px}.dt-overlay{position:fixed;inset:0;overflow:auto;background:radial-gradient(ellipse at 50% 30%,#3c1b56,#100b20 75%);z-index:2000;padding:24px 0 50px}.dt-overlay[hidden]{display:none}.dt-dialog{position:relative;width:min(760px,94vw);margin:auto;outline:none}.dt-close{position:absolute;right:0;top:0;z-index:5;width:44px;padding:0!important;font-size:27px!important}.dt-notice{font-size:10px;letter-spacing:.15em;text-align:center;padding:14px 48px 20px;color:#c2b9cf;margin:0}.dt-stage{position:relative;aspect-ratio:1390/1660;width:100%;}.dt-photo,.dt-grips{position:absolute;top:20%;left:0;width:100%;height:69.28%;pointer-events:none}.dt-photo{z-index:0}.dt-grips{z-index:3}.dt-card{position:absolute;top:0;left:10.64748%;width:78.05755%;padding:4% 4% 3%;border:3px solid #fff5bd;border-radius:12px;background:radial-gradient(circle at 0 0,#fff3 1px,transparent 2px) 0 0/12px 12px,linear-gradient(150deg,#f73390,#ce1475 70%);box-shadow:0 0 0 5px #4cc5ed,0 0 0 8px #e0ddf5,0 16px 32px #0006;container-type:inline-size;text-align:center;color:white;z-index:1}.dt-kicker{font-size:3cqw;letter-spacing:.16em;font-weight:850;margin:0 0 8px}.dt-card h2{font-family:var(--font-bebas-neue),Impact,sans-serif;font-size:15cqw;line-height:.83;letter-spacing:.01em;margin:0;text-shadow:3px 3px 0 #2e173e;color:#ffe563;transform:rotate(-3deg)}.dt-card h2 span{display:block;color:white}.dt-rule{font-size:3.5cqw;line-height:1.5;margin:14px 0 8px}.dt-rule strong{font-size:4cqw}.dt-score{display:flex;align-items:center;justify-content:center;gap:9%;margin:14px 0}.dt-target{width:25%;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:3cqw;font-weight:800}.dt-target img{width:68%;height:auto;border-radius:50%;background:#fff;border:3px solid #f3b2d1;filter:grayscale(1);opacity:.7}.dt-target.found img{filter:none;opacity:1;border-color:#ffe563;box-shadow:0 0 0 4px #ffe56355}.dt-count{display:flex;flex-direction:column;white-space:nowrap}.dt-count strong{font-size:10cqw;line-height:1;color:#ffe563}.dt-count span{font-size:2.8cqw;font-weight:800}.dt-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.dt-spot{position:relative;aspect-ratio:1/1.16;background:#fcf6e9;border-radius:10px;border:2px solid #f5d961;overflow:hidden;color:#332145;box-shadow:0 3px 0 #8e175c}.dt-symbol{height:calc(100% - 29px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px;gap:2px}.dt-symbol>svg,.dt-symbol>img{width:59%;height:70%;object-fit:contain}.dt-symbol>img{background:white;border-radius:50%}.dt-symbol span{font-size:2.8cqw;font-weight:800;line-height:1.1}.dt-symbol small{font-size:2.2cqw}.dt-spot canvas{position:absolute;top:0;left:0;width:100%;height:calc(100% - 29px);touch-action:none;cursor:url('/images/penny-cursor.png') 16 16,crosshair}.dt-page .dt-tap{position:absolute;bottom:0;left:0;width:100%;min-height:29px;height:29px;padding:0 2px;border:0;border-top:1px solid #b1bac3;border-radius:0;background:#e5e9ed;color:#364152;font-size:2.2cqw;font-weight:800}.dt-tap:disabled{cursor:default}.dt-spot.is-picked{border-color:#fff}.dt-spot.is-missed{opacity:.58}.dt-result{min-height:72px;margin-top:15px;padding:12px 5px;background:#4c133c55;border-radius:8px;display:flex;flex-direction:column;justify-content:center;gap:7px}.dt-result strong{font-size:3.9cqw;line-height:1.15}.dt-result span{font-size:2.7cqw;line-height:1.35}.dt-result.won{background:#ffe563;color:#312139}.dt-help{text-align:center;font-size:12px;line-height:1.65;color:#d3c8dd;margin:10px auto 24px;max-width:90%}.dt-review{border-top:1px solid #64516d;padding:16px;max-width:590px;margin:auto;font-size:12px;color:#d3c8dd}.dt-review summary{cursor:pointer;min-height:32px}.dt-review label{display:block;margin-top:10px}.dt-review select{display:block;width:100%;margin:8px 0 12px;background:#fff;color:#22132c;border-radius:6px;padding:8px}.dt-review p{line-height:1.5}.dt-review button{width:100%}@media(max-width:600px){.dt-overlay{padding-top:10px}.dt-dialog{width:98vw}.dt-notice{font-size:8px;padding:14px 45px 24px}.dt-card{padding:4% 3%;border-width:2px;border-radius:9px;box-shadow:0 0 0 3px #4cc5ed,0 0 0 5px #e0ddf5,0 10px 25px #0006}.dt-stage{aspect-ratio:1390/1850}.dt-photo,.dt-grips{top:20%;height:62.16%}.dt-grid{gap:6px}.dt-spot{aspect-ratio:1/1.3;border-radius:7px}.dt-rule{margin:12px 0 6px}.dt-score{margin:10px 0}.dt-result{margin-top:10px;min-height:65px;padding:10px 5px}.dt-tap{font-size:2.5cqw!important}.dt-symbol span{font-size:3.2cqw}.dt-target img{border-width:2px}.dt-help{font-size:11px}.dt-result span{font-size:3cqw}.dt-review{max-width:80%}}@media(prefers-reduced-motion:reduce){.dt-page *{animation:none!important;transition:none!important}.dt-spot canvas{cursor:crosshair}}
+/* Let the card determine height so review controls never overlap the play area. */
+.dt-dialog{width:min(540px,94vw)}.dt-dialog:focus{outline:none}.dt-stage{aspect-ratio:auto}.dt-card{position:relative;left:auto;margin-left:10.64748%;}.dt-photo,.dt-grips{top:23%;height:auto;aspect-ratio:1390/1150}.dt-help{margin-top:22px}@media(max-width:600px){.dt-dialog{width:98vw}.dt-stage{aspect-ratio:auto}.dt-photo,.dt-grips{top:23%;height:auto}}
+.dt-page .dt-tap{height:44px;min-height:44px;font-size:max(10px,2.2cqw)!important}.dt-symbol,.dt-spot canvas{height:calc(100% - 44px)}.dt-symbol span{font-size:max(10px,2.8cqw)}.dt-result span{font-size:max(10px,2.7cqw)}.dt-kicker{font-size:max(9px,3cqw)}.dt-rule{font-size:max(11px,3.5cqw)}.dt-rule strong{font-size:max(12px,4cqw)}.dt-target{font-size:max(10px,3cqw)}.dt-count span{font-size:max(10px,2.8cqw)}
+.dt-panel{position:relative;overflow:hidden;background:#fff8ef;color:#302039;border:4px solid #ffe269;border-radius:20px;padding:28px;margin:16px 16px 24px;text-align:center;box-shadow:0 0 0 4px #e62b8a,0 12px 40px #0005}.dt-panel h2{font-family:var(--font-bebas-neue),Impact,sans-serif;font-size:42px;line-height:1.05;margin:8px 0 18px;color:#c81871}.dt-panel h3{font-size:25px;margin:16px 0}.dt-panel p{line-height:1.55;margin:14px 0}.dt-panel form{text-align:left}.dt-panel label{display:block;font-weight:700;margin:18px 0}.dt-panel input:not([type=checkbox]){display:block;width:100%;min-height:46px;padding:10px;border:2px solid #aa8d9f;border-radius:7px;font:inherit;margin-top:7px;background:white;color:#302039}.dt-panel .dt-consent{display:flex;gap:10px;font-size:13px;line-height:1.5;font-weight:400}.dt-consent input{width:20px;height:20px;flex-shrink:0}.dt-panel button{margin:8px 4px;max-width:100%;white-space:normal}.dt-panel form>button{width:100%;margin-left:0}.dt-panel ol{text-align:left;padding-left:22px;line-height:1.7}.dt-panel li{margin-bottom:12px}.dt-small{font-size:12px}.dt-player{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;padding:10px 18px 18px;font-size:12px}.dt-player>span{width:100%;text-align:center}.dt-player button{font-size:12px;padding:6px 10px}.dt-target img{aspect-ratio:1;height:auto;object-fit:contain;border-radius:16%;filter:none;opacity:1}.dt-symbol>img{border-radius:0;width:80%;height:80%;object-fit:contain}.dt-symbol .dt-prop{display:block;width:80%;height:auto;aspect-ratio:1;background-image:url('/images/double-trouble/props-v4.png');background-size:300% 300%;flex-shrink:1;min-height:0}.dt-prize-scratch{margin:20px 0;background:#f5df89;border:3px solid #c79324;border-radius:12px;padding:12px}.dt-prize-scratch canvas{display:block;width:100%;height:140px;touch-action:none}.dt-prize-scratch button{font-size:13px}.dt-demo{font-weight:800;font-size:11px;letter-spacing:.07em;color:#a51653}.dt-code{display:block;overflow-wrap:anywhere;font-size:23px;padding:12px;background:#f3e5ef;border:2px dashed #bd397c}.dt-prize-details{border-bottom:1px solid #d9bfcf;padding-bottom:16px;margin-bottom:18px}.dt-prize-details p,.dt-prize-details summary{font-size:13px}.dt-ticket-link{display:block;margin-top:18px;font-weight:800;color:#9b1456;text-decoration:underline}.dt-error{background:#fff0e4;color:#732600;border:2px solid #d96921;border-radius:8px;padding:14px;margin:12px 16px;font-size:13px;line-height:1.5}.dt-error button{display:block;margin-top:10px}.dt-confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden;height:180px}.dt-confetti i{position:absolute;top:-16px;width:9px;height:16px;animation:dt-fall 2s ease-out 2 forwards}.dt-outcome>h2{position:relative}.dt-page button:disabled{opacity:.55;cursor:not-allowed}.dt-panel :focus-visible{outline-color:#c81871}.dt-panel article+article{margin-top:25px}.dt-backdrop h1{font-size:clamp(36px,8vw,70px)}@keyframes dt-fall{to{transform:translateY(210px) rotate(550deg);opacity:0}}@media(max-width:420px){.dt-panel{padding:22px 16px;margin-left:12px;margin-right:12px}.dt-panel h2{font-size:34px}.dt-panel p{font-size:14px}.dt-review{max-width:94%}}@media(prefers-reduced-motion:reduce){.dt-confetti{display:none}}
+.dt-target img{object-fit:cover;object-position:center 12%}.dt-symbol>img{object-fit:cover;object-position:center 12%;border-radius:8px}
+.dt-portrait{display:block;overflow:hidden;background:#fff;border-radius:8px;aspect-ratio:1}.dt-target .dt-portrait{width:68%}.dt-symbol>.dt-portrait{width:80%;height:70%}.dt-portrait img,.dt-target .dt-portrait img{display:block;width:100%;height:100%;border:0;border-radius:0;object-fit:cover;object-position:center 12%}.dt-portrait-gerry img{transform:scale(1.9);transform-origin:center 20%}.dt-portrait-bernie img{transform:scale(1.1);transform-origin:center 20%}.dt-target.found .dt-portrait{outline:3px solid #ffe563}
+.dt-symbol .dt-prop{width:auto;height:70%;max-width:100%;aspect-ratio:1;flex:0 0 auto}
+
+.dt-tagline{font-weight:800;line-height:1.35;text-align:center}.dt-card .dt-tagline{font-size:clamp(11px,3.5cqw,16px);margin:16px 0 8px;color:#fff5bd}.dt-panel .dt-tagline{font-size:15px;margin:-6px 0 18px}
+/* Card-first entry and compact, show-branded panels. */
+.dt-dialog [hidden]{display:none!important}
+.dt-preview-board{display:block;width:100%;padding:0!important;border:0!important;background:none!important;border-radius:10px!important}
+.dt-preview-spot{display:flex;align-items:center;justify-content:center;aspect-ratio:1.18;border:2px solid #f8d85a;border-radius:9px;background:linear-gradient(130deg,#a8afb9,#f4f6f8 35%,#b6bec7 60%,#e6ebef);color:#66707e;font:bold clamp(24px,9cqw,44px) Georgia;box-shadow:0 3px 0 #941452}
+.dt-teaser-twins{display:flex;justify-content:center;align-items:center;gap:14px;margin:15px 0}.dt-teaser-twins .dt-portrait{width:20%;max-width:70px}.dt-teaser-twins>span:not(.dt-portrait){font-size:clamp(11px,3.2cqw,15px);font-weight:800;line-height:1.4}
+.dt-page .dt-play-cta{width:100%;margin-top:18px;font-size:clamp(18px,5cqw,25px);border-radius:100px;box-shadow:0 4px 0 #822251}
+.dt-teaser-note{font-size:12px;font-weight:750;margin:12px 0 2px}.dt-page .dt-text-link{display:inline-block;background:transparent;border:0;box-shadow:none;color:inherit;text-decoration:underline;text-underline-offset:4px;font-size:13px;padding:8px;min-height:44px}
+.dt-panel{border:3px solid #fff0a2;border-radius:18px;background:radial-gradient(circle at 0 0,#ffffff14 1.5px,transparent 2px) 0 0/14px 14px,linear-gradient(155deg,#ed338b,#c5156e);color:#fff;margin:20px 16px 28px;padding:30px 26px;box-shadow:0 0 0 4px #55c8eb,0 0 0 7px #dedbf3,0 18px 45px #0006}
+.dt-panel h2{color:#ffe76a;font-size:clamp(40px,10vw,62px);letter-spacing:.01em;text-shadow:2px 3px 0 #62224a;margin:12px 0 18px;line-height:.95}.dt-panel h3{font-size:25px}.dt-panel .dt-kicker{font-size:12px;letter-spacing:.15em;font-weight:850}.dt-panel .dt-tagline{font-size:14px;margin:0 0 22px}.dt-panel p{margin:12px 0}.dt-panel .dt-demo{color:#fff1b4;font-size:10px;letter-spacing:.07em}.dt-panel .dt-small{font-size:11px;line-height:1.5;color:#fff2f8}
+.dt-panel input:not([type=checkbox]){background:#fffdf5;border-color:#fff3b7;box-shadow:0 3px 0 #9a225c;color:#302039}.dt-panel label{font-size:13px;margin:14px 0}.dt-panel .dt-consent{font-size:12px;align-items:center;line-height:1.4}.dt-panel form>button{border-radius:100px;font-size:20px;box-shadow:0 4px 0 #7f1b52}.dt-panel :focus-visible{outline-color:#fff}
+.dt-signup{max-width:440px;margin-left:auto;margin-right:auto}.dt-prize-details{border:0;margin:0;padding:0}.dt-code{background:#fff8db;color:#582046;border:2px dashed #f3ce54;font-size:22px;margin:18px 0}.dt-panel .dt-ticket-link{color:#fff;margin:12px 0 0;font-size:14px}.dt-outcome>button:not(.dt-text-link){display:block;margin:20px auto 6px;border-radius:100px;padding:12px 28px}.dt-outcome.lost{padding-top:45px;padding-bottom:32px}.dt-terms{text-align:left}.dt-terms h2{font-size:45px}.dt-terms h3{font-size:19px;margin:24px 0 8px}.dt-terms p{font-size:13px;line-height:1.6}.dt-terms>button{display:block;margin:24px auto 0}.dt-prize-scratch{box-shadow:0 4px 0 #8d2456}.dt-prize-scratch button{font-size:11px}.dt-player{padding-bottom:6px}
+@media(max-width:480px){.dt-signup{margin-left:14px;margin-right:14px}.dt-panel{padding:26px 19px}.dt-panel h2{font-size:45px}.dt-panel .dt-tagline{font-size:12px}.dt-teaser .dt-card{padding-bottom:4%}.dt-preview-spot{aspect-ratio:1.08}.dt-teaser .dt-rule{margin-top:12px}.dt-teaser-twins{margin:12px 0;gap:9px}.dt-teaser .dt-grid{gap:7px}}
+@media(max-width:480px){.dt-outcome h2{font-size:35px;margin-bottom:14px}.dt-outcome h3{font-size:24px;margin:14px 0}.dt-outcome .dt-code{font-size:16px;padding:10px 5px;margin:14px 0}.dt-outcome .dt-prize-details>button{font-size:12px}.dt-outcome .dt-ticket-link{font-size:12px}.dt-outcome .dt-kicker{font-size:10px}.dt-outcome{padding-top:24px;padding-bottom:18px}}
+/* Tall approved character photos: anchor crops at the crown, not the torso. */
+.dt-portrait img,.dt-target .dt-portrait img{object-position:center top;transform-origin:center top}.dt-portrait-bernie img{transform:scale(1.7)}
+/* Scratch-first conversion card. Keyboard controls remain available on focus. */
+.dt-sr-only,.dt-page .dt-keyboard-reveal{position:absolute;width:1px;height:1px;min-height:0;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.dt-page .dt-keyboard-reveal:focus-visible{z-index:8;left:4px;right:4px;bottom:4px;width:calc(100% - 8px);height:auto;min-height:44px;margin:0;padding:8px;clip-path:none;white-space:normal;background:#ffe563;color:#302039}
+.dt-spot,.dt-preview-spot{aspect-ratio:1}.dt-symbol{height:100%;padding:0;gap:0}.dt-symbol>.dt-portrait,.dt-symbol .dt-prop{width:100%;height:100%;aspect-ratio:1;border-radius:0}.dt-spot canvas{height:100%;width:100%}.dt-symbol .dt-sr-only{width:1px;height:1px}
+.dt-preview-spot{flex-direction:column;gap:8%;color:#939da9;text-shadow:0 1px #ffffff90;font:900 clamp(14px,5cqw,24px)/.9 Impact,Arial Black,sans-serif}.dt-preview-spot small{font:700 clamp(6px,1.8cqw,9px)/1.2 Arial,sans-serif}
+.dt-card .dt-tagline{font-family:var(--font-bebas-neue),Impact,sans-serif;font-size:clamp(20px,6.2cqw,30px);font-weight:900;line-height:1.05;letter-spacing:.01em;margin:18px 0 10px}.dt-win-banner{display:inline-block;background:#ffe563;color:#542047;font-family:var(--font-bebas-neue),Impact,sans-serif;font-size:clamp(21px,6.5cqw,32px);line-height:1.1;padding:8px 12px;margin:4px 0 0;transform:rotate(-2deg);box-shadow:0 3px 0 #9e1e60;border-radius:4px}
+.dt-prize-scratch{position:relative;padding:0;overflow:hidden;background:#fff8db;color:#542047}.dt-prize-content{padding:22px 14px;min-height:260px}.dt-prize-scratch canvas{position:absolute;inset:0;display:block;width:100%;height:100%;cursor:crosshair;touch-action:none}.dt-prize-content .dt-demo{color:#8a3357}.dt-panel .dt-prize-content .dt-ticket-link{display:block;background:#ffe563;color:#542047;border:2px solid #542047;border-radius:100px;padding:12px;text-decoration:none;font-weight:900;font-size:14px}.dt-prize-content .dt-code{overflow-wrap:anywhere;font-size:clamp(15px,4vw,22px)}
+@media(max-width:480px){.dt-card .dt-tagline{font-size:clamp(18px,6cqw,24px)}.dt-prize-content{padding:18px 10px}.dt-preview-spot{aspect-ratio:1}}
+@font-face{font-family:DT Anton;src:url('/fonts/Anton-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
+.dt-card h2{font-family:DT Anton,Impact,sans-serif;font-weight:400;font-size:17cqw;line-height:.96;letter-spacing:.015em;filter:drop-shadow(2px 3px 0 #211321);text-shadow:none;color:#f6d354;background:radial-gradient(circle at 20% 30%,#fff9b7 0 1px,transparent 1.5px) 0 0/5px 5px,linear-gradient(125deg,#8e570a,#fff4a1 25%,#e3aa25 45%,#fff8c5 65%,#a36513);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;-webkit-text-stroke:.5px #7f4e19}.dt-card h2 span{color:#e6e9ee;background:radial-gradient(circle at 20% 30%,#fff 0 1px,transparent 1.5px) 0 0/5px 5px,linear-gradient(125deg,#89949f,#fff 25%,#a4adb9 45%,#fff 65%,#74818f);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;-webkit-text-stroke:.5px #5d6570}
+.dt-card .dt-tagline{font-family:DT Anton,Impact,sans-serif;font-weight:400;color:#fff5c9;text-shadow:1px 2px #592448;font-size:6.1cqw;line-height:1.2}.dt-win-banner{font-family:DT Anton,Impact,sans-serif;font-weight:400}
+/* Native-ratio windows: preserve original photo pixels, center equal-scale heads. */
+.dt-portrait{position:relative;isolation:isolate}.dt-portrait img,.dt-target .dt-portrait img{position:absolute;max-width:none;max-height:none;height:auto!important;object-fit:initial;object-position:initial;transform:none!important;transform-origin:initial}
+.dt-portrait-gerry img,.dt-target .dt-portrait-gerry img{width:488.26%;left:-197.83%;top:-67.39%}
+.dt-portrait-bernie img,.dt-target .dt-portrait-bernie img{width:225%;left:-73.21%;top:0}
+.dt-teaser-twins .dt-portrait{width:25%;max-width:90px}.dt-target .dt-portrait{width:80%}.dt-symbol>.dt-portrait{width:100%;height:100%}
+.dt-portrait img,.dt-target .dt-portrait img{aspect-ratio:auto!important}
+.dt-portrait-gerry img,.dt-target .dt-portrait-gerry img{width:488.26%;left:-197.83%;top:-76.09%}
+
+/* Card-branded invitation and named character portraits. */
+.dt-named-twin{width:30%;max-width:110px;display:flex;flex-direction:column;align-items:center;gap:6px;font:400 clamp(17px,4.8cqw,25px)/1.2 'DT Anton',Impact,sans-serif;color:#fff5c9;text-shadow:1px 2px #592448}
+.dt-teaser-twins .dt-named-twin .dt-portrait{width:82%;max-width:90px}
+.dt-page .dt-card .dt-play-cta{font-family:'DT Anton',Impact,sans-serif;font-weight:400;font-size:clamp(27px,8cqw,42px);letter-spacing:.05em;line-height:1.1;padding:13px 12px;border-radius:9px;border:3px solid #fff6c5;color:#542047;text-shadow:0 1px #fff8c5;background:radial-gradient(circle,#fff9 0 1px,transparent 1.5px) 0 0/7px 7px,linear-gradient(115deg,#b78119,#fff0a0 25%,#edc544 55%,#fff4b6 78%,#b78119);box-shadow:0 0 0 2px #a66516,inset 0 0 0 2px #d99c2b,0 5px 0 #822251}
+.dt-page .dt-card .dt-play-cta:hover{filter:brightness(1.08)}
+.dt-page .dt-card .dt-play-cta:active{transform:translateY(2px)}
+
+/* Lottery-ticket finish: static glitter, high-contrast outlines and playful lettering. */
+.dt-page{--dt-gold:linear-gradient(110deg,#b7770b,#fff3a4 24%,#e5b43e 48%,#fff5b2 72%,#b97808);--dt-silver:linear-gradient(110deg,#89929e,#fff 24%,#bac4cf 48%,#fff 72%,#818b99);--dt-glitter:url('/images/double-trouble/glitter.svg');font-family:var(--font-nunito),Arial,sans-serif;font-weight:800}
+.dt-card h2,.dt-card h2 span{background-image:var(--dt-silver),var(--dt-glitter);background-size:100% 100%,95px 95px;background-blend-mode:hard-light;background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;-webkit-text-stroke:1px #25202b;filter:drop-shadow(1px 0 #ffe39c) drop-shadow(-1px 0 #ffe39c) drop-shadow(0 2px #ffe39c) drop-shadow(2px 4px #241728)}
+.dt-card h2{font-size:18.5cqw;line-height:1.02;transform:rotate(-3deg);letter-spacing:.01em}
+.dt-card h2 span{background-image:var(--dt-gold),var(--dt-glitter)}
+.dt-card .dt-tagline{font-family:var(--font-luckiest-guy),Impact,sans-serif;font-size:clamp(18px,5.4cqw,28px);line-height:1.2;font-weight:400;letter-spacing:.01em;color:#fff5d2;text-shadow:1px 2px #3e1732;margin:20px 0 12px}
+.dt-card .dt-rule{font-family:var(--font-luckiest-guy),Impact,sans-serif;font-weight:400;font-size:clamp(15px,4.2cqw,22px);line-height:1.4;letter-spacing:.015em;text-shadow:1px 2px #7d194c;margin:18px 0 12px}
+.dt-card .dt-rule strong{display:inline-block;font:inherit;color:#fff4b1;margin-top:5px}
+.dt-win-banner{font-family:var(--font-luckiest-guy),Impact,sans-serif;font-size:clamp(23px,6.5cqw,34px);line-height:1.15;border:2px solid #fff8cb;background-image:var(--dt-gold),var(--dt-glitter);background-size:100% 100%,100px 100px;background-blend-mode:hard-light;color:#39152f;text-shadow:0 1px #fff3a8;box-shadow:0 0 0 2px #7f4313,0 5px 0 #7f194f}
+.dt-named-twin,.dt-target>span:not(.dt-portrait){font-family:var(--font-luckiest-guy),Impact,sans-serif;font-weight:400;letter-spacing:.025em;font-size:clamp(17px,4.8cqw,25px)}
+.dt-count strong{font-family:var(--font-luckiest-guy),Impact,sans-serif;text-shadow:2px 3px #68234c}.dt-count span{font-weight:900;font-size:clamp(12px,3cqw,16px)}
+.dt-panel h2{font-family:var(--font-luckiest-guy),Impact,sans-serif;font-weight:400;background-image:var(--dt-gold),var(--dt-glitter);background-size:100% 100%,110px 110px;background-blend-mode:hard-light;background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;-webkit-text-stroke:1px #3e192f;filter:drop-shadow(0 1px #fff1b8) drop-shadow(2px 4px #481332);text-shadow:none;font-size:clamp(34px,7vw,64px);line-height:1.14;overflow-wrap:normal}
+.dt-outcome.lost{max-width:560px;margin:44px auto 30px;padding:40px 28px 28px;border:5px solid #fff4ba;box-shadow:0 0 0 4px #d5a63e,0 0 0 8px #ebedf3,0 0 0 11px #5ebedc,0 20px 65px #0008;background:radial-gradient(ellipse at 50% 0,#ff70bd55,transparent 60%),linear-gradient(145deg,#e92791,#aa105e)}
+.dt-outcome .dt-kicker{font-family:var(--font-luckiest-guy),Impact,sans-serif;color:#fff4c5;font-size:17px;letter-spacing:.09em}
+.dt-outcome .dt-loss-copy{font-size:clamp(18px,4.6vw,24px);font-weight:900;line-height:1.35}
+.dt-outcome .dt-cards-left{display:inline-block;border:2px dashed #ffe3a1;border-radius:9px;padding:9px 18px;font-size:20px;color:#fff2aa}
+.dt-outcome .dt-tomorrow{font-family:var(--font-luckiest-guy),Impact,sans-serif;font-size:clamp(21px,5vw,29px);font-weight:400;line-height:1.3;color:#fff1af;text-shadow:1px 2px #662246}
+.dt-page .dt-card .dt-play-cta,.dt-page .dt-lotto-button,.dt-signup form>button{font-family:var(--font-luckiest-guy),Impact,sans-serif;font-weight:400;font-size:clamp(25px,6.5vw,36px);line-height:1.2;letter-spacing:.035em;border:3px solid #fff6c5;border-radius:10px;padding:14px 22px;color:#39152f;text-shadow:0 1px #fff8c5;background-image:var(--dt-gold),var(--dt-glitter);background-size:100% 100%,100px 100px;background-blend-mode:hard-light;box-shadow:0 0 0 2px #a66516,inset 0 0 0 2px #d99c2b,0 5px 0 #822251}
+.dt-outcome>button.dt-lotto-button{width:min(100%,350px);margin:18px auto 14px;border-radius:10px}
+.dt-page .dt-text-link{font-size:15px;font-weight:900}.dt-panel label{font-size:16px}.dt-panel .dt-consent{font-size:13px;font-weight:800}.dt-signup>p{font-size:19px;font-weight:900}
+.dt-result strong{font-family:var(--font-luckiest-guy),Impact,sans-serif;font-size:clamp(15px,4cqw,22px);font-weight:400;line-height:1.3}
+.dt-card:after,.dt-outcome.lost:after{content:'✦';position:absolute;right:10px;top:12px;color:#fff6c5;font:32px/1 Georgia;text-shadow:0 0 8px #fff;pointer-events:none}
+.dt-card:before,.dt-outcome.lost:before{content:'✧';position:absolute;left:9px;top:40px;color:#fff;font:25px/1 Georgia;text-shadow:0 0 8px #fff;pointer-events:none}
+@media(max-width:600px){.dt-outcome.lost{margin:28px 16px;padding:30px 18px 22px}.dt-outcome .dt-small{font-size:12px}.dt-signup{margin:24px 16px}.dt-card .dt-rule{font-size:clamp(14px,4.2cqw,22px)}}
+
+/* Let larger lettering determine card height; keep controls below the ticket. */
+.dt-stage{aspect-ratio:auto;height:auto}.dt-stage .dt-card{position:relative;top:auto}.dt-stage+.dt-help{margin-top:22px}
+
+.dt-card h2.dt-art-title{background:none;filter:none;transform:none;-webkit-text-stroke:0;width:78%;margin:0 auto;line-height:0}.dt-art-title img{display:block;width:100%;height:auto}
+
+/* Fit each authored header line to the card at every viewport. */
+.dt-card .dt-tagline{font-size:8.5cqw;white-space:nowrap;letter-spacing:0;margin:14px 0 12px}
+.dt-card .dt-rule{font-size:5.4cqw;white-space:nowrap;letter-spacing:0;line-height:1.55}
+.dt-card .dt-rule strong{font-size:4.3cqw;white-space:nowrap;color:#fff}
+.dt-rule .dt-name-bernie{color:#8cecff;text-shadow:1px 1px #25112f,0 1px #25112f}
+.dt-rule .dt-name-gerry{color:#ffe366;text-shadow:1px 1px #25112f,0 1px #25112f}
+
+/* Shared show branding across signup, results, saved prizes and rules. */
+.dt-panel{container-type:inline-size}
+.dt-popup-brand{text-align:center;margin:0 auto 24px}
+.dt-popup-brand img{display:block;width:78%;max-width:240px;height:auto;margin:0 auto}
+.dt-panel .dt-popup-brand p{font-family:var(--font-luckiest-guy),Impact,sans-serif;font-size:clamp(18px,8.5cqw,32px);line-height:1.2;color:#fff5d2;text-shadow:1px 2px #3e1732;white-space:nowrap;margin:12px 0 0;letter-spacing:0}
+.dt-panel h2{font-size:clamp(24px,10cqw,44px);text-align:center;text-wrap:balance}
+.dt-panel .dt-name-bernie{color:#8cecff;font-weight:900}
+.dt-panel .dt-name-gerry{color:#ffe366;font-weight:900}
+.dt-terms>button,.dt-prize-details>button:not(.dt-text-link){font-family:var(--font-luckiest-guy),Impact,sans-serif;background-image:var(--dt-gold),var(--dt-glitter);color:#39152f;border:2px solid #fff6c5;border-radius:9px;text-shadow:0 1px #fff8c5}
+
+/* Small reveal effects keep the scratch canvas still. */
+.dt-card,.dt-panel{isolation:isolate}
+.dt-page .dt-motion-toggle{display:block;margin:0 auto 16px;min-height:44px;padding:6px 14px;font-size:12px;background:#271637;color:#fff2bd;border:1px solid #a68a54;border-radius:100px}
+.dt-win-banner{position:relative;overflow:hidden}
+.dt-panel{animation:dt-panel-arrive .32s ease-out both;transform-origin:50% 20%}
+.dt-spot.is-picked .dt-symbol{animation:dt-symbol-reveal .35s ease-out both}
+.dt-target.found .dt-portrait{animation:dt-found .5s ease-out both}
+.dt-outcome.won h2{animation:dt-jackpot .65s ease-out both}
+.dt-prize-scratch.is-revealed{animation:dt-prize-glow .7s ease-out both}
+.dt-teaser .dt-play-cta{animation:dt-cta-glow 3s ease-in-out infinite}
+@keyframes dt-panel-arrive{from{opacity:.2;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes dt-symbol-reveal{from{opacity:.3;transform:scale(.88)}to{opacity:1;transform:none}}
+@keyframes dt-found{0%{transform:scale(1)}45%{transform:scale(1.12)}100%{transform:scale(1)}}
+@keyframes dt-jackpot{0%{transform:scale(.9)}55%{transform:scale(1.04)}100%{transform:scale(1)}}
+@keyframes dt-prize-glow{50%{box-shadow:0 0 22px #ffe66d}100%{box-shadow:0 4px 0 #8d2456}}
+@keyframes dt-cta-glow{0%,100%{box-shadow:0 3px 0 #722244}50%{box-shadow:0 3px 0 #722244,0 0 16px #ffe26988}}
+.dt-page[data-motion=off] *,.dt-page[data-motion=off] *:before,.dt-page[data-motion=off] *:after{animation:none!important;transition:none!important}
+.dt-page[data-motion=off] .dt-confetti{display:none}
+.dt-overlay[hidden] *,.dt-overlay[hidden] *:after{animation-play-state:paused!important}
+@media(prefers-reduced-motion:reduce){.dt-page *,.dt-page *:before,.dt-page *:after{animation:none!important;transition:none!important}.dt-confetti{display:none}}
+
+/* Branded reward ticket. */
+.dt-outcome.won{max-width:520px;margin-left:auto;margin-right:auto}
+.dt-prize-scratch{border:2px solid #f9edb0;border-radius:16px;background:linear-gradient(145deg,#d51b79,#8d1458);color:#fff;box-shadow:0 0 0 3px #cfd7e7,0 8px 22px #61204455}
+.dt-prize-content{padding:26px 20px;min-height:330px;background:radial-gradient(circle at 0 0,#fff2 1px,transparent 2px) 0 0/12px 12px}
+.dt-panel .dt-prize-eyebrow{font-size:11px;letter-spacing:.22em;font-weight:800;color:#fff0b3;margin:0 0 10px}
+.dt-panel .dt-prize-value{font-family:var(--font-bebas-neue),Impact,sans-serif;font-size:clamp(48px,12vw,82px);line-height:1;color:#ffe879;text-shadow:2px 3px #6c1e47;margin:8px 0}
+.dt-prize-value span{font-size:.48em;margin-left:5px}.dt-panel .dt-prize-caption{font-size:14px;color:#fff6fb}
+.dt-prize-content .dt-code{background:#761348;color:#fff4c4;border:1px solid #f4ce70;border-radius:8px;font-size:clamp(14px,4vw,20px);letter-spacing:.04em;margin:18px 0 8px}
+.dt-prize-details>button:not(.dt-text-link){border-radius:100px;background:transparent;color:#fff4c4;border:1px solid #f4ce70;font-size:12px;padding:8px 18px}
+.dt-prize-content .dt-ticket-link{background:linear-gradient(#fff0a2,#f5cc43);color:#57203f;border-color:#fff3b0;box-shadow:0 3px 0 #64163f;font-size:16px}
+.dt-prize-content .dt-text-link{color:#fff4c4}.dt-prize-content :focus-visible{outline-color:#fff}
+@media(max-width:560px){.dt-outcome.won{margin-left:14px;margin-right:14px}.dt-prize-content{padding:24px 14px}}
+
+/* Clean card entry: only the close control above, utilities below. */
+.dt-notice{padding:0;height:54px}
+.dt-player{margin:20px auto 0;max-width:90%;padding:0 8px;font-size:11px;color:#e2d9e9}
+.dt-player button{background:transparent;color:#fff3c3;border:1px solid #a68a54;border-radius:100px;font-size:11px}
+.dt-settings{margin:12px auto 24px;text-align:center;font-size:11px;color:#ddd2e5}
+.dt-settings summary{cursor:pointer;min-height:44px;padding:12px}
+.dt-page .dt-settings .dt-motion-toggle{margin:0 auto 12px}
+.dt-prize-line{font-size:clamp(11px,3.3cqw,15px);line-height:1.45;margin:14px 0 6px;color:#fff6d7}
+.dt-win-banner{animation:dt-offer-arrive 2.5s ease-in-out infinite;transform-origin:center;will-change:transform,opacity}
+@keyframes dt-offer-arrive{
+  0%,2%{opacity:0;transform:translateY(9px) scale(.92) rotate(-2deg)}
+  10%{opacity:1;transform:translateY(-2px) scale(1.025) rotate(-2deg)}
+  16%,88%{opacity:1;transform:translateY(0) scale(1) rotate(-2deg)}
+  98%,100%{opacity:0;transform:translateY(-9px) scale(.96) rotate(-2deg)}
+}
+/* Keep the offer legible while a choice is being scratched. */
+.dt-page[data-scratching=true] .dt-win-banner{animation:none;opacity:1}
+
+/* Results float over the intact card; the layer scrolls independently on small screens. */
+.dt-result-layer{position:fixed;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;padding:24px 18px;background:#160a252e;overflow-y:auto;overscroll-behavior:contain}
+.dt-result-popup{position:relative;width:min(400px,100%);max-height:calc(100dvh - 48px);overflow-y:auto;overscroll-behavior:contain;border-radius:20px;outline:none;animation:dt-result-bounce .65s both;transform-origin:50% 70%;box-shadow:0 20px 60px #0007}
+.dt-result-popup .dt-panel{margin:0!important;border:3px solid #fff0a2;box-shadow:none;animation:none;padding:22px 18px}
+.dt-result-popup .dt-popup-brand img{max-width:130px}
+.dt-result-popup .dt-popup-brand{margin:0 auto 10px}
+.dt-result-popup .dt-popup-brand p{font-size:21px;margin:6px 0}
+.dt-result-popup .dt-outcome h2{font-size:36px;margin:10px 0}
+.dt-result-popup .dt-prize-content{min-height:260px;padding:18px 12px}
+.dt-result-popup .dt-prize-value{font-size:52px}
+.dt-page .dt-result-close{position:absolute;right:8px;top:8px;z-index:5;width:36px;min-height:36px;padding:0;font-size:24px;border-radius:50%}
+@keyframes dt-result-bounce{0%{opacity:0;transform:translateY(60px) scale(.7)}55%{opacity:1;transform:translateY(-12px) scale(1.04)}75%{transform:translateY(5px) scale(.98)}100%{opacity:1;transform:none}}
+@media(max-width:480px){.dt-result-popup{width:88%;max-height:calc(100dvh - 48px)}.dt-result-popup .dt-outcome h2{font-size:30px}.dt-result-popup .dt-panel{padding:20px 14px}.dt-result-popup .dt-prize-value{font-size:42px}.dt-result-popup .dt-prize-content{min-height:240px}}
+
+.dt-result-popup{max-height:82dvh}
+.dt-result-popup .dt-popup-brand img{max-width:100px}
+.dt-result-popup .dt-popup-brand p{font-size:18px}
+.dt-result-popup .dt-prize-scratch{margin:14px 0}
+.dt-result-popup .dt-prize-content{min-height:210px}
+@media(max-height:740px){.dt-result-popup{max-height:80dvh}.dt-result-popup .dt-popup-brand{display:none}}
+
+/* Reward actions share the card's glitter-gold lottery treatment. */
+.dt-prize-content .dt-ticket-link{display:block;text-decoration:none;border:2px solid #fff8cb;border-radius:10px;padding:14px 10px;background-image:var(--dt-gold),var(--dt-glitter);background-size:100% 100%,100px 100px;background-blend-mode:hard-light;box-shadow:0 0 0 2px #a46e27,0 5px 0 #7f194f;font-family:var(--font-luckiest-guy),Impact,sans-serif;font-size:clamp(19px,5vw,25px);text-transform:uppercase;color:#39152f;text-shadow:0 1px #fff3a8;line-height:1.2}
+.dt-prize-value span{display:block;font-size:.36em;margin:4px 0 0}
+.dt-email-status{font-size:12px;line-height:1.5;overflow-wrap:anywhere;margin:12px 0}.dt-panel .dt-email-status p{font-size:12px}.dt-email-status a{color:#fff4c4;text-decoration:underline}
+.dt-prize-details>.dt-email-code{display:block;margin:18px auto 8px}
+.dt-result-popup .dt-outcome{padding-top:38px}
+
+/* Supporting cast joins the non-winning pool without changing twin artwork. */
+.dt-symbol .dt-supporting-portrait{display:flex;flex-direction:column;align-items:center;width:90%;height:94%;min-height:0;gap:3px}
+.dt-supporting-portrait img{display:block;width:100%;height:calc(100% - 16px);min-height:0;object-fit:contain;object-position:center; border-radius:6px}
+.dt-supporting-portrait>span{font-size:2.8cqw;line-height:1;font-weight:800;color:#332145}

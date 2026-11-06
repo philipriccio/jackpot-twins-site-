@@ -172,3 +172,6 @@ Geometric purple cross tile replaces platform emoji on first cast scratch canvas
 
 ## October 24 — approved casino signup popup release
 Philip approved deployment in Telegram36095. Pearl-white form, gold/silver chasing marquee, chrome Sign up label, concise approved copy. Automatic opening requires20seconds elapsed, hero entirely above viewport,2.5seconds idle; suppress during interaction, hidden page, competing dialogs,7day dismissal, known local subscriber, or email arrival. Manual signup stays available. Existing consent/proxy/attribution preserved. Browser timing and behavior evidence: workspace audits/jt-signup-popup-2026-10-24/. Subscriber recognition is browser-local, not cross-device identity detection.
+
+## November 5 — scratch launch candidate (local, disabled by default)
+Isolated patched-release implementation adds PostgreSQL-authoritative verified-email gameplay, finite configurable rewards, exact Mirvish links, CRM/mail outbox, concrete SES transport with uncertainty handling, signed provider delivery events, private interaction analytics and gated homepage integration. No live prize policy/configuration, sends, push or deployment. Evidence: ../../audits/jt-scratch-launch-20261105/IMPLEMENTATION.md; operational gates/rollback: SCRATCH-OPERATIONS.md. Original prototype unchanged. Synthetic production-build preview localhost:3295/scratch.

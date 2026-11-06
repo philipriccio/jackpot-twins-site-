@@ -4,18 +4,23 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/build-scratch-runtime.cjs && next build --webpack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "scratch:report": "node scratch-runtime/operator.cjs report",
+    "scratch:worker": "node scratch-runtime/operator.cjs work"
   },
   "dependencies": {
+    "@aws-sdk/client-sesv2": "3.1163.0",
     "next": "16.4.5",
+    "pg": "8.23.1",
     "react": "19.2.9",
     "react-dom": "19.2.9"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/pg": "8.23.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",

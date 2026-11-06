@@ -17,6 +17,7 @@ export function useSignupPopup() {
   const shown = useRef(false);
   const trigger = useRef<"automatic" | "manual">("manual");
   const openSignup = useCallback((source: "automatic" | "manual" = "manual") => {
+    if (source === "automatic" && document.documentElement.dataset.scratchOpen === "true") return;
     shown.current = true;
     trigger.current = source;
     setOpen(true);

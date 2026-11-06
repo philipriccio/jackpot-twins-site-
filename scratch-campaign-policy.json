@@ -1,0 +1,9 @@
+{
+  "enabled": false,
+  "synthetic": false,
+  "initialFreePairs": 6,
+  "discountConditionalWeights": {"25": 70, "40": 20, "50": 10},
+  "freeWinningPercentage": null,
+  "freeInstructions": "Our team will follow up by email to arrange your pair of tickets. Tickets are booked manually by our team.",
+  "launchGate": "Free-ticket frequency must be approved and configured before activation. Campaign dates and final rules must also be configured."
+}

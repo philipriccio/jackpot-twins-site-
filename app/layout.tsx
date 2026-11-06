@@ -1,3 +1,4 @@
+import ScratchInvitation from "./scratch/invitation";
 import SiteAnalytics from "./site-analytics";
 import Script from "next/script";
 import type { Metadata } from "next";
@@ -33,6 +34,9 @@ const inter = Inter({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
 });
+
+// Runtime kill switch must also remove the homepage invitation without rebuilding.
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://jackpottwins.ca"),
@@ -106,7 +110,8 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
       </head>
-      <body>{children}<SiteAnalytics /></body>
+      <body>{children}<SiteAnalytics />
+        {process.env.SCRATCH_ENABLED === "1" && <ScratchInvitation />}</body>
     </html>
   );
 }

@@ -1,0 +1,2 @@
+const {test}=require('node:test'),assert=require('node:assert/strict');
+test('runtime kill switch removes homepage invitation, blocks game and API',async()=>{const base='http://127.0.0.1:3296';assert.equal((await fetch(base+'/scratch')).status,404);assert.equal((await fetch(base+'/api/scratch/config')).status,503);assert.ok(!(await (await fetch(base+'/')).text()).includes('Play the Jackpot Twins Scratch Game'));});

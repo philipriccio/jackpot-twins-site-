@@ -26,7 +26,7 @@ export function safePageUrl(raw: string): string {
   try {
     const url = new URL(raw);
     const clean = new URL(url.origin + url.pathname);
-    for (const key of keys) {
+    for (const key of url.pathname.startsWith("/scratch") ? [] : keys) {
       const value = url.searchParams.get(key);
       if (value && /^[a-z0-9][a-z0-9_.-]{0,99}$/i.test(value)) clean.searchParams.set(key, value);
     }
@@ -36,10 +36,10 @@ export function safePageUrl(raw: string): string {
 export function gaEvent(action: string, params: Record<string, string | number> = {}) {
   if (typeof window === "undefined") return;
   try {
-    const context = campaignContext();
+    const context = location.pathname.startsWith("/scratch") ? {} : campaignContext();
     const acquisition = Object.fromEntries(Object.entries(context).map(([key, value]) => ["acquisition_" + key.slice(4), value]));
     const analytics = window as unknown as { gtag?: (...args: unknown[]) => void; dataLayer?: unknown[] };
-    const data = { send_to: "G-KCPDK21Y7G", ...acquisition, page_location: safePageUrl(location.href), page_referrer: safePageUrl(document.referrer), ...params };
+    const data = { send_to: "G-KCPDK21Y7G", ...acquisition, page_location: safePageUrl(location.href), page_referrer: location.pathname.startsWith("/scratch") ? "" : safePageUrl(document.referrer), ...params };
     if (!analytics.gtag) {
       analytics.dataLayer ||= [];
       analytics.gtag = function () {
@@ -49,7 +49,7 @@ export function gaEvent(action: string, params: Record<string, string | number> 
     }
     if (!configured) {
       analytics.gtag("js", new Date());
-      analytics.gtag("config", "G-KCPDK21Y7G", { send_page_view: false, page_location: safePageUrl(location.href), page_referrer: safePageUrl(document.referrer) });
+      analytics.gtag("config", "G-KCPDK21Y7G", { send_page_view: false, page_location: safePageUrl(location.href), page_referrer: location.pathname.startsWith("/scratch") ? "" : safePageUrl(document.referrer) });
       configured = true;
     }
     analytics.gtag("event", action, data);
