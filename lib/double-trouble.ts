@@ -1,6 +1,6 @@
 export const ITEMS = ['bernie','gerry','chair','snacks','phone','slippers','cake','subaru','freshener','jacket','penny','peter','harold','abigail'] as const;
 export type Item = typeof ITEMS[number];
-export const MAX_CHOICES = 4;
+export const MAX_CHOICES = 5;
 // Saves created before four-choice rules have no explicit limit.
 export const choiceLimit = (round: Round): 4|5 => round.maxChoices ?? 5;
 export type Round = { maxChoices?: 4|5; board: Item[]; chosen: number[]; revealed: number[]; active: number|null; status: 'playing'|'won'|'lost' };
