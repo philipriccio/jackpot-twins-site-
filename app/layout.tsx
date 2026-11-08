@@ -1,4 +1,3 @@
-import ScratchInvitation from "./scratch/invitation";
 import SiteAnalytics from "./site-analytics";
 import Script from "next/script";
 import type { Metadata } from "next";
@@ -111,7 +110,7 @@ export default function RootLayout({
         />
       </head>
       <body>{children}<SiteAnalytics />
-        {process.env.SCRATCH_ENABLED === "1" && <ScratchInvitation />}</body>
+        </body>
     </html>
   );
 }

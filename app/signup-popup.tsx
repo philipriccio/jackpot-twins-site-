@@ -12,7 +12,8 @@ export function rememberSignupSuccess() {
   try { localStorage.setItem(preferenceKey, JSON.stringify({ subscribed: true })); } catch { /* Optional storage. */ }
 }
 
-export function useSignupPopup() {
+export function useSignupPopup(scratchMode = false) {
+  const popupPreferenceKey = scratchMode ? "jt-scratch-popup-v1" : preferenceKey;
   const [open, setOpen] = useState(false);
   const shown = useRef(false);
   const trigger = useRef<"automatic" | "manual">("manual");
@@ -21,16 +22,16 @@ export function useSignupPopup() {
     shown.current = true;
     trigger.current = source;
     setOpen(true);
-    gaEvent("signup_popup_open", { trigger: source });
-  }, []);
+    gaEvent(scratchMode ? "scratch_popup_open" : "signup_popup_open", { trigger: source });
+  }, [scratchMode]);
   const closeSignup = useCallback((reason: string) => {
     setOpen(false);
     try {
-      const saved = JSON.parse(localStorage.getItem(preferenceKey) || "null");
-      if (!saved?.subscribed) localStorage.setItem(preferenceKey, JSON.stringify({ dismissedAt: Date.now() }));
+      const saved = JSON.parse(localStorage.getItem(popupPreferenceKey) || "null");
+      if (!saved?.subscribed) localStorage.setItem(popupPreferenceKey, JSON.stringify({ dismissedAt: Date.now() }));
     } catch { /* Do not make dismissal depend on storage access. */ }
-    gaEvent("signup_popup_dismiss", { trigger: trigger.current, reason });
-  }, []);
+    gaEvent(scratchMode ? "scratch_popup_dismiss" : "signup_popup_dismiss", { trigger: trigger.current, reason });
+  }, [scratchMode, popupPreferenceKey]);
   useEffect(() => {
     // A shareable review link bypasses visitor rules without changing preferences.
     if (new URLSearchParams(window.location.search).get("preview_signup") === "1") {
@@ -38,10 +39,10 @@ export function useSignupPopup() {
       return () => window.clearTimeout(previewTimer);
     }
     // An email arrival is likely already a subscriber. The manual form stays available.
-    if (new URLSearchParams(window.location.search).get("utm_medium")?.toLowerCase() === "email" || campaignContext().utm_medium?.toLowerCase() === "email") return;
+    if (!scratchMode && (new URLSearchParams(window.location.search).get("utm_medium")?.toLowerCase() === "email" || campaignContext().utm_medium?.toLowerCase() === "email")) return;
     try {
-      const saved = JSON.parse(localStorage.getItem(preferenceKey) || "null");
-      if (saved?.subscribed || (typeof saved?.dismissedAt === "number" && Date.now() - saved.dismissedAt < week)) return;
+      const saved = JSON.parse(localStorage.getItem(popupPreferenceKey) || "null");
+      if ((!scratchMode && saved?.subscribed) || (typeof saved?.dismissedAt === "number" && Date.now() - saved.dismissedAt < week)) return;
     } catch { /* Blocked/corrupt storage must not break the page. */ }
     const arrivedAt = Date.now();
     let lastActivity = arrivedAt;
@@ -79,7 +80,7 @@ export function useSignupPopup() {
       document.removeEventListener("visibilitychange", activity);
       window.removeEventListener("scroll", activity);
     };
-  }, [openSignup]);
+  }, [openSignup, scratchMode, popupPreferenceKey]);
   return { open, openSignup, closeSignup };
 }
 
