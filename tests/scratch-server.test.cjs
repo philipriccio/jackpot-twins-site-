@@ -66,6 +66,15 @@ test('authoritative integration: persistence, retries, quotas, stock, verificati
  await assert.rejects(api.mutate(lookalike,{action:'start',requestId:randomUUID(),email:'philip@companytheatre.ca'}),/Invalid request/);
  await db.query('UPDATE scratch_player SET verified=false WHERE id=$1',[vipPlayer]);await assert.rejects(api.state(vip),/verify/);
  await db.query('UPDATE scratch_player SET verified=true WHERE id=$1',[vipPlayer]);
+ // Owner-only preview gate fails before any signup persistence or mail queue.
+ process.env.SCRATCH_PREVIEW_ONLY='1';
+ const previewCounts=async()=> (await db.query('SELECT (SELECT count(*)::int FROM scratch_player) players,(SELECT count(*)::int FROM scratch_outbox) jobs')).rows[0];
+ const previewBefore=await previewCounts();
+ await assert.rejects(makePlayer('not-invited@example.invalid'),e=>e.status===403&&/limited to invited testers/.test(e.message));
+ assert.deepEqual(await previewCounts(),previewBefore);
+ const previewOwner=await makePlayer('PHILIP@COMPANYTHEATRE.CA');assert.equal((await api.state(previewOwner)).vipTest,true);
+ process.env.SCRATCH_PREVIEW_ONLY='0';await makePlayer('preview-disabled@example.invalid');
+ delete process.env.SCRATCH_PREVIEW_ONLY;
  await assert.rejects(api.pool().query('DELETE FROM scratch_event'),/permission denied/);
  console.log('Verified restricted role; concurrent start/choice, hidden board, winner/three-play limits, stock, expiry, event dedupe/privacy, worker outage/recovery.');
 });
