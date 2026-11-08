@@ -202,3 +202,5 @@
 .dt-spot.is-locked{opacity:.4;filter:saturate(.35)}
 .dt-spot.is-active{border-color:#fff;box-shadow:0 0 0 3px #ffe563,0 0 0 5px #8b1251;z-index:1}
 .dt-scratch-here{position:absolute;bottom:3px;left:2px;right:2px;z-index:2;padding:4px 1px;border-radius:4px;background:#ffe563;color:#35162c;font:900 clamp(9px,2.5cqw,13px)/1.15 Arial,sans-serif;text-align:center;pointer-events:none}
+
+.dt-supporting-portrait>.dt-photo-status{top:35%;bottom:auto;padding:4px;font-size:10px;z-index:1}

@@ -1,6 +1,7 @@
 'use client';
 import {useEffect,useRef,useState,useCallback,type ReactNode} from 'react';
 import Image from 'next/image';
+import {preload} from 'react-dom';
 import Link from 'next/link';
 import {observedSession} from './telemetry';
 import {MAX_CHOICES,choiceLimit,type Item,type Round} from '@/lib/double-trouble';
@@ -20,7 +21,8 @@ const copy:Record<Item,string>={bernie:'Found Bernie. Now where’s Gerry?',gerr
 function PopupBrand(){return <header className="dt-popup-brand"><Image src="/images/jt-2026-logo-new.webp" width={2405} height={1518} alt="Jackpot Twins" unoptimized/><p>The Scratch Game</p></header>;}
 function Portrait({who}:{who:'bernie'|'gerry'}){return <span className={`dt-portrait dt-portrait-${who}`}><Image src={who==='bernie'?'/images/double-trouble/bernie.webp':'/images/double-trouble/gerry.webp'} width={110} height={110} alt="" unoptimized/></span>;}
 const supportingPhotos:Partial<Record<Item,string>>={peter:'/images/cast-20261103/tony.webp',harold:'/images/cast-20261103/colin.webp',abigail:'/images/cast-20261103/caroline.webp'};
-function Prop({item}:{item:Item}){const photo=supportingPhotos[item];if(photo)return <span className={`dt-supporting-portrait dt-supporting-${item}`}><Image src={photo} width={160} height={160} alt="" unoptimized/><span>{names[item]}</span></span>;const index=['chair','snacks','phone','slippers','cake','subaru','freshener','jacket','penny'].indexOf(item);return <span className="dt-prop" aria-hidden="true" style={{backgroundPosition:`${index%3*50}% ${Math.floor(index/3)*50}%`}}/>;}
+function SupportingPortrait({item,photo}:{item:Item;photo:string}){const [status,setStatus]=useState<'loading'|'ready'|'error'>('loading');return <span className={`dt-supporting-portrait dt-supporting-${item}`}><Image src={photo} width={160} height={160} alt="" unoptimized loading="eager" fetchPriority="high" onLoad={()=>setStatus('ready')} onError={()=>setStatus('error')}/>{status!=='ready'&&<span className="dt-photo-status">{status==='error'?'Photo unavailable':'Loading photo…'}</span>}<span>{names[item]}</span></span>;}
+function Prop({item}:{item:Item}){const photo=supportingPhotos[item];if(photo)return <SupportingPortrait key={photo} item={item} photo={photo}/>;const index=['chair','snacks','phone','slippers','cake','subaru','freshener','jacket','penny'].indexOf(item);return <span className="dt-prop" aria-hidden="true" style={{backgroundPosition:`${index%3*50}% ${Math.floor(index/3)*50}%`}}/>;}
 function Photo({front=false}:{front?:boolean}){const id=front?'dt-grips':'dt-outline';return <svg className={front?'dt-grips':'dt-photo'} viewBox="70 120 1390 1150" aria-hidden="true"><defs><mask id={id} maskUnits="userSpaceOnUse" x="0" y="0" width="1536" height="1024" style={{maskType:'luminance'}}><image href={`/images/jt27-${front?'grip':'outline'}-mask-v2.png`} width="1536" height="1024"/></mask></defs><image href="/images/jt27-scratch-wide-plate-v3.png" width="1536" height="1024" mask={`url(#${id})`}/></svg>;}
 function Spot({index,item,round,commit,complete,playId}:{index:number;item:Item;round:Round;commit:(i:number)=>boolean;complete:(i:number,keyboardReveal?:boolean)=>void;playId:string}){
  const visible=round.revealed.includes(index),ended=round.status!=='playing',blocked=ended||visible||(round.active!==null&&round.active!==index);
@@ -35,6 +37,8 @@ function PrizeScratch({onReveal,revealed,children,playId}:{onReveal:()=>void;rev
  return <div className={`dt-prize-scratch ${revealed?'is-revealed':''}`}><div className="dt-prize-content" inert={!revealed} aria-hidden={!revealed}>{children}</div>{!revealed&&<><ScratchSurface storageId={`${playId}:prize`} prize onStart={()=>true} onComplete={onReveal}/><button className="dt-keyboard-reveal" onClick={onReveal}>Reveal my prize without scratching</button></>}</div>;
 }
 export default function DoubleTrouble({placement='scratch_page',onClose}:{placement?:'homepage'|'scratch_page';onClose?:()=>void}={}){
+ // Fetch all three public portraits before any server-hidden square is selected.
+ for(const photo of Object.values(supportingPhotos))preload(photo,{as:'image',fetchPriority:'high'});
  const [data,setData]=useState<State|null>(null),state=useRef<State|null>(null),[ready,setReady]=useState(false),[error,setError]=useState(''),[open,setOpen]=useState(true),[screen,setScreen]=useState<'game'|'history'>('game'),[muted,setMuted]=useState(true),[outcome,setOutcome]=useState(true),[copied,setCopied]=useState<string|null>(null),[copyNotice,setCopyNotice]=useState(''),[emailPreview,setEmailPreview]=useState<string|null>(null),[motion,setMotion]=useState(true),[signup,setSignup]=useState(false),[details,setDetails]=useState<Play|'general'|null>(null),[verification,setVerification]=useState<string|null>(null),[sending,setSending]=useState(false),[config,setConfig]=useState<{rules:string;freeEnabled:boolean}|null>(null);
  const verificationExpiry=useRef(0);
  const [signupError,setSignupError]=useState(''),signupBusy=useRef(false);
