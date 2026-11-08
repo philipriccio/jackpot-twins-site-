@@ -19,8 +19,11 @@ export function lockScratchViewport(root: HTMLElement) {
   };
   const start = (event: TouchEvent) => {
     if (guarded || !(event.target instanceof Element)) return;
-    const area = event.target.closest('.dt-grid[data-scratch-area="true"], .dt-prize-scratch:not(.is-revealed)');
+    const area = event.target.closest('.dt-grid[data-scratch-area="true"], .dt-prize-scratch');
     if (!area || !root.contains(area)) return;
+    // Revealing a reward must not turn continued rubbing into page scrolling.
+    // Keep its actual controls usable, including deliberate text selection.
+    if (area.matches('.is-revealed') && event.target.closest('button, a, input, select, .dt-code')) return;
     guarded = true;
     // Stop momentum/bounce on every scrolling ancestor before the first move.
     for (let node = area.parentElement; node && root.contains(node); node = node.parentElement) {
