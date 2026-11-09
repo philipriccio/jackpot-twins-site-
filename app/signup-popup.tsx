@@ -28,7 +28,7 @@ export function useSignupPopup(scratchMode = false) {
     setOpen(false);
     try {
       const saved = JSON.parse(localStorage.getItem(popupPreferenceKey) || "null");
-      if (!saved?.subscribed) localStorage.setItem(popupPreferenceKey, JSON.stringify({ dismissedAt: Date.now() }));
+      if (!scratchMode && !saved?.subscribed) localStorage.setItem(popupPreferenceKey, JSON.stringify({ dismissedAt: Date.now() }));
     } catch { /* Do not make dismissal depend on storage access. */ }
     gaEvent(scratchMode ? "scratch_popup_dismiss" : "signup_popup_dismiss", { trigger: trigger.current, reason });
   }, [scratchMode, popupPreferenceKey]);
@@ -42,7 +42,8 @@ export function useSignupPopup(scratchMode = false) {
     if (!scratchMode && (new URLSearchParams(window.location.search).get("utm_medium")?.toLowerCase() === "email" || campaignContext().utm_medium?.toLowerCase() === "email")) return;
     try {
       const saved = JSON.parse(localStorage.getItem(popupPreferenceKey) || "null");
-      if ((!scratchMode && saved?.subscribed) || (typeof saved?.dismissedAt === "number" && Date.now() - saved.dismissedAt < week)) return;
+      // Scratch visitors can return immediately, including with an old saved dismissal.
+      if (!scratchMode && (saved?.subscribed || (typeof saved?.dismissedAt === "number" && Date.now() - saved.dismissedAt < week))) return;
     } catch { /* Blocked/corrupt storage must not break the page. */ }
     const arrivedAt = Date.now();
     let lastActivity = arrivedAt;
@@ -52,13 +53,13 @@ export function useSignupPopup(scratchMode = false) {
     const up = () => { pointerDown = false; activity(); };
     const timer = window.setInterval(() => {
       if (shown.current) { window.clearInterval(timer); return; }
-      if (Date.now() - arrivedAt < (scratchMode ? 4000 : 20000) || document.visibilityState !== "visible" || pointerDown || Date.now() - lastActivity < 2500) return;
+      if (Date.now() - arrivedAt < (scratchMode ? 4000 : 20000) || document.visibilityState !== "visible" || pointerDown || (!scratchMode && Date.now() - lastActivity < 2500)) return;
       // Keep the newsletter’s scroll gate; the game opens over the visible homepage.
       if (!scratchMode) {
         const hero = document.querySelector("section.approved-hero");
         if (!hero || hero.getBoundingClientRect().bottom > 0) return;
       }
-      if (document.querySelector('dialog[open], [role="dialog"]') || document.activeElement?.matches('input, textarea, select, button, a, [contenteditable="true"]')) return;
+      if (document.querySelector('dialog[open], [role="dialog"]') || document.activeElement?.matches(scratchMode ? 'input, textarea, select, [contenteditable="true"]' : 'input, textarea, select, button, a, [contenteditable="true"]')) return;
       openSignup("automatic");
       window.clearInterval(timer);
     }, 500);

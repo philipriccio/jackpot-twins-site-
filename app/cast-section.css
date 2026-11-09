@@ -32,12 +32,9 @@
 @media(max-width:650px) {
   .cast-gallery-inner { padding:32px 20px; }
   .cast-gallery h2 { font-size:66px; }
-  .cast-leads { gap:16px; }
-  .cast-leads .cast-portrait { height:240px; }
-  .cast-leads h3 { font-size:30px; }
-  .cast-leads h3 span { display:block; }
+  .cast-leads, .cast-ensemble { grid-template-columns:1fr; gap:32px; max-width:360px; margin:auto; }
+  .cast-leads .cast-portrait, .cast-ensemble .cast-portrait { height:390px; }
+  .cast-leads h3 { font-size:36px; }
   .cast-role { font-size:11px; }
-  .cast-ensemble { grid-template-columns:1fr; gap:32px; max-width:360px; margin:auto; }
-  .cast-ensemble .cast-portrait { height:390px; }
   .cast-divider { margin-top:32px; }
 }
