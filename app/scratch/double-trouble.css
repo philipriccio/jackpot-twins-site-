@@ -204,3 +204,7 @@
 .dt-scratch-here{position:absolute;bottom:3px;left:2px;right:2px;z-index:2;padding:4px 1px;border-radius:4px;background:#ffe563;color:#35162c;font:900 clamp(9px,2.5cqw,13px)/1.15 Arial,sans-serif;text-align:center;pointer-events:none}
 
 .dt-supporting-portrait>.dt-photo-status{top:35%;bottom:auto;padding:4px;font-size:10px;z-index:1}
+
+/* Homepage game: preserve the page beneath the modal rather than a solid stage. */
+.dt-page-modal{min-height:0;background:transparent}
+.dt-page-modal .dt-overlay{background:rgba(20,12,35,.32);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}

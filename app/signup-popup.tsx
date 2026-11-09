@@ -52,11 +52,12 @@ export function useSignupPopup(scratchMode = false) {
     const up = () => { pointerDown = false; activity(); };
     const timer = window.setInterval(() => {
       if (shown.current) { window.clearInterval(timer); return; }
-      if (Date.now() - arrivedAt < 20000 || document.visibilityState !== "visible" || pointerDown || Date.now() - lastActivity < 2500) return;
-      // Wait until the main title and ticket hero has left the viewport.
-      // Missing hero fails closed: manual signup remains available.
-      const hero = document.querySelector("section.approved-hero");
-      if (!hero || hero.getBoundingClientRect().bottom > 0) return;
+      if (Date.now() - arrivedAt < (scratchMode ? 4000 : 20000) || document.visibilityState !== "visible" || pointerDown || Date.now() - lastActivity < 2500) return;
+      // Keep the newsletter’s scroll gate; the game opens over the visible homepage.
+      if (!scratchMode) {
+        const hero = document.querySelector("section.approved-hero");
+        if (!hero || hero.getBoundingClientRect().bottom > 0) return;
+      }
       if (document.querySelector('dialog[open], [role="dialog"]') || document.activeElement?.matches('input, textarea, select, button, a, [contenteditable="true"]')) return;
       openSignup("automatic");
       window.clearInterval(timer);
