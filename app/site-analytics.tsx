@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
+import { trackScratch } from './scratch/telemetry';
 import { attributedUrl, campaignContext, gaEvent } from "./campaign-analytics";
 
 export default function SiteAnalytics() {
@@ -11,6 +12,7 @@ export default function SiteAnalytics() {
     if (lastPage.current !== pathname) {
       lastPage.current = pathname;
       gaEvent("page_view", { page_path: pathname });
+      if(pathname==='/scratch')trackScratch('page_viewed','scratch_page');
     }
     const decorate = (anchor: HTMLAnchorElement) => {
       const url = new URL(anchor.href, location.href);
@@ -31,7 +33,7 @@ export default function SiteAnalytics() {
       if (!anchor) return;
       try {
         const result = decorate(anchor);
-        if (result) { const { event: name, ...params } = result; gaEvent(name, params); }
+        if (result) { const { event: name, ...params } = result; gaEvent(name, params); if(pathname==='/scratch'&&name==='ticket_click'&&anchor.dataset.ticketPlacement==='scratch_footer')trackScratch('ticket_outbound','scratch_page',{cta:'footer'}); }
       } catch { /* Preserve navigation. */ }
     };
     document.addEventListener("click", clicked, true);

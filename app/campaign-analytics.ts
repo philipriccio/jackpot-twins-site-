@@ -1,3 +1,4 @@
+import {classifyScratchSource} from './scratch/telemetry';
 // Campaign metadata only: never read forms, identities, redirect tokens or arbitrary query keys.
 const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_id"] as const;
 type Context = Partial<Record<(typeof keys)[number], string>>;
@@ -10,6 +11,7 @@ export function campaignContext(): Context {
     const value = input.get(key);
     return value && /^[a-z0-9][a-z0-9_.-]{0,99}$/i.test(value) ? [[key, value]] : [];
   }));
+  if (window.location.pathname.startsWith('/scratch')) return {utm_source:classifyScratchSource(window.location.search),utm_medium:'referral',utm_campaign:'jackpot_twins_scratch'};
   const incoming = clean(new URLSearchParams(window.location.search));
   if (incoming.utm_source && incoming.utm_medium && incoming.utm_campaign) {
     memory = incoming;
@@ -36,7 +38,7 @@ export function safePageUrl(raw: string): string {
 export function gaEvent(action: string, params: Record<string, string | number> = {}) {
   if (typeof window === "undefined") return;
   try {
-    const context = location.pathname.startsWith("/scratch") ? {} : campaignContext();
+    const context = campaignContext();
     const acquisition = Object.fromEntries(Object.entries(context).map(([key, value]) => ["acquisition_" + key.slice(4), value]));
     const analytics = window as unknown as { gtag?: (...args: unknown[]) => void; dataLayer?: unknown[] };
     const data = { send_to: "G-KCPDK21Y7G", ...acquisition, page_location: safePageUrl(location.href), page_referrer: location.pathname.startsWith("/scratch") ? "" : safePageUrl(document.referrer), ...params };
