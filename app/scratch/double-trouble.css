@@ -187,7 +187,6 @@
 /* Keep reward email actions legible; do not synthesize bold display glyphs. */
 .dt-page .dt-prize-details>.dt-email-code{font-family:var(--font-inter),Arial,sans-serif;font-size:14px;font-weight:700;line-height:1.4;letter-spacing:normal;color:#39152f;background:#ffe879;text-shadow:none;border:2px solid #fff6c5;border-radius:9px;padding:12px 16px}
 
-.dt-vip-notice{position:relative;z-index:2;max-width:34rem;margin:1rem auto;padding:.75rem 2.5rem .75rem 1rem;background:#fff4c5;color:#382514;border:2px solid #bb8c28;border-radius:.75rem;font:600 .9rem/1.4 Arial,sans-serif;overflow-wrap:anywhere}
 
 /* Reserve gestures across the playable board, including gaps and locked spots.
    Outside these areas the overlay remains normally scrollable. */
@@ -196,7 +195,7 @@
 /* Safari: isolate modal scrolling and prevent scroll anchoring after reveals. */
 .dt-overlay{overscroll-behavior:none;overflow-anchor:none}
 .dt-grid[data-scratch-area=true]{overflow-anchor:none}
-.dt-page .dt-finish-square,.dt-page .dt-new-test-card{display:block;margin:14px auto;max-width:88%;font-size:14px}
+.dt-page .dt-finish-square{display:block;margin:14px auto;max-width:88%;font-size:14px}
 
 /* Saved unfinished cards must identify the sole scratchable square. */
 .dt-spot.is-locked{opacity:.4;filter:saturate(.35)}

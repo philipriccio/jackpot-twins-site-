@@ -11,7 +11,7 @@ test('authoritative integration: persistence, retries, quotas, stock, verificati
  await db.query('TRUNCATE scratch_campaign,scratch_rate CASCADE');await db.query("INSERT INTO scratch_campaign VALUES('synthetic-launch',true,true,now()-interval '1 day',now()+interval '1 day',$1,1,'Synthetic collection only','Synthetic campaign; not valid for public use')",[{25:1,40:0,50:0,free:100000}]);
  const challengeId=randomUUID();await api.signup({name:'Attempt limit',email:challengeId+'@example.invalid',consent:false,requestId:challengeId});const issued=(await db.query("SELECT payload FROM scratch_outbox WHERE dedupe=$1",['verify:'+challengeId])).rows[0].payload.code;assert.match(issued,/^\d{6}$/);const wrong=issued==='000000'?'000001':'000000';for(let i=0;i<8;i++)await assert.rejects(api.verify({verificationId:challengeId,code:wrong}),/invalid or expired/);await assert.rejects(api.verify({verificationId:challengeId,code:issued}),/invalid or expired/);
  const token=await makePlayer();const request={action:'start',requestId:randomUUID()};const results=await Promise.all(Array.from({length:8},()=>api.mutate(token,request)));assert.equal(new Set(results.map(x=>x.plays[0].id)).size,1);const id=results[0].plays[0].id;assert.deepEqual(results[0].plays[0].round.board,Array(9).fill('hidden'));assert.equal(results[0].remaining,2);assert.equal(results[0].plays[0].prize,null);assert.equal(results[0].plays[0].round.maxChoices,5);
- await assert.rejects(api.mutate(token,{...request,action:'claim'}),/conflict/);await fixtureBoard(id);
+ await assert.rejects(api.mutate(token,{...request,method:'scratch'}),/conflict/);await fixtureBoard(id);
  const commits=await Promise.allSettled([act(token,'commit',{cardId:id,index:0}),act(token,'commit',{cardId:id,index:1})]);assert.equal(commits.filter(x=>x.status==='fulfilled').length,1);await act(token,'complete',{cardId:id,index:0});await reveal(token,id,1);const won=await api.state(token);assert.equal(won.plays[0].round.status,'won');assert.ok(['free','25'].includes(won.plays[0].prize));assert.equal(won.plays[0].prizeRevealed,false);assert.equal((await api.state(token)).plays[0].prize,won.plays[0].prize);assert.equal(won.remaining,0);await assert.rejects(act(token,'start'),/No plays/);const awarded=await act(token,'reveal_prize',{cardId:id});assert.equal(awarded.plays[0].prize,won.plays[0].prize);assert.equal(awarded.plays[0].prizeRevealed,true);await Promise.all(Array.from({length:8},()=>act(token,'email_prize',{cardId:id})));assert.equal((await db.query("SELECT count(*)::int n FROM scratch_outbox WHERE dedupe=$1",['prize:'+id])).rows[0].n,1);
  // Another winner cannot overdraw the single free reward.
  const t2=await makePlayer();const s2=await act(t2,'start');const id2=s2.plays[0].id;await fixtureBoard(id2);await reveal(t2,id2,0);await reveal(t2,id2,1);assert.ok((await db.query('SELECT free_remaining FROM scratch_campaign')).rows[0].free_remaining>=0);assert.ok((await db.query("SELECT count(*)::int n FROM scratch_card WHERE prize='free'")).rows[0].n<=1);
@@ -37,42 +37,57 @@ test('authoritative integration: persistence, retries, quotas, stock, verificati
  await db.query("INSERT INTO scratch_outbox(id,dedupe,player,kind,payload,status,lease_until) VALUES($1,$2,$3,'verification',$4,'working',now()-interval '1 second')",[staleJob,'stale:'+staleJob,fixturePlayer,{verificationId:staleChallenge,code:'synthetic-expired'}]);
  assert.equal(await work(async()=>assert.fail('Expired verification must not dispatch')),false);
  const stale=(await db.query('SELECT status,payload FROM scratch_outbox WHERE id=$1',[staleJob])).rows[0];assert.equal(stale.status,'failed');assert.deepEqual(stale.payload,{});
- // VIP authorization remains verified server identity; test wins never consume public inventory.
- const beforeVip=await analytics.report();
+ // VIP retirement: historical test games remain stored but cannot affect public play.
+ const owner=await makePlayer('philip@companytheatre.ca');
+ const ownerPlayer=(await db.query('SELECT player FROM scratch_session WHERE hash=$1',[api.hash(owner)])).rows[0].player;
+ const {createRound}=require('../lib/double-trouble.ts');
+ const testPlaying=randomUUID(),testWon=randomUUID();
+ const board=['bernie','gerry','chair','snacks','phone','slippers','cake','subaru','freshener'];
+ await db.query("INSERT INTO scratch_card(id,player,day,round,is_test,prize) VALUES($1,$3,current_date,$4,true,NULL),($2,$3,current_date,$5,true,'25')",[testPlaying,testWon,ownerPlayer,createRound(board),{...createRound(board),chosen:[0,1],revealed:[0,1],status:'won'}]);
+ const historicEvent='historic-test:'+randomUUID();
+ await db.query("INSERT INTO scratch_event(id,campaign,player,card,authority,name,props) VALUES($1,'synthetic-launch',$2,$3,'server','card_won','{\"vip_test\":true}')",[historicEvent,ownerPlayer,testWon]);
+ const historyBefore=(await db.query('SELECT * FROM scratch_card WHERE id=ANY($1::uuid[]) ORDER BY id',[[testPlaying,testWon]])).rows;
+ const publicBefore=await api.state(owner);assert.equal(publicBefore.vipTest,undefined);assert.deepEqual(publicBefore.plays,[]);assert.equal(publicBefore.remaining,3);
  const inventory=(await db.query('SELECT free_remaining FROM scratch_campaign')).rows[0].free_remaining;
- const fulfillmentBefore=(await fulfillment.fulfillment()).length;
- const vip=await makePlayer('philip@companytheatre.ca');
- assert.equal((await api.state(vip)).vipTest,true);
- // Seed one legacy genuine award to prove it is retained and not reclassified.
- const vipPlayer=(await db.query('SELECT player FROM scratch_session WHERE hash=$1',[api.hash(vip)])).rows[0].player;
- const legacy=randomUUID();await db.query("INSERT INTO scratch_card(id,player,day,round,prize,revealed) VALUES($1,$2,current_date,$3,'25',true)",[legacy,vipPlayer,{board:[],chosen:[],revealed:[],active:null,status:'won'}]);
- for(let n=0;n<5;n++){
-  const current=await act(vip,'start'),card=current.plays.at(-1).id;
-  assert.equal(current.vipTest,true);assert.equal(current.plays.at(-1).isTest,true);assert.equal(current.remaining,1);
-  await fixtureBoard(card);await reveal(vip,card,0);await reveal(vip,card,1);
-  const result=await act(vip,'reveal_prize',{cardId:card});assert.equal(result.plays.at(-1).prize,'25');
-  await assert.rejects(act(vip,'email_prize',{cardId:card}),/test prize emails are disabled/);
+ for(const cardId of [testPlaying,testWon])for(const action of ['commit','complete','reveal_prize','email_prize','claim']){
+  const body={action,requestId:randomUUID(),cardId,...(['commit','complete'].includes(action)?{index:0}:{})};
+  await assert.rejects(api.mutate(owner,body),e=>e.status===404);
+  // Replaying a pre-retirement idempotency record must not bypass retirement.
+  await db.query('INSERT INTO scratch_request(player,id,fingerprint) VALUES($1,$2,$3)',[ownerPlayer,body.requestId,api.hash(JSON.stringify(body))]);
+  await assert.rejects(api.mutate(owner,body),e=>e.status===404);
  }
+ assert.deepEqual((await db.query('SELECT * FROM scratch_card WHERE id=ANY($1::uuid[]) ORDER BY id',[[testPlaying,testWon]])).rows,historyBefore);
  assert.equal((await db.query('SELECT free_remaining FROM scratch_campaign')).rows[0].free_remaining,inventory);
- assert.equal((await fulfillment.fulfillment()).length,fulfillmentBefore);
- assert.equal((await db.query('SELECT is_test,prize FROM scratch_card WHERE id=$1',[legacy])).rows[0].is_test,false);
- assert.equal((await db.query("SELECT count(*)::int n FROM scratch_outbox WHERE player=$1 AND kind='prize'",[vipPlayer])).rows[0].n,0);
- await analytics.collect({id:randomUUID(),name:'prize_outbound',props:{tier:'25'}},vip);
- const afterVip=await analytics.report();assert.deepEqual(afterVip.counts,beforeVip.counts);
- assert.equal((await db.query("SELECT count(*)::int n FROM scratch_event WHERE player=$1 AND props->>'vip_test'='true'",[vipPlayer])).rows[0].n>20,true);
- assert.equal(afterVip.cards.reduce((n,d)=>n+d.cards,0),beforeVip.cards.reduce((n,d)=>n+d.cards,0)+1); // only legacy public card
- const lookalike=await makePlayer('philip+vip@companytheatre.ca');assert.equal((await api.state(lookalike)).vipTest,false);
+ assert.equal((await db.query("SELECT count(*)::int n FROM scratch_outbox WHERE player=$1 AND kind='prize'",[ownerPlayer])).rows[0].n,0);
+ assert.deepEqual((await db.query('SELECT props FROM scratch_event WHERE id=$1',[historicEvent])).rows[0].props,{vip_test:true});
+ // The former VIP now receives exactly three public plays and normal persistence.
+ for(let n=0;n<3;n++){
+  const current=await act(owner,'start'),card=current.plays.at(-1).id;
+  assert.equal(current.plays.at(-1).isTest,false);assert.equal(current.remaining,2-n);
+  assert.equal((await act(owner,'start')).plays.at(-1).id,card);
+  assert.equal((await api.state(owner)).plays.at(-1).id,card);
+  await fixtureBoard(card,false);for(let i=0;i<5;i++)await reveal(owner,card,i);
+ }
+ assert.equal((await api.state(owner)).remaining,0);await assert.rejects(act(owner,'start'),/No plays/);
+ await analytics.collect({id:randomUUID(),name:'game_opened',props:{}},owner);
+ assert.equal((await db.query("SELECT count(*)::int n FROM scratch_event WHERE player=$1 AND name IN ('signup_submitted','card_started','game_opened') AND props->>'vip_test'='true'",[ownerPlayer])).rows[0].n,0);
+ // Historical real awards stay visible and continue to block further games.
+ const legacy=randomUUID();await db.query("INSERT INTO scratch_card(id,player,day,round,prize,revealed) VALUES($1,$2,current_date-1,$3,'25',true)",[legacy,ownerPlayer,{...createRound(board),chosen:[0,1],revealed:[0,1],status:'won'}]);
+ await db.query('UPDATE scratch_card SET day=day-1 WHERE player=$1 AND NOT is_test',[ownerPlayer]);
+ const retained=await api.state(owner);assert.equal(retained.plays.find(p=>p.id===legacy).prize,'25');assert.equal(retained.remaining,0);await assert.rejects(act(owner,'start'),/No plays/);
+ await act(owner,'email_prize',{cardId:legacy});assert.equal((await db.query("SELECT count(*)::int n FROM scratch_outbox WHERE dedupe=$1",['prize:'+legacy])).rows[0].n,1);
+ const lookalike=await makePlayer('philip+vip@companytheatre.ca');assert.equal((await api.state(lookalike)).vipTest,undefined);
  await assert.rejects(api.mutate(lookalike,{action:'start',requestId:randomUUID(),vipTest:true}),/Invalid request/);
  await assert.rejects(api.mutate(lookalike,{action:'start',requestId:randomUUID(),email:'philip@companytheatre.ca'}),/Invalid request/);
- await db.query('UPDATE scratch_player SET verified=false WHERE id=$1',[vipPlayer]);await assert.rejects(api.state(vip),/verify/);
- await db.query('UPDATE scratch_player SET verified=true WHERE id=$1',[vipPlayer]);
+ await db.query('UPDATE scratch_player SET verified=false WHERE id=$1',[ownerPlayer]);await assert.rejects(api.state(owner),/verify/);
+ await db.query('UPDATE scratch_player SET verified=true WHERE id=$1',[ownerPlayer]);
  // Owner-only preview gate fails before any signup persistence or mail queue.
  process.env.SCRATCH_PREVIEW_ONLY='1';
  const previewCounts=async()=> (await db.query('SELECT (SELECT count(*)::int FROM scratch_player) players,(SELECT count(*)::int FROM scratch_outbox) jobs')).rows[0];
  const previewBefore=await previewCounts();
  await assert.rejects(makePlayer('not-invited@example.invalid'),e=>e.status===403&&/limited to invited testers/.test(e.message));
  assert.deepEqual(await previewCounts(),previewBefore);
- const previewOwner=await makePlayer('PHILIP@COMPANYTHEATRE.CA');assert.equal((await api.state(previewOwner)).vipTest,true);
+ const previewOwner=await makePlayer('PHILIP@COMPANYTHEATRE.CA');assert.equal((await api.state(previewOwner)).vipTest,undefined);
  process.env.SCRATCH_PREVIEW_ONLY='0';await makePlayer('preview-disabled@example.invalid');
  delete process.env.SCRATCH_PREVIEW_ONLY;
  await assert.rejects(api.pool().query('DELETE FROM scratch_event'),/permission denied/);
