@@ -1,0 +1,70 @@
+.scratch-room{min-height:100dvh;color:#fff8e7;background:radial-gradient(ellipse at 50% 12%,#702655 0,transparent 55%),#25112d;font-family:var(--font-nunito),Arial,sans-serif;padding:0 28px 24px}.scratch-room *{box-sizing:border-box}.scratch-room a:focus-visible,.scratch-room summary:focus-visible{outline:3px solid #ffe563;outline-offset:5px}.scratch-room-header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 0;border-bottom:1px solid #fff3;margin-bottom:28px;font-size:13px;font-weight:800}.scratch-room-header a{text-decoration:none}.scratch-room-header p{color:#ffe5a3;margin:0;letter-spacing:.08em}.scratch-room-layout{display:grid;grid-template-columns:minmax(420px,660px) minmax(280px,360px);align-items:start;gap:22px;max-width:1042px;margin:0 auto}.scratch-game-column{grid-column:1;grid-row:1;min-width:0}.scratch-page-title{font-size:12px;letter-spacing:.14em;text-transform:uppercase;text-align:center;margin:0 0 20px;color:#ffe5a3}.scratch-sidebar{border:1px solid #f5d78e66;border-radius:15px;background:#fff8ee;color:#3f2040;overflow:hidden;box-shadow:0 10px 35px #0002}.scratch-show{grid-column:1;grid-row:1}.scratch-guide{grid-column:2;grid-row:1}.scratch-sidebar>summary{list-style:none;cursor:pointer;min-height:54px;padding:16px 20px;background:#f8dd8b;font-size:20px;font-weight:900;color:#48213d;display:flex;justify-content:space-between;gap:12px}.scratch-sidebar>summary::-webkit-details-marker{display:none}.scratch-sidebar[open]>summary>span{transform:rotate(45deg)}.scratch-sidebar-content{padding:20px}.scratch-eyebrow{font-size:10px;font-weight:900;letter-spacing:.16em;color:#ad2365}.scratch-show h2{font-family:var(--font-bebas-neue),Impact,sans-serif;font-size:clamp(28px,2.5vw,43px);line-height:1.08;font-weight:400;margin:18px 0}.scratch-show h2 em{font-style:normal;color:#c01970}.scratch-show p{font-size:14px;line-height:1.65}.scratch-show-dates{display:grid;gap:5px;margin:24px 0;padding:17px 0;border-top:1px solid #d9c2cd;border-bottom:1px solid #d9c2cd}.scratch-show-dates strong{font-size:20px;color:#aa175e}.scratch-show-dates span{font-size:14px}.scratch-show .scratch-cast{font-size:13px;font-weight:800}.scratch-show .scratch-credits{font-size:12px}.scratch-show-link{display:block;padding:14px;border-radius:8px;background:#c01c6a;color:white;text-decoration:none;font-size:14px;font-weight:900;margin:24px 0}.scratch-how{border-top:1px solid #d9c2cd;padding-top:18px}.scratch-how h3{font-size:18px;margin:0}.scratch-how p{font-size:13px}.scratch-guide-intro{font-size:13px;line-height:1.55;margin:0 0 20px;color:#705369}.scratch-guide h2{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:#ac2167;margin:24px 0 12px}.scratch-guide-list{list-style:none;margin:0;padding:0}.scratch-guide-list li{display:grid;grid-template-columns:64px minmax(0,1fr);align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #e7d8df}.scratch-guide-list li:last-child{border:0}.scratch-guide-image{display:block;width:64px;height:64px;background-color:white;border:1px solid #e9d9df;border-radius:11px;overflow:hidden}.scratch-guide-image img{width:100%;height:100%;object-fit:contain}.scratch-guide-prop{background-image:url('/images/double-trouble/props-v4.png');background-size:300% 300%}.scratch-guide-list h3{font-size:14px;line-height:1.25;margin:0 0 4px;color:#421d3a}.scratch-guide-list p{font-size:12px;line-height:1.45;margin:0;color:#735568}.scratch-room-footer{display:flex;justify-content:space-between;gap:15px;font-size:12px;color:#e3c9dc;border-top:1px solid #fff3;margin-top:36px;padding-top:22px}.scratch-room-footer a{color:#ffe5a3}
+/* Page-only presentation; the homepage continues to use the original modal. */
+.dt-page-embedded{min-height:0;background:transparent}.dt-page-embedded .dt-overlay{position:relative;inset:auto;overflow:visible;background:none;z-index:auto;padding:0}.dt-page-embedded .dt-dialog{width:100%;max-width:660px}.dt-page-embedded .dt-notice{display:none}.dt-page-embedded .dt-result-layer{z-index:2100;background:#170c29aa;backdrop-filter:blur(4px)}.dt-page-embedded .dt-terms{margin-top:40px}.dt-page-embedded .dt-close{right:16px}.dt-page-embedded .dt-settings{margin-bottom:0}
+@media(min-width:1050px){.scratch-show{position:sticky;top:24px}.scratch-guide .scratch-sidebar-content{max-height:calc(100dvh - 180px);overflow-y:auto;overscroll-behavior:contain;scrollbar-color:#cda7bb #fff8ee}}
+@media(max-width:1049px){.scratch-room{padding:0 20px 24px}.scratch-room-layout{grid-template-columns:minmax(0,1fr) minmax(0,1fr);max-width:850px;gap:20px}.scratch-game-column{grid-column:1/-1;grid-row:1;max-width:640px;width:100%;margin:auto}.scratch-show{grid-column:1;grid-row:2}.scratch-guide{grid-column:1/-1;grid-row:2}.scratch-room-header p{display:none}}
+@media(max-width:600px){.scratch-room{padding:0 10px 20px}.scratch-room-header{font-size:11px;padding:17px 4px;margin-bottom:20px;gap:8px}.scratch-room-layout{display:flex;flex-direction:column;gap:18px}.scratch-game-column{order:0}.scratch-sidebar{width:100%}.scratch-show{order:1}.scratch-guide{order:2}.scratch-page-title{font-size:10px;letter-spacing:.08em;margin-bottom:16px}.scratch-sidebar-content{padding:18px}.scratch-sidebar>summary{font-size:19px}.scratch-room-footer{flex-direction:column;line-height:1.6}.dt-page-embedded .dt-dialog{width:100%}.dt-page-embedded .dt-card{width:84%;margin-left:8%}.scratch-show h2{font-size:36px}}
+@media(prefers-reduced-motion:reduce){.scratch-room *{scroll-behavior:auto!important}}
+/* The dedicated page has room for the story beside it: keep the actual play
+   surface together instead of stretching the tall modal artwork to fill a column. */
+.dt-page-embedded .dt-card h2.dt-art-title{width:42%;max-width:190px}.dt-page-embedded .dt-card .dt-tagline{font-size:clamp(19px,5cqw,27px);margin:10px 0}.dt-page-embedded .dt-win-banner{font-size:clamp(18px,4.5cqw,25px);margin:10px auto}.dt-page-embedded .dt-card .dt-rule{font-size:clamp(13px,3.3cqw,17px);margin:10px 0;white-space:normal}.dt-page-embedded .dt-card .dt-rule strong{font-size:inherit;white-space:normal}.dt-page-embedded .dt-teaser-twins{margin:8px auto;gap:16px}.dt-page-embedded .dt-teaser-twins .dt-portrait{width:54px;height:54px}.dt-page-embedded .dt-named-twin{font-size:16px}.dt-page-embedded .dt-grid{max-width:360px;margin:0 auto}.dt-page-embedded .dt-preview-board{max-width:360px;margin:0 auto;display:block}.dt-page-embedded .dt-card .dt-play-cta{font-size:25px;padding:10px;margin-top:14px}.dt-page-embedded .dt-prize-line{font-size:12px}.dt-page-embedded .dt-score{margin:8px 0}.dt-page-embedded .dt-target .dt-portrait{width:54px;height:54px}.dt-page-embedded .dt-target>span:not(.dt-portrait){font-size:15px}.dt-page-embedded .dt-count strong{font-size:32px}
+
+/* Revision: quiet show credits on the page; a cool-toned, fully visible catalogue. */
+.scratch-show{padding:32px 20px 0 0;color:#fff8ed;background:none;border:0;box-shadow:none}
+.scratch-show-dates{border:0;padding:0;margin:0 0 32px;gap:8px}
+.scratch-show-dates strong{color:#fff8ed;font-size:clamp(23px,2vw,30px);line-height:1.2}
+.scratch-show-dates span{color:#e9dce9;font-size:17px}
+.scratch-show .scratch-cast{font-size:16px;line-height:1.8;font-weight:600;margin:0 0 26px}
+.scratch-show .scratch-credits{font-size:14px;line-height:1.6;color:#dfccdf;margin:0 0 22px}
+.scratch-show-link{display:inline-flex;gap:24px;background:#f5ebf5;color:#371738;border:1px solid #fff8;padding:13px 24px;margin:6px 0 0;border-radius:5px}
+.scratch-guide{background:#eaf3f7;border-color:#b8d9e8;color:#183e50;box-shadow:none}
+.scratch-guide>summary{background:#a8d5e8;color:#183e50}
+.scratch-guide .scratch-sidebar-content{max-height:none;overflow:visible}
+.scratch-guide-intro,.scratch-guide-list p{color:#416275}
+.scratch-guide h2,.scratch-guide-list h3{color:#183e50}
+.scratch-guide-list li{border-color:#c6dce6;padding:10px 0}
+.scratch-guide-image{border-color:#c7dde7}
+@media(max-width:1049px){.scratch-show{padding:24px 12px}}
+@media(max-width:600px){.scratch-show{width:100%;padding:22px 12px}.scratch-show-dates{margin-bottom:24px}.scratch-show .scratch-cast{font-size:15px}}
+
+/* Match the main site's Oswald billing, Bebas date/byline and gold/chrome ticket treatment. */
+.scratch-show{font-family:var(--font-oswald),sans-serif;text-align:center;padding-right:12px}
+.scratch-show-dates strong{font-family:var(--font-bebas-neue),sans-serif;font-size:clamp(32px,3vw,46px);font-weight:400;letter-spacing:.03em;color:#f5d020}
+.scratch-show-dates span{font-family:var(--font-oswald),sans-serif;font-size:20px;letter-spacing:.06em;text-transform:uppercase;color:white}
+.scratch-show .scratch-cast{font-family:var(--font-oswald),sans-serif;font-size:20px;font-weight:400;line-height:1.55;letter-spacing:.03em;color:white}
+.scratch-show .scratch-credits{font-family:var(--font-oswald),sans-serif;font-size:16px;letter-spacing:.04em;color:white}
+.scratch-show .scratch-credits strong{font-family:var(--font-bebas-neue),sans-serif;font-size:28px;font-weight:400;letter-spacing:.05em}
+.scratch-show-link{display:inline-flex;justify-content:center;padding:10px;max-width:100%;border:2px solid #fafaff;border-radius:15px;background:linear-gradient(165deg,#fff,#c4c8d1 19%,#f9fafc 30%,#707782 49%,#e7eaf0 62%,#969ca8 82%,#fff);box-shadow:0 5px 0 #585962,0 7px 0 #29252b;color:#342006;font-family:var(--font-bebas-neue),sans-serif;font-size:28px;font-weight:400;letter-spacing:.05em}
+.scratch-ticket-face{display:flex;align-items:center;justify-content:center;gap:12px;padding:13px 16px;border:2px solid #81530b;border-radius:7px;background:linear-gradient(#fff4b3,#f5cf57 43%,#d79b21 48%,#efbc36 68%,#ffe691);box-shadow:inset 0 2px #fffbe4,inset 0 -3px #ac701d;text-shadow:0 1px #fff2b2;line-height:1}
+.scratch-ticket-face>span{font-size:16px}
+.scratch-show-link:hover{filter:brightness(1.08)}
+@media(max-width:600px){.scratch-show .scratch-cast{font-size:20px}.scratch-show-dates strong{font-size:40px}}
+
+/* The catalogue follows the game at every screen size. */
+.scratch-room-layout{display:flex;flex-direction:column;align-items:center;max-width:850px}
+.scratch-game-column{width:100%;max-width:660px;margin:0 auto}
+.scratch-guide{width:100%;order:2}
+.scratch-guide-subtitle{display:block;font-size:15px;font-weight:700;margin-top:4px;line-height:1.4}
+.scratch-guide-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:24px}
+@media(max-width:750px){.scratch-guide-list{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:18px}}
+@media(max-width:450px){.scratch-guide-list{grid-template-columns:1fr}}
+
+/* Centre both title lines independently of the disclosure control. */
+.scratch-guide>summary{position:relative;justify-content:center;text-align:center;padding-inline:48px}
+.scratch-guide>summary>span{position:absolute;right:20px;top:calc(50% - 12px)}
+/* Identical native-ratio head windows to the revealed game portraits. */
+.scratch-guide-head{position:relative;isolation:isolate}
+.scratch-guide-head img{display:block;position:absolute;max-width:none;max-height:none;height:auto;object-fit:initial;aspect-ratio:auto;border-radius:0}
+.scratch-guide-head-bernie img{width:225%;left:-73.21%;top:0}
+.scratch-guide-head-gerry img{width:488.26%;left:-197.83%;top:-76.09%}
+.scratch-guide-head-pete img{width:555.5%;left:-225%;top:-96%}
+.scratch-guide-head-harold img{width:484.09%;left:-193.64%;top:-88.64%}
+.scratch-guide-head-abigail img{width:447.08%;left:-173.33%;top:-137.5%}
+
+/* Branded display typography and a two-twin / three-person cast arrangement. */
+.scratch-guide>summary{font-family:var(--font-bebas-neue),Impact,sans-serif;font-size:36px;font-weight:400;letter-spacing:.04em;line-height:1.1}
+.scratch-guide-subtitle{font-family:var(--font-oswald),sans-serif;font-size:18px;font-weight:400;letter-spacing:.035em;line-height:1.4;margin-top:5px}
+.scratch-guide-people{grid-template-columns:repeat(6,minmax(0,1fr));gap:8px 24px}
+.scratch-guide-people>li{grid-column:span 2}
+.scratch-guide-people>li:nth-child(-n+2){grid-column:span 3}
+@media(max-width:600px){.scratch-guide-people{column-gap:10px}.scratch-guide-people>li{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;min-width:0}.scratch-guide-people h3{font-size:13px}.scratch-guide-people p{font-size:11px;overflow-wrap:anywhere}.scratch-guide>summary{font-size:32px}.scratch-guide-subtitle{font-size:16px}}

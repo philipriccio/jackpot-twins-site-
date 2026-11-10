@@ -1,11 +1,11 @@
 // Native listeners deliberately supplement touch-action for iOS Safari.
 // The body lock lasts for the modal lifetime, not each panel/render change.
-export function lockScratchViewport(root: HTMLElement) {
+export function lockScratchViewport(root: HTMLElement, lockBody = true) {
   const body = document.body;
   const x = window.scrollX, y = window.scrollY;
   const saved = {position: body.style.position, top: body.style.top, left: body.style.left,
     width: body.style.width, overflow: body.style.overflow};
-  Object.assign(body.style, {position: 'fixed', top: `${-y}px`, left: `${-x}px`, width: '100%', overflow: 'hidden'});
+  if (lockBody) Object.assign(body.style, {position: 'fixed', top: `${-y}px`, left: `${-x}px`, width: '100%', overflow: 'hidden'});
   let guarded = false;
   let frozen: {element: HTMLElement; overflow: string; top: number; left: number}[] = [];
   const release = () => {
@@ -57,7 +57,9 @@ export function lockScratchViewport(root: HTMLElement) {
     document.removeEventListener('touchcancel', end, true);
     window.removeEventListener('pagehide', release);
     document.removeEventListener('visibilitychange', hide);
-    Object.assign(body.style, saved);
-    window.scrollTo({left: x, top: y, behavior: 'instant'});
+    if (lockBody) {
+      Object.assign(body.style, saved);
+      window.scrollTo({left: x, top: y, behavior: 'instant'});
+    }
   };
 }

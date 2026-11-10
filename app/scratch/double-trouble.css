@@ -207,3 +207,9 @@
 /* Homepage game: preserve the page beneath the modal rather than a solid stage. */
 .dt-page-modal{min-height:0;background:transparent}
 .dt-page-modal .dt-overlay{background:rgba(20,12,35,.32);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
+
+/* Reserve a caption row; labels never overlay the person or prop. The scratch
+   canvas still covers the entire square, and names appear only after reveal. */
+.dt-spot .dt-symbol{display:flex;flex-direction:column;justify-content:flex-start;align-items:center;padding:0;gap:0}
+.dt-spot .dt-symbol>.dt-portrait,.dt-spot .dt-symbol>.dt-prop,.dt-spot .dt-symbol>.dt-supporting-portrait{width:calc(100% - 24px);height:calc(100% - 24px);flex:0 0 auto;aspect-ratio:1;border-radius:0}
+.dt-spot .dt-symbol>.dt-item-label{display:flex;align-items:center;justify-content:center;flex:0 0 24px;height:24px;width:100%;padding:0 2px;background:#fff;color:#332145;font-family:var(--font-inter),Arial,sans-serif;font-size:clamp(9px,2.6cqw,12px);font-weight:700;line-height:1.1;letter-spacing:0;text-align:center}
