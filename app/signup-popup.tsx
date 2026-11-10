@@ -53,7 +53,7 @@ export function useSignupPopup(scratchMode = false) {
     const up = () => { pointerDown = false; activity(); };
     const timer = window.setInterval(() => {
       if (shown.current) { window.clearInterval(timer); return; }
-      if (Date.now() - arrivedAt < (scratchMode ? 4000 : 20000) || document.visibilityState !== "visible" || pointerDown || (!scratchMode && Date.now() - lastActivity < 2500)) return;
+      if (Date.now() - arrivedAt < (scratchMode ? 3000 : 20000) || document.visibilityState !== "visible" || pointerDown || (!scratchMode && Date.now() - lastActivity < 2500)) return;
       // Keep the newsletter’s scroll gate; the game opens over the visible homepage.
       if (!scratchMode) {
         const hero = document.querySelector("section.approved-hero");
