@@ -68,3 +68,73 @@
 .scratch-guide-people>li{grid-column:span 2}
 .scratch-guide-people>li:nth-child(-n+2){grid-column:span 3}
 @media(max-width:600px){.scratch-guide-people{column-gap:10px}.scratch-guide-people>li{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;min-width:0}.scratch-guide-people h3{font-size:13px}.scratch-guide-people p{font-size:11px;overflow-wrap:anywhere}.scratch-guide>summary{font-size:32px}.scratch-guide-subtitle{font-size:16px}}
+
+/* Show-branded gallery: pink marquee, gold trim and cream picture cards. */
+.scratch-page-title{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.scratch-guide{border:3px solid #ffe48a;border-radius:22px;background:#fbe8f0;box-shadow:0 0 0 3px #d5d8e5,0 0 0 6px #d52c83,0 15px 35px #0004;overflow:hidden}
+.scratch-guide>summary{color:#fff5c9;background:radial-gradient(circle,#ffe89b 1px,transparent 1.6px) 0 0/15px 15px,#c61770;border-bottom:2px solid #ffe48a;padding-top:22px;padding-bottom:22px;font-size:42px;text-shadow:1px 2px #6b174b;letter-spacing:.045em}
+.scratch-guide-subtitle{font-size:20px;color:white;letter-spacing:.06em}
+.scratch-guide .scratch-sidebar-content{padding:24px}
+.scratch-guide h2{text-align:center;font-family:var(--font-bebas-neue),Impact,sans-serif;font-size:28px;font-weight:400;letter-spacing:.08em;color:#9b145c;margin:12px 0 18px}
+.scratch-guide h2::before,.scratch-guide h2::after{content:'✦';font-size:16px;margin:0 12px;color:#bc7a13;vertical-align:middle}
+.scratch-guide-list{gap:14px;grid-template-columns:repeat(3,minmax(0,1fr))}
+.scratch-guide-list li{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;gap:12px;min-width:0;padding:18px 10px;background:#fffaf0;border:1px solid #e9c9a8;border-radius:14px;box-shadow:0 3px 0 #deb7cc}
+.scratch-guide-list li:last-child{border:1px solid #e9c9a8}
+.scratch-guide-image{width:80px;height:80px;flex-shrink:0;border:2px solid #eecb6d;border-radius:13px;box-shadow:0 3px 8px #5e184515;background-color:#fff}
+.scratch-guide-list h3{font-family:var(--font-oswald),sans-serif;font-size:18px;font-weight:500;color:#842054;line-height:1.3}
+.scratch-guide-list p{color:#664357;font-size:13px;line-height:1.45}
+.scratch-guide-people{grid-template-columns:repeat(6,minmax(0,1fr));margin-bottom:32px}
+.scratch-guide-people>li{grid-column:span 2}
+.scratch-guide-people>li:first-child{grid-column:2/span 2}
+.scratch-guide-people>li:nth-child(2){grid-column:4/span 2}
+.scratch-guide-people>li:nth-child(3){grid-column:1/span 2}
+.scratch-room-footer{display:flex;flex-direction:column;align-items:center;gap:38px;border:0;margin-top:48px;padding:12px 0 26px}
+.scratch-presenter-logos{display:flex;justify-content:center;align-items:center;gap:42px;max-width:100%}
+.scratch-presenter-logos a{display:flex;align-items:center;min-width:0}
+.scratch-presenter-logos img{display:block;max-width:100%;height:auto}
+@media(max-width:600px){.scratch-guide .scratch-sidebar-content{padding:18px 12px}.scratch-guide>summary{font-size:34px}.scratch-guide-subtitle{font-size:17px}.scratch-guide-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.scratch-guide-list li{padding:14px 6px;gap:8px}.scratch-guide-people{grid-template-columns:repeat(6,minmax(0,1fr));gap:12px 8px}.scratch-guide-people .scratch-guide-image{width:58px;height:58px}.scratch-guide-people h3{font-size:15px}.scratch-guide-people p{font-size:11px}.scratch-guide-list h3{overflow-wrap:anywhere}.scratch-presenter-logos{gap:24px}.scratch-presenter-logos a:first-child{width:130px}.scratch-presenter-logos a:last-child{width:145px}}
+
+a.scratch-buy-tickets{
+  position:relative;isolation:isolate;display:inline-flex;justify-content:center;
+  padding:13px;max-width:100%;min-height:76px;border:2px solid #fafaff;border-radius:18px;
+  background:linear-gradient(165deg,#fff 0%,#c4c8d1 19%,#f9fafc 30%,#707782 49%,#e7eaf0 62%,#969ca8 82%,#fff 100%);
+  box-shadow:0 6px 0 #585962,0 8px 0 #29252b,0 12px 24px #26122950;
+  color:#342006;font-size:clamp(24px,4vw,30px);letter-spacing:.08em;
+  text-decoration:none;transition:transform .15s,box-shadow .15s;
+}
+a.scratch-buy-tickets::before,a.scratch-buy-tickets::after{
+  content:"";position:absolute;inset:4px 9px;z-index:-1;pointer-events:none;
+  background:radial-gradient(circle,#fffbe0 0 2px,#efb83c 2.5px 3px,transparent 3.5px) 0 0/18px 7px repeat-x,
+    radial-gradient(circle,#fffbe0 0 2px,#efb83c 2.5px 3px,transparent 3.5px) 9px 100%/18px 7px repeat-x;
+  filter:drop-shadow(0 0 3px #ffd353);animation:scratch-buy-bulbs 1.8s linear infinite;
+}
+a.scratch-buy-tickets::after{inset:9px 4px;background:radial-gradient(circle,#fffbe0 0 2px,#efb83c 2.5px 3px,transparent 3.5px) 0 0/7px 18px repeat-y,radial-gradient(circle,#fffbe0 0 2px,#efb83c 2.5px 3px,transparent 3.5px) 100% 9px/7px 18px repeat-y;animation-name:scratch-buy-side-bulbs}
+.scratch-buy-face{
+  position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:15px;
+  padding:12px 25px;border:2px solid #81530b;border-radius:8px;
+  background:linear-gradient(#fff4b3 0%,#f5cf57 43%,#d79b21 48%,#efbc36 68%,#ffe691 100%);
+  box-shadow:inset 0 2px 0 #fffbe4,inset 0 -4px 0 #ac701d,0 1px 3px #21132390;
+  text-shadow:0 1px 0 #fff2b2;line-height:1;
+}
+.scratch-buy-face::after{
+  content:"";position:absolute;inset:-50% auto -50% -65%;width:45%;pointer-events:none;
+  background:linear-gradient(90deg,transparent,#fff9 50%,transparent);transform:skewX(-22deg);
+  animation:scratch-buy-shine 2.8s ease-in-out infinite;
+}
+.scratch-buy-star{font-size:18px;color:#704508;text-shadow:0 1px #fff7cf}
+a.scratch-buy-tickets:hover{transform:translateY(-3px);color:#342006;box-shadow:0 9px 0 #585962,0 11px 0 #29252b,0 15px 30px #e9ad3566}
+a.scratch-buy-tickets:active{transform:translateY(5px);box-shadow:0 1px 0 #585962,0 3px 0 #29252b,0 5px 10px #26122950}
+a.scratch-buy-tickets:focus-visible{outline:3px solid #17131d;outline-offset:5px}
+@keyframes scratch-buy-bulbs{to{background-position:36px 0,-27px 100%}}
+@keyframes scratch-buy-side-bulbs{to{background-position:0 36px,100% -27px}}
+@keyframes scratch-buy-shine{0%,12%{left:-65%}65%,100%{left:130%}}
+@media(max-width:600px){
+  .hero-top-ticket .btn-main.ticket-slot{padding:13px}
+  .scratch-buy-face{padding:12px 18px;gap:12px}
+}
+@media(prefers-reduced-motion:reduce){
+  a.scratch-buy-tickets::before,a.scratch-buy-tickets::after,.scratch-buy-face::after{animation:none}
+  .scratch-buy-face::after{display:none}
+  a.scratch-buy-tickets{transition:none}
+}
+.scratch-room-footer a.scratch-buy-tickets{font-family:var(--font-bebas-neue),Impact,sans-serif;color:#342006;font-size:32px}
