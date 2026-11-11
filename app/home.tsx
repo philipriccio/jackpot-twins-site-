@@ -95,7 +95,7 @@ export default function Home({ scratchMode = false }: { scratchMode?: boolean })
           </div>
         </div>
 
-        <ApprovedHero />
+        <ApprovedHero scratchMode={scratchMode} />
 
         <div className="copro">
           <span className="copro-label">A Production By</span>

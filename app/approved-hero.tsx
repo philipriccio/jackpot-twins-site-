@@ -1,10 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { ticketUrl } from "./ticket-analytics";
 
 /** The photograph stays untouched; only its edge colours fill the surrounding hero. */
-export default function ApprovedHero() {
+export default function ApprovedHero({ scratchMode = false }: { scratchMode?: boolean }) {
   const heroRef = useRef<HTMLDivElement>(null);
   const photoRef = useRef<HTMLImageElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -94,6 +95,7 @@ export default function ApprovedHero() {
               <a className="btn-main ticket-slot" href={ticketUrl("hero")} data-ticket-placement="hero" target="_blank" rel="noopener noreferrer">
                 <span className="ticket-slot-face"><span aria-hidden="true" className="ticket-slot-star">★</span><span>Buy Tickets</span><span aria-hidden="true" className="ticket-slot-star">★</span></span>
               </a>
+              {scratchMode && <Link href="/scratch" className="hero-scratch-link">Scratch Card</Link>}
             </div>
           </div>
         </div>
