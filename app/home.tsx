@@ -199,7 +199,7 @@ export default function Home({ scratchMode = false }: { scratchMode?: boolean })
               <Image src="/logos/mirvish-logo-white.svg" alt="Mirvish Productions" width={146} height={20} />
             </Link>
           </div>
-          <div className="footer-copy">© 2026 The Company Theatre. All rights reserved.</div>
+          <div className="footer-copy">© 2026 The Company Theatre. All rights reserved. <Link href="/privacy">Privacy</Link></div>
         </footer>
       </main>
 

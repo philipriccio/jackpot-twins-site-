@@ -1,0 +1,11 @@
+import Link from 'next/link';
+export const metadata={title:'Privacy & measurement — Jackpot Twins'};
+export default function Privacy(){return <main style={{maxWidth:760,margin:'0 auto',padding:'48px 24px',lineHeight:1.7,background:'#fff8f0',color:'#0a0a0a',minHeight:'100vh'}}>
+ <Link href="/" style={{textDecoration:"underline"}}>← Jackpot Twins</Link><h1>Privacy &amp; measurement</h1>
+ <p>The Company Theatre uses website measurement to understand visits, Scratch Game participation and referrals to Mirvish. Ticket-link clicks are not confirmed ticket purchases.</p>
+ <h2>Scratch Game</h2><p>Your name and email are used to verify your account, save your game and deliver rewards. Email marketing is optional and uses the separate checkbox on the signup form. Agreeing to marketing emails is not required to play.</p>
+ <h2>Google Analytics and Meta Pixel</h2><p>We use Google Analytics for website traffic and Meta Pixel to measure and improve Facebook and Instagram advertising. Meta receives page visits, ticket-link clicks, first verified Scratch registrations and game starts and outcomes. Repeat cards are not counted as new registrations.</p>
+ <p>Meta’s technology may collect browser and device information, your IP address, page and referring URLs, advertising click identifiers and cookies, and may associate activity with your Meta account. We do not send your name, email, verification code, saved profile, reward code or card identifier in our Meta event data. Automatic advanced matching and automatic event collection are not enabled by our integration.</p>
+ <p>Ad blockers, browser privacy settings and Meta’s ad preferences can limit this measurement. These tools are not needed to play or buy tickets. For Meta’s use of information and your choices, see <a style={{textDecoration:"underline"}} href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener noreferrer">Meta’s Privacy Policy</a>. For Google’s use, see <a style={{textDecoration:"underline"}} href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">Google’s partner-site information</a>.</p>
+ <h2>Questions</h2><p>Contact The Company Theatre through <a style={{textDecoration:"underline"}} href="https://companytheatre.ca">companytheatre.ca</a> for questions about your information.</p>
+ </main>;}

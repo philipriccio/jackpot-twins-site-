@@ -109,7 +109,7 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
       </head>
-      <body>{children}<SiteAnalytics />
+      <body>{children}<SiteAnalytics metaPixelId={process.env.NODE_ENV === 'production' ? process.env.META_PIXEL_ID : undefined} />
         </body>
     </html>
   );

@@ -8,5 +8,6 @@ export function classifyScratchSource(search:string):ScratchSource {
  if(['newsletter','email','mailchimp'].includes(source??'')||medium==='email')return 'newsletter';
  if(['facebook','instagram','meta','tiktok','social'].includes(source??'')||['social','paid_social','organic_social'].includes(medium??''))return 'social';
  if(['partner','mirvish'].includes(source??'')||medium==='partner')return 'partner';
+ if(query.getAll('fbclid').length===1&&/^[a-zA-Z0-9_-]{1,500}$/.test(query.get('fbclid')??''))return 'social';
  return ['source','utm_source','utm_medium','utm_campaign','utm_content','utm_id'].some(key=>query.has(key))?'other':'direct';
 }

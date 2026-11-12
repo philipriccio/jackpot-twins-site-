@@ -4,10 +4,14 @@ import { usePathname } from "next/navigation";
 import { trackScratch } from './scratch/telemetry';
 import { attributedUrl, campaignContext, gaEvent } from "./campaign-analytics";
 
-export default function SiteAnalytics() {
+import { initializeMeta, metaPage, metaTicket } from './meta-pixel';
+
+export default function SiteAnalytics({metaPixelId}: {metaPixelId?: string}) {
   const pathname = usePathname();
   const lastPage = useRef<string | null>(null);
   useEffect(() => {
+    initializeMeta(metaPixelId);
+    metaPage(pathname);
     campaignContext();
     if (lastPage.current !== pathname) {
       lastPage.current = pathname;
@@ -32,6 +36,7 @@ export default function SiteAnalytics() {
       const anchor = (event.target as Element)?.closest?.("a[href]") as HTMLAnchorElement | null;
       if (!anchor) return;
       try {
+        metaTicket(anchor.href);
         const result = decorate(anchor);
         if (result) { const { event: name, ...params } = result; gaEvent(name, params); if(pathname==='/scratch'&&name==='ticket_click'&&anchor.dataset.ticketPlacement==='scratch_footer')trackScratch('ticket_outbound','scratch_page',{cta:'footer'}); }
       } catch { /* Preserve navigation. */ }
@@ -39,6 +44,6 @@ export default function SiteAnalytics() {
     document.addEventListener("click", clicked, true);
     document.addEventListener("auxclick", clicked, true);
     return () => { document.removeEventListener("click", clicked, true); document.removeEventListener("auxclick", clicked, true); };
-  }, [pathname]);
+  }, [pathname, metaPixelId]);
   return null;
 }
