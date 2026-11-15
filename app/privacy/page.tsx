@@ -1,6 +1,6 @@
 import Link from 'next/link';
-export const metadata={title:'Privacy & measurement — Jackpot Twins'};
-export default function Privacy(){return <main style={{maxWidth:760,margin:'0 auto',padding:'48px 24px',lineHeight:1.7,background:'#fff8f0',color:'#0a0a0a',minHeight:'100vh'}}>
+export const metadata={title:'Privacy & measurement — Jackpot Twins',description:'How The Company Theatre handles Jackpot Twins Scratch Game information and website measurement.',alternates:{canonical:'https://jackpottwins.ca/privacy'},openGraph:{title:'Privacy & measurement — Jackpot Twins',url:'https://jackpottwins.ca/privacy',description:'Information about privacy and website measurement.'},twitter:{title:'Privacy & measurement — Jackpot Twins',description:'Information about privacy and website measurement.'}};
+export default function Privacy(){return <main id="main-content" tabIndex={-1} style={{maxWidth:760,margin:'0 auto',padding:'48px 24px',lineHeight:1.7,background:'#fff8f0',color:'#0a0a0a',minHeight:'100vh'}}>
  <Link href="/" style={{textDecoration:"underline"}}>← Jackpot Twins</Link><h1>Privacy &amp; measurement</h1>
  <p>The Company Theatre uses website measurement to understand visits, Scratch Game participation and referrals to Mirvish. Ticket-link clicks are not confirmed ticket purchases.</p>
  <h2>Scratch Game</h2><p>Your name and email are used to verify your account, save your game and deliver rewards. Email marketing is optional and uses the separate checkbox on the signup form. Agreeing to marketing emails is not required to play.</p>

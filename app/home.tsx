@@ -2,9 +2,10 @@
 
 import { CONSENT_VERSION } from "@/lib/signup-contract";
 
+import { productionDates } from "@/lib/production-dates";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-const ScratchGame = dynamic(() => import("./scratch/double-trouble"), { ssr: false, loading: () => <p role="status">Opening your game…</p> });
+const ScratchGame = dynamic(() => import("./scratch/double-trouble"), { ssr: false, loading: () => <div className="game-loading-overlay" role="status">Opening your game…</div> });
 import Link from "next/link";
 import { useCallback, useMemo, useRef, useState } from "react";
 
@@ -35,7 +36,7 @@ const tickerItems = [
   "WRITTEN AND DIRECTED BY PHILIP RICCIO",
   "WORLD PREMIERE",
   "CAA THEATRE · TORONTO",
-  "SPRING 2027",
+  "MARCH 9–28, 2027",
   "THE COMPANY THEATRE + MIRVISH PRODUCTIONS",
 ] as const;
 
@@ -43,6 +44,7 @@ export default function Home({ scratchMode = false }: { scratchMode?: boolean })
   const { open: modalOpen, openSignup, closeSignup } = useSignupPopup(scratchMode);
   const signupPending = useRef(false);
   const [signupStatus, setSignupStatus] = useState<SignupState>("idle");
+  const [tickerPaused, setTickerPaused] = useState(false);
   const allTickerItems = useMemo(() => [...tickerItems, ...tickerItems], []);
 
   const handleSignup = useCallback(async (formData: FormData) => {
@@ -83,9 +85,10 @@ export default function Home({ scratchMode = false }: { scratchMode?: boolean })
 
   return (
     <>
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <div className="ticker">
-          <div className="ticker-inner">
+          <button className="ticker-pause" aria-pressed={tickerPaused} onClick={()=>setTickerPaused(!tickerPaused)}>{tickerPaused ? "Resume ticker" : "Pause ticker"}</button>
+          <div className="ticker-inner" style={{animationPlayState:tickerPaused ? "paused" : "running"}}>
             {allTickerItems.map((item, index) => (
               <div key={`${item}-${index}`} style={{ display: "inline-flex", alignItems: "center" }}>
                 <span className="ticker-text">{item}</span>
@@ -163,6 +166,7 @@ export default function Home({ scratchMode = false }: { scratchMode?: boolean })
           </ul>
         </section>
 
+        <section className="visit-info" aria-labelledby="visit-heading"><h2 id="visit-heading">Plan your visit</h2><p><strong>{productionDates.label} · CAA Theatre</strong><br/>651 Yonge Street, Toronto, ON M4Y 1Z9</p><p>Choose your date from the official Mirvish calendar, including matinee and evening performances. Individual dates may have different start times.</p><p><a href={ticketUrl("visit_calendar")} data-ticket-placement="visit_calendar">Performance calendar, running time and content advisories</a></p><p>Mirvish lists a running time of approximately 2 hours, including intermission. The production contains mature language and is recommended for ages 14+.</p><p>For accessible seating or help with group bookings of 10 or more, contact Mirvish at <a href="tel:18004613333">1.800.461.3333</a>. Group terms and date restrictions apply. Check the official listing for current ticket fees and policies before booking.</p><p><a href="https://www.mirvish.com/visit/theatres/caa-theatre">CAA Theatre directions and accessibility</a> · <a href="https://www.mirvish.com/ticket-info/group-bookings">Group ticket enquiries</a></p></section>
         <section className="signup" id="signup">
           <p className="signup-label">Jackpot Twins at the CAA Theatre</p>
           <h2 className="signup-heading">Get Your Tickets</h2>

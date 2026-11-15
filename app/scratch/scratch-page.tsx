@@ -25,7 +25,7 @@ const props = [
 ];
 
 export default function ScratchPage(){
- return <main className="scratch-room">
+ return <main id="main-content" tabIndex={-1} className="scratch-room">
   <header className="scratch-room-header"><Link href="/" className="scratch-home-link">← Jackpot Twins</Link><a href="#scratch-image-guide">People & objects ↓</a></header>
   <div className="scratch-room-layout">
    <section className="scratch-game-column" aria-labelledby="scratch-page-title"><h1 id="scratch-page-title" className="scratch-page-title">The Jackpot Twins Scratch Game</h1><DoubleTrouble embedded/></section>

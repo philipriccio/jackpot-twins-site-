@@ -79,18 +79,18 @@ export default function ApprovedHero({ scratchMode = false }: { scratchMode?: bo
             <div className="portrait-names">
               <p>Nora<span>McLellan</span></p><p>Seana<span>McKenna</span></p>
             </div>
-            {/* Native image preserves the exact approved JPEG and canvas source. */}
+            {/* Responsive derivatives preserve the approved composition without cropping. */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img ref={photoRef} src="/images/jackpot-twins-instagram-hero.jpg" width={1080} height={1350}
+            <img ref={photoRef} src="/images/jackpot-twins-instagram-hero-1080.webp" srcSet="/images/jackpot-twins-instagram-hero-480.webp 480w, /images/jackpot-twins-instagram-hero-800.webp 800w, /images/jackpot-twins-instagram-hero-1080.webp 1080w" sizes="(max-width: 360px) 250px, (max-width: 600px) 280px, 50vw" width={1080} height={1350}
               fetchPriority="high" loading="eager" alt="Nora McLellan and Seana McKenna holding the Jackpot Twins lottery cheque" />
           </div>
           <div className="insta-hero-copy">
             <p className="hero-billing"><span className="billing-names"><span className="billing-party">David and Hannah Mirvish</span>{" "}<span className="billing-and">and</span>{" "}<span className="billing-party">The Company Theatre</span></span><span className="billing-present">present</span></p>
             <p className="hero-byline"><span className="byline-copy">A New Comedy by Philip Riccio</span>{/* eslint-disable-next-line @next/next/no-img-element */}
-              <img className="desktop-lettering" src="/images/jt-diamond-byline.webp" width={1410} height={352} alt="" aria-hidden="true" /></p>
+              <picture className="desktop-lettering"><source media="(min-width: 601px)" srcSet="/images/jt-diamond-byline-900.webp"/><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" width={1410} height={352} alt="" aria-hidden="true" /></picture></p>
             <div className="conversion-pitch"><h2>Winning the Lottery is easy.<br /><span>Surviving it is the hard part.</span></h2><p>A sharp-witted new comedy about the price of getting<br className="desktop-break" /> everything you ever wanted.</p></div>
             <p className="hero-signup-teaser visit-details"><span className="visit-details-copy">March 9–28, 2027 · CAA Theatre, Toronto</span>{/* eslint-disable-next-line @next/next/no-img-element */}
-              <img className="desktop-lettering" src="/images/jt-gold-dates-theatre.png" width={2173} height={724} alt="" aria-hidden="true" /></p>
+              <picture className="desktop-lettering"><source media="(min-width: 601px)" srcSet="/images/jt-gold-dates-theatre-900.webp"/><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" width={2173} height={724} alt="" aria-hidden="true" /></picture></p>
             <div className="cta-row">
               <a className="btn-main ticket-slot" href={ticketUrl("hero")} data-ticket-placement="hero" target="_blank" rel="noopener noreferrer">
                 <span className="ticket-slot-face"><span aria-hidden="true" className="ticket-slot-star">★</span><span>Buy Tickets</span><span aria-hidden="true" className="ticket-slot-star">★</span></span>

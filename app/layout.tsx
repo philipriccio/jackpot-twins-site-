@@ -39,9 +39,9 @@ export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://jackpottwins.ca"),
-  title: "Jackpot Twins — A New Comedy by Philip Riccio | World Premiere 2027",
+  title: "Jackpot Twins — Toronto Comedy | March 9–28, 2027",
   description:
-    "Jackpot Twins — A sharp-witted, irreverent new comedy by Philip Riccio. World Premiere Spring 2027 at the CAA Theatre, Toronto. Starring Seana McKenna, Nora McLellan, Tony Nappo, Colin A Doyle & Caroline Toal. A Company Theatre & Mirvish Productions co-production.",
+    "Seana McKenna and Nora McLellan star in Philip Riccio’s new comedy. March 9–28, 2027 at Toronto’s CAA Theatre. Explore the show and buy official Mirvish tickets.",
   keywords: [
     "Jackpot Twins",
     "Philip Riccio",
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     canonical: "https://jackpottwins.ca",
   },
   openGraph: {
-    title: "Jackpot Twins — World Premiere Spring 2027",
+    title: "Jackpot Twins — March 9–28, 2027 · Toronto",
     description:
       "A sharp-witted, irreverent new comedy about the heavy price of getting everything you ever wanted. Starring Seana McKenna & Nora McLellan. CAA Theatre, Toronto.",
     url: "https://jackpottwins.ca",
@@ -77,19 +77,19 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/jt-2026-logo-new.png",
-        width: 2405,
-        height: 1518,
+        url: "/images/search-social-1200x630.jpg",
+        width: 1200,
+        height: 630,
         alt: "Jackpot Twins — A New Comedy by Philip Riccio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Jackpot Twins — World Premiere Spring 2027",
+    title: "Jackpot Twins — March 9–28, 2027 · Toronto",
     description:
       "A sharp-witted, irreverent new comedy about the heavy price of getting everything you ever wanted.",
-    images: ["/images/jt-2026-logo-new.png"],
+    images: ["/images/search-social-1200x630.jpg"],
   },
 };
 
@@ -109,7 +109,7 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
       </head>
-      <body>{children}<SiteAnalytics metaPixelId={process.env.NODE_ENV === 'production' ? process.env.META_PIXEL_ID : undefined} />
+      <body><a className="skip-link" href="#main-content">Skip to main content</a>{children}<SiteAnalytics metaPixelId={process.env.NODE_ENV === 'production' ? process.env.META_PIXEL_ID : undefined} />
         </body>
     </html>
   );

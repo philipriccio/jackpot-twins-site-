@@ -1,3 +1,5 @@
+import type { Metadata } from 'next';
+export const metadata: Metadata = { title: 'Jackpot Twins Scratch Game — Ticket Prizes & Offers', description: 'Play the Jackpot Twins Scratch Game for ticket prizes and offers. Free to play, with email verification. See prizes and rules before playing.', alternates: {canonical: 'https://jackpottwins.ca/scratch'}, openGraph: {title: 'Jackpot Twins Scratch Game', description: 'Find both twins to win ticket offers. See prizes and rules.', url: 'https://jackpottwins.ca/scratch', images: ['/images/jt-2026-logo-new.png']}, twitter: {card:'summary_large_image', title:'Jackpot Twins Scratch Game', description:'Find both twins to win ticket offers.', images:['/images/jt-2026-logo-new.png']} };
 import {notFound,redirect} from 'next/navigation';
 import {scratchCanonicalQuery} from '../../lib/scratch-canonical-query';
 import ScratchPage from './scratch-page';
