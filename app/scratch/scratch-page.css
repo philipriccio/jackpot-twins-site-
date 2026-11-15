@@ -138,3 +138,10 @@ a.scratch-buy-tickets:focus-visible{outline:3px solid #17131d;outline-offset:5px
   a.scratch-buy-tickets{transition:none}
 }
 .scratch-room-footer a.scratch-buy-tickets{font-family:var(--font-bebas-neue),Impact,sans-serif;color:#342006;font-size:32px}
+
+/* Compact entry/game presentation; the gallery remains below the play area. */
+.scratch-room-header{padding:12px 0;margin-bottom:12px}
+.dt-page-embedded .dt-dialog{max-width:540px}
+.dt-page-embedded .dt-stage .dt-card{width:100%;margin-inline:auto}
+@media(max-width:600px){.scratch-room{padding-inline:10px}.scratch-room-header{padding:12px 4px;margin-bottom:8px}.scratch-room-layout{gap:18px}.dt-page-embedded .dt-dialog{width:100%}}
+@media(max-height:500px) and (min-width:600px){.dt-page-embedded .dt-dialog,.scratch-game-column{max-width:760px}}
