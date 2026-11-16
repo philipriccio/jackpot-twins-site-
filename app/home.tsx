@@ -2,7 +2,7 @@
 
 import { CONSENT_VERSION } from "@/lib/signup-contract";
 
-import { productionDates } from "@/lib/production-dates";
+import PerformanceCalendar from "./performance-calendar";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 const ScratchGame = dynamic(() => import("./scratch/double-trouble"), { ssr: false, loading: () => <div className="game-loading-overlay" role="status">Opening your game…</div> });
@@ -164,7 +164,7 @@ export default function Home({ scratchMode = false }: { scratchMode?: boolean })
           </ul>
         </section>
 
-        <section className="visit-info" aria-labelledby="visit-heading"><h2 id="visit-heading">Plan your visit</h2><p><strong>{productionDates.label} · CAA Theatre</strong><br/>651 Yonge Street, Toronto, ON M4Y 1Z9</p><p>Choose your date from the official Mirvish calendar, including matinee and evening performances. Individual dates may have different start times.</p><p><a href={ticketUrl("visit_calendar")} data-ticket-placement="visit_calendar">Performance calendar, running time and content advisories</a></p><p>Mirvish lists a running time of approximately 2 hours, including intermission. The production contains mature language and is recommended for ages 14+.</p><p>For accessible seating or help with group bookings of 10 or more, contact Mirvish at <a href="tel:18004613333">1.800.461.3333</a>. Group terms and date restrictions apply. Check the official listing for current ticket fees and policies before booking.</p><p><a href="https://www.mirvish.com/visit/theatres/caa-theatre">CAA Theatre directions and accessibility</a> · <a href="https://www.mirvish.com/ticket-info/group-bookings">Group ticket enquiries</a></p></section>
+        <PerformanceCalendar />
         <section className="signup" id="signup">
           <p className="signup-label">Jackpot Twins at the CAA Theatre</p>
           <h2 className="signup-heading">Get Your Tickets</h2>

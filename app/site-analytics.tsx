@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { trackScratch } from './scratch/telemetry';
 import { attributedUrl, campaignContext, gaEvent } from "./campaign-analytics";
 
-import { initializeMeta, metaPage, metaTicket } from './meta-pixel';
+import { initializeMeta, metaPage, metaTicket, isMirvishTicket } from './meta-pixel';
 
 export default function SiteAnalytics({metaPixelId}: {metaPixelId?: string}) {
   const pathname = usePathname();
@@ -22,7 +22,7 @@ export default function SiteAnalytics({metaPixelId}: {metaPixelId?: string}) {
       const url = new URL(anchor.href, location.href);
       const own = ["jackpottwins.ca", "companytheatre.ca", "www.companytheatre.ca"];
       if (url.origin === location.origin) return null; // Never campaign-tag internal links.
-      const ticket = /^(www\.)?mirvish\.com$/.test(url.hostname) && url.pathname.includes("/shows/jackpot-twins");
+      const ticket = isMirvishTicket(url.href);
       const crossSite = own.includes(url.hostname);
       const donation = /^(www\.)?canadahelps\.org$/.test(url.hostname);
       if (!ticket && !crossSite && !donation) return null;

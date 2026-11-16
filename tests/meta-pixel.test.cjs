@@ -25,3 +25,10 @@ test('both ticket hosts supported, non-tickets rejected; blocked tracker does no
 test('scratch canonicalization preserves validated ad click ID and drops arbitrary and duplicate input',()=>{
  const {scratchCanonicalQuery:q}=require('../lib/scratch-canonical-query.ts');assert.equal(q({utm_source:'instagram',fbclid:'abc_123',email:'private@example.invalid',token:'secret'}),'?source=social&fbclid=abc_123');assert.equal(q({source:'social',fbclid:['a','b']}),'?source=social');assert.equal(q({fbclid:'bad@email.invalid'}),'');assert.equal(q({fbclid:'x'.repeat(501)}),'');assert.equal(q({code:'123456',redirect:'https://evil.invalid'}),'');
 });
+test('calendar permits only verified Jackpot performance ticket paths',()=>{
+ const {meta}=fixture();const {performances}=require('../lib/performance-schedule.ts');
+ assert.equal(performances.length,23);
+ for(const show of performances)assert.equal(meta.isMirvishTicket(show.url),true);
+ for(const path of ['/25079/25079','/25079/25103','/12345/25080','/25079/25080/other'])assert.equal(meta.isMirvishTicket('https://tickets.mirvish.com'+path),false);
+ assert.equal(meta.isMirvishTicket('https://tickets.mirvish.com.evil.invalid/25079/25080'),false);
+});

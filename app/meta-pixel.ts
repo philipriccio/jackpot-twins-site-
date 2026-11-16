@@ -55,7 +55,7 @@ export function metaVerified(result: {verified?: unknown; firstVerification?: un
   send('Lead', {content_name:'Scratch verified registration'});
 }
 export function isMirvishTicket(href: string) {
-  try {const url = new URL(href);return url.protocol === 'https:' && ((/^(www\.)?mirvish\.com$/.test(url.hostname) && url.pathname === '/shows/jackpot-twins') || (url.hostname === 'tickets.mirvish.com' && url.pathname === '/events/jackpot'));} catch {return false;}
+  try {const url = new URL(href);return url.protocol === 'https:' && ((/^(www\.)?mirvish\.com$/.test(url.hostname) && url.pathname === '/shows/jackpot-twins') || (url.hostname === 'tickets.mirvish.com' && (url.pathname === '/events/jackpot' || /^\/25079\/(?:250[89]\d|2510[0-2])$/.test(url.pathname))));} catch {return false;}
 }
 export function metaTicket(href: string) {if (isMirvishTicket(href)) send('TicketClick');}
 type Card = {id:string;round:{status:string};prize?:string|null;isTest?:boolean};
