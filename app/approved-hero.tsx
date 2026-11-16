@@ -18,6 +18,9 @@ export default function ApprovedHero({ scratchMode = false }: { scratchMode?: bo
     if (!hero || !photo || !canvas || !ctx) return;
     let disposed = false;
     let frame = 0;
+    const source = document.createElement("canvas");
+    const sourceContext = source.getContext("2d");
+    if (!sourceContext) return;
     const paint = () => {
       frame = 0;
       if (disposed || !photo.complete || !photo.naturalWidth) return;
@@ -27,6 +30,11 @@ export default function ApprovedHero({ scratchMode = false }: { scratchMode?: bo
       const x = p.left - h.left, y = p.top - h.top;
       const w = p.width, height = p.height;
       const sw = photo.naturalWidth, sh = photo.naturalHeight;
+      // srcSet density-corrects naturalWidth, but drawImage source rectangles
+      // address decoded pixels. Normalize the WHOLE image before sampling edges.
+      source.width = sw;
+      source.height = sh;
+      sourceContext.drawImage(photo, 0, 0, sw, sh);
       // Decorative, blurred canvas needs no more than two device pixels per CSS pixel.
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.ceil(h.width * dpr);
@@ -44,7 +52,7 @@ export default function ApprovedHero({ scratchMode = false }: { scratchMode?: bo
         [0, 0, sw, sh, x, y, w, height],
       ];
       for (const region of regions) {
-        if (region[6] > 0 && region[7] > 0) ctx.drawImage(photo, ...region);
+        if (region[6] > 0 && region[7] > 0) ctx.drawImage(source, ...region);
       }
       hero.dataset.backgroundReady = "true";
     };
