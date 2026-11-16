@@ -44,7 +44,6 @@ export default function Home({ scratchMode = false }: { scratchMode?: boolean })
   const { open: modalOpen, openSignup, closeSignup } = useSignupPopup(scratchMode);
   const signupPending = useRef(false);
   const [signupStatus, setSignupStatus] = useState<SignupState>("idle");
-  const [tickerPaused, setTickerPaused] = useState(false);
   const allTickerItems = useMemo(() => [...tickerItems, ...tickerItems], []);
 
   const handleSignup = useCallback(async (formData: FormData) => {
@@ -87,8 +86,7 @@ export default function Home({ scratchMode = false }: { scratchMode?: boolean })
     <>
       <main id="main-content" tabIndex={-1}>
         <div className="ticker">
-          <button className="ticker-pause" aria-pressed={tickerPaused} onClick={()=>setTickerPaused(!tickerPaused)}>{tickerPaused ? "Resume ticker" : "Pause ticker"}</button>
-          <div className="ticker-inner" style={{animationPlayState:tickerPaused ? "paused" : "running"}}>
+          <div className="ticker-inner">
             {allTickerItems.map((item, index) => (
               <div key={`${item}-${index}`} style={{ display: "inline-flex", alignItems: "center" }}>
                 <span className="ticker-text">{item}</span>
