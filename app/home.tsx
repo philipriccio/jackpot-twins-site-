@@ -19,6 +19,7 @@ import "./approved-hero.css";
 
 const creativeTeam = [
   { role: "Written & Directed by", person: "Philip Riccio" },
+  { role: "Associate Director", person: "Mitchell Cushman" },
   { role: "Producer", person: "Janice Peters Gibson" },
   { role: "Set Design", person: "Anahita Dehbonehie" },
   { role: "Lighting Design", person: "Kevin Lamotte" },
